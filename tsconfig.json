@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "target": "ES6",
+    "module": "CommonJS",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "jsx": "react",
+    "outDir": "./build/",
+    "allowJs": true,
+    "sourceMap": true
+  }
+}
