@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { RecoilRoot } from 'recoil';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Feed from './Feed';
-import AddContent from './AddContent';
+import AddContent from '@/pages/AddContent';
+import Feed from '@/pages/Feed';
 
 const App: FC = () => {
   return (
