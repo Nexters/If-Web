@@ -1,0 +1,10 @@
+# modules
+node_modules
+
+# webpack-bundle-analyze
+report.html
+stats.json
+
+# IDE Config
+.vscode
+.idea
