@@ -12,6 +12,10 @@
     "jsx": "react",
     "outDir": "./build/",
     "allowJs": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   }
 }
