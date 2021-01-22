@@ -15,4 +15,5 @@ module.exports = {
     ],
     ['@babel/preset-react'],
   ],
+  plugins: ['react-hot-loader/babel']
 };
