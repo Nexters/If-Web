@@ -2,8 +2,7 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-//   .BundleAnalyzerPlugin;
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   entry: {
@@ -15,7 +14,10 @@ module.exports = {
     publicPath: '/',
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+    extensions: ['.tsx', '.ts', '.js', '.json'],
   },
   module: {
     rules: [
@@ -50,7 +52,7 @@ module.exports = {
       template: 'public/index.html',
     }),
     // new BundleAnalyzerPlugin({
-    //   analyzerMode: 'static'
+    //   analyzerMode: 'static',
     // }),
   ],
 };

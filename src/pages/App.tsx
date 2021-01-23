@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import { RecoilRoot } from 'recoil';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { hot } from 'react-hot-loader';
 
-import Feed from './Feed';
-import AddContent from './AddContent';
+import AddContent from '@/pages/AddContent';
+import Feed from '@/pages/Feed';
 
 const App: FC = () => {
   return (
@@ -18,4 +19,4 @@ const App: FC = () => {
   );
 };
 
-export default App;
+export default hot(module)(App);
