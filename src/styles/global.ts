@@ -13,7 +13,10 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
     body {
+        margin: auto;
+        max-width: 480px;
         font-family: "UhBeeSeulvely", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        color: #1A1515;
     }
     a {
     color: inherit;
