@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         margin: auto;
         max-width: 480px;
+        background-color: #F8F8F8;
         font-family: "UhBeeSeulvely", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         color: #1A1515;
     }
