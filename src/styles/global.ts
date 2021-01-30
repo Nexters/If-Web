@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
         max-width: 480px;
         height: 100vh;
         margin: auto;
-        background-color: #F8F8F8;
+        background-color: #F4F4F4;
         font-family: "UhBeeSeulvely", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         color: #1A1515;
     }
