@@ -1,9 +1,9 @@
-enum HeaderTypes {
-  feed = 'Feed',
-  addEdit = 'AddEdit',
-  detail = 'Detail',
-  album = 'Album',
-  myPage = 'MyPage',
+enum HEADER_TYPES {
+  FEED = 'FEED',
+  ADD_EDIT = 'ADD_EDIT',
+  DETAIL = 'DETAIL',
+  ALBUM = 'ALBUM',
+  MY_PAGE = 'MY_PAGE',
 }
 
-export default HeaderTypes;
+export default HEADER_TYPES;
