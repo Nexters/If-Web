@@ -17,9 +17,10 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   rules: {
+    'react/prop-types': 'off',
     '@typescript-eslint/no-var-requires': 'off',
-    'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
+    'no-use-before-define': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
