@@ -11,7 +11,7 @@ export interface IStory {
   createdAt: string;
   date: string;
   memo: string;
-  pictureList: [IPicture];
+  pictureList: IPicture[];
   updatedAt: string;
   userPlaceId: number;
 }

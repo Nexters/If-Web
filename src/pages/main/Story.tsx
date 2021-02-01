@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { getFormattedDate } from '@/utils/formatter';
 import { IStoryProps } from './interface';
 
-const PolaroidWrapper = styled.div<{ position: string }>`
+const StoryWrapper = styled.div<{ position: string }>`
   width: 220px;
   height: 282px;
   margin: ${(props) =>
@@ -32,15 +32,15 @@ const Memo = styled.span`
   color: ${(props) => props.theme.colors.darkgray};
 `;
 
-const Polaroid: FC<IStoryProps> = (props) => {
+const Story: FC<IStoryProps> = (props) => {
   const { date, memo, position } = props;
   return (
-    <PolaroidWrapper position={position}>
+    <StoryWrapper position={position}>
       <PictureWrapper></PictureWrapper>
       <Date>{getFormattedDate(date)}</Date>
       <Memo>{memo}</Memo>
-    </PolaroidWrapper>
+    </StoryWrapper>
   );
 };
 
-export default Polaroid;
+export default Story;
