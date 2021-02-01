@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 
 import AddContent from '@/pages/AddContent';
-import Feed from '@/pages/Feed';
+import Main from '@/pages/main';
 import GlobalStyle from '@/styles/global';
 import theme from '@/styles/theme';
 import { ThemeProvider } from 'styled-components';
@@ -19,7 +19,7 @@ const App: FC = () => {
           <Switch>
             <Route path={'/add'} component={AddContent} />
             <Route path={'/album'} component={Album} />
-            <Route exact path={'/'} component={Feed} />
+            <Route exact path={'/'} component={Main} />
           </Switch>
         </Router>
       </RecoilRoot>

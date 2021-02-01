@@ -12,11 +12,15 @@ const GlobalStyle = createGlobalStyle`
     * {
         box-sizing: border-box;
     }
+    html {
+        width: 100vw;
+        background-color: #FFFFFF;
+    }
     body {
         max-width: 480px;
         height: 100vh;
-        margin: auto;
-        background-color: #F8F8F8;
+        margin: 0 auto;
+        background-color: #F4F4F4;
         font-family: "UhBeeSeulvely", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         color: #1A1515;
     }
