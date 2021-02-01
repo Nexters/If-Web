@@ -8,3 +8,6 @@ stats.json
 # IDE Config
 .vscode
 .idea
+
+# Private
+.env
