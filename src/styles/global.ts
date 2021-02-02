@@ -18,11 +18,15 @@ const GlobalStyle = createGlobalStyle`
     }
     body {
         max-width: 480px;
-        height: 100vh;
+        min-height: 100vh; 
+        height: auto;
         margin: 0 auto;
         background-color: #F4F4F4;
         font-family: "UhBeeSeulvely", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         color: #1A1515;
+        ::-webkit-scrollbar {
+            display: none;
+        }
     }
     a {
     color: inherit;
