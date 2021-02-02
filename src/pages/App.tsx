@@ -8,6 +8,7 @@ import Main from '@/pages/main';
 import GlobalStyle from '@/styles/global';
 import theme from '@/styles/theme';
 import { ThemeProvider } from 'styled-components';
+import Album from '@/pages/Album';
 
 const App: FC = () => {
   return (
@@ -17,6 +18,7 @@ const App: FC = () => {
         <Router>
           <Switch>
             <Route path={'/add'} component={AddContent} />
+            <Route path={'/album'} component={Album} />
             <Route exact path={'/'} component={Main} />
           </Switch>
         </Router>
