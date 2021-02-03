@@ -5,6 +5,8 @@ import { hot } from 'react-hot-loader';
 
 import AddContent from '@/pages/AddContent';
 import Main from '@/pages/main';
+import Login from '@/pages/Login/Login';
+
 import GlobalStyle from '@/styles/global';
 import theme from '@/styles/theme';
 import { ThemeProvider } from 'styled-components';
@@ -20,6 +22,7 @@ const App: FC = () => {
             <Route path={'/add'} component={AddContent} />
             <Route path={'/album'} component={Album} />
             <Route exact path={'/'} component={Main} />
+            <Route path={'/login'} component={Login} />
           </Switch>
         </Router>
       </RecoilRoot>

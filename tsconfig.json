@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
+    "lib": ["ESNext", "DOM"],
     "target": "ES6",
     "module": "CommonJS",
     "allowSyntheticDefaultImports": true,
@@ -17,5 +14,6 @@
     "paths": {
       "@/*": ["src/*"]
     }
-  }
+  },
+  "include": ["src/pages", "src/custom.d.ts"]
 }
