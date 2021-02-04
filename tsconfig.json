@@ -12,8 +12,9 @@
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@assets/*": ["assets/*"]
     }
   },
-  "include": ["src/pages", "src/custom.d.ts"]
+  "include": ["./src/*"]
 }

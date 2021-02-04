@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import HEADER_TYPES from '@/types/HeaderTypes';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import AlbumIcon from '../../assets/album.svg';
-import SaveIcon from '../../assets/save.svg';
-import MyPageIcon from '../../assets/mypage.svg';
-import ArrowIcon from '../../assets/arrow.svg';
-import FeedIcon from '../../assets/feed.svg';
+import AlbumIcon from '@assets/album.svg';
+import SaveIcon from '@assets/save.svg';
+import MyPageIcon from '@assets/mypage.svg';
+import ArrowIcon from '@assets/arrow.svg';
+import FeedIcon from '@assets/feed.svg';
 
 const StyledHeader = styled.header`
   display: flex;
