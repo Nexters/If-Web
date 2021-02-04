@@ -17,7 +17,7 @@ const ListItem = styled.li`
 const NationImageWrapper = styled.div`
   width: 48px;
   height: 48px;
-  background-color: ${(props) => props.theme.colors.lightgray};
+  background-color: ${({ theme }) => theme.colors.lightgray};
   margin-right: 12px;
 `;
 
@@ -28,16 +28,15 @@ const NationDefinitionList = styled.dl`
 
   dt {
     line-height: 20px;
-    font-size: 17px;
-    font-size: ${(props) => props.theme.fontSizes.title04};
+    font-size: ${({ theme }) => theme.fontSizes.title04};
     letter-spacing: 0.05em;
   }
 
   dd {
     line-height: 20px;
-    font-size: ${(props) => props.theme.fontSizes.caption03};
+    font-size: ${({ theme }) => theme.fontSizes.caption03};
     letter-spacing: 0.1em;
-    color: ${(props) => props.theme.colors.darkgray};
+    color: ${({ theme }) => theme.colors.darkgray};
     margin-top: 4px;
     width: calc(100vw - 108px);
     overflow: hidden;
