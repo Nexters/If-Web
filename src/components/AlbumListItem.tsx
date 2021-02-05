@@ -6,6 +6,24 @@ interface IAlbumListItemProps {
   amount: number;
 }
 
+const AlbumListItem: FC<IAlbumListItemProps> = ({ name, amount }) => {
+  return (
+    <ListItem>
+      <figure>
+        <AlbumImageWrapper>
+          {/* <img src="/#" alt="앨범 기본이미지" />   */}
+        </AlbumImageWrapper>
+      </figure>
+      <AlbumFigCaption>
+        <span className="name">{name}</span>
+        <span className="amount">{amount}</span>
+      </AlbumFigCaption>
+    </ListItem>
+  );
+};
+
+export default AlbumListItem;
+
 const ListItem = styled.li`
   padding: 0 20px 24px 0;
   height: 200px;
@@ -40,21 +58,3 @@ const AlbumFigCaption = styled.figcaption`
     margin-left: 8px;
   }
 `;
-
-const AlbumListItem: FC<IAlbumListItemProps> = ({ name, amount }) => {
-  return (
-    <ListItem>
-      <figure>
-        <AlbumImageWrapper>
-          {/* <img src="/#" alt="앨범 기본이미지" />   */}
-        </AlbumImageWrapper>
-      </figure>
-      <AlbumFigCaption>
-        <span className="name">{name}</span>
-        <span className="amount">{amount}</span>
-      </AlbumFigCaption>
-    </ListItem>
-  );
-};
-
-export default AlbumListItem;

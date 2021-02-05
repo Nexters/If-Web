@@ -6,6 +6,24 @@ interface INationListItemProps {
   foods?: string;
 }
 
+const NationListItem: FC<INationListItemProps> = ({ name, foods }) => {
+  return (
+    <ListItem>
+      <figure>
+        <NationImageWrapper>
+          {/* <img src="/#" alt="나라 기본이미지" />   */}
+        </NationImageWrapper>
+      </figure>
+      <NationDefinitionList>
+        <dt>{name}</dt>
+        <dd>{foods}</dd>
+      </NationDefinitionList>
+    </ListItem>
+  );
+};
+
+export default NationListItem;
+
 const ListItem = styled.li`
   display: flex;
 
@@ -44,21 +62,3 @@ const NationDefinitionList = styled.dl`
     white-space: nowrap;
   }
 `;
-
-const NationListItem: FC<INationListItemProps> = ({ name, foods }) => {
-  return (
-    <ListItem>
-      <figure>
-        <NationImageWrapper>
-          {/* <img src="/#" alt="나라 기본이미지" />   */}
-        </NationImageWrapper>
-      </figure>
-      <NationDefinitionList>
-        <dt>{name}</dt>
-        <dd>{foods}</dd>
-      </NationDefinitionList>
-    </ListItem>
-  );
-};
-
-export default NationListItem;

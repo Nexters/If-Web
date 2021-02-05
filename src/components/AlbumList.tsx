@@ -46,6 +46,27 @@ const albumList: IAlbumContent[] = [
   },
 ];
 
+const AlbumList: FC = () => {
+  return (
+    <AlbumListWrapper>
+      <AlbumInitialList>
+        {albumList.slice(0, 4).map(({ id, name, amount }) => (
+          <AlbumListItem key={id} name={name} amount={amount} />
+        ))}
+      </AlbumInitialList>
+      {albumList.length > 4 && (
+        <AlbumOverflowList>
+          {albumList.slice(4).map(({ id, name, amount }) => (
+            <AlbumListItem key={id} name={name} amount={amount} />
+          ))}
+        </AlbumOverflowList>
+      )}
+    </AlbumListWrapper>
+  );
+};
+
+export default AlbumList;
+
 const AlbumListWrapper = styled.div`
   display: flex;
   flex-wrap: nowrap;
@@ -72,24 +93,3 @@ const AlbumOverflowList = styled.ul`
   flex-flow: column wrap;
   min-height: 400px;
 `;
-
-const AlbumList: FC = () => {
-  return (
-    <AlbumListWrapper>
-      <AlbumInitialList>
-        {albumList.slice(0, 4).map(({ id, name, amount }) => (
-          <AlbumListItem key={id} name={name} amount={amount} />
-        ))}
-      </AlbumInitialList>
-      {albumList.length > 4 && (
-        <AlbumOverflowList>
-          {albumList.slice(4).map(({ id, name, amount }) => (
-            <AlbumListItem key={id} name={name} amount={amount} />
-          ))}
-        </AlbumOverflowList>
-      )}
-    </AlbumListWrapper>
-  );
-};
-
-export default AlbumList;

@@ -7,14 +7,6 @@ import Header from '@/pages/Header';
 import styled from 'styled-components';
 import { atom, useRecoilValue } from 'recoil';
 
-const PageTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes.title03};
-  font-weight: normal;
-  letter-spacing: 0.1em;
-  line-height: 30px;
-  padding: 0 0 32px 0;
-`;
-
 const album = atom({
   key: 'album',
   default: [111],
@@ -51,3 +43,11 @@ const Album: FC = () => {
 };
 
 export default Album;
+
+const PageTitle = styled.h3`
+  font-size: ${({ theme }) => theme.fontSizes.title03};
+  font-weight: normal;
+  letter-spacing: 0.1em;
+  line-height: 30px;
+  padding: 0 0 32px 0;
+`;

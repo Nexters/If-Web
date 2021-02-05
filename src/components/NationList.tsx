@@ -91,13 +91,6 @@ const nationList: INationContent[] = [
   },
 ];
 
-const NationListTitle = styled.h4`
-  font-size: ${({ theme }) => theme.fontSizes.title04};
-  line-height: 20px;
-  padding: 24px 0 32px 0;
-  border-top: 1px solid ${({ theme }) => theme.colors.lightgray};
-`;
-
 interface INationListProps {
   useTitle?: boolean;
 }
@@ -118,3 +111,10 @@ const NationList: FC<INationListProps> = ({ useTitle = false }) => {
 };
 
 export default NationList;
+
+const NationListTitle = styled.h4`
+  font-size: ${({ theme }) => theme.fontSizes.title04};
+  line-height: 20px;
+  padding: 24px 0 32px 0;
+  border-top: 1px solid ${({ theme }) => theme.colors.lightgray};
+`;
