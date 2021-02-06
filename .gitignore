@@ -11,3 +11,6 @@ stats.json
 
 # Private
 .env
+
+# mac temporary file
+.DS_store

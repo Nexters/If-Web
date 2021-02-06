@@ -1,5 +1,6 @@
-import NationListItem from '@/components/NationListItem';
 import React, { FC } from 'react';
+import styled from 'styled-components';
+import NationListItem from './NationListItem';
 
 interface INationContent {
   id: number;
@@ -90,14 +91,30 @@ const nationList: INationContent[] = [
   },
 ];
 
-const NationList: FC = () => {
+interface INationListProps {
+  useTitle?: boolean;
+}
+
+const NationList: FC<INationListProps> = ({ useTitle = false }) => {
   return (
-    <ul>
-      {nationList.map(({ id, name, foods }) => (
-        <NationListItem key={id} name={name} foods={foods} />
-      ))}
-    </ul>
+    <>
+      {useTitle && (
+        <NationListTitle>새로운 나라도 기록해보세요!</NationListTitle>
+      )}
+      <ul>
+        {nationList.map(({ id, name, foods }) => (
+          <NationListItem key={id} name={name} foods={foods} />
+        ))}
+      </ul>
+    </>
   );
 };
 
 export default NationList;
+
+const NationListTitle = styled.h4`
+  font-size: ${({ theme }) => theme.fontSizes.title04};
+  line-height: 20px;
+  padding: 24px 0 32px 0;
+  border-top: 1px solid ${({ theme }) => theme.colors.lightgray};
+`;
