@@ -15,8 +15,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-      '@assets': path.resolve(__dirname, 'assets'),
+      '@': path.resolve(__dirname, 'src')
     },
     extensions: ['.tsx', '.ts', '.js', '.json'],
   },
@@ -48,6 +47,7 @@ module.exports = {
       {
         test: /\.(png|jp(e*)g|svg|gif)$/,
         use: [
+          '@svgr/webpack',
           {
             loader: 'file-loader',
             options: {

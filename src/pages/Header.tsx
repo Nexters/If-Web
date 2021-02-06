@@ -2,11 +2,7 @@ import React, { FC } from 'react';
 import HEADER_TYPES from '@/types/HeaderTypes';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import AlbumIcon from '@assets/album.svg';
-import SaveIcon from '@assets/save.svg';
-import MyPageIcon from '@assets/mypage.svg';
-import ArrowIcon from '@assets/arrow.svg';
-import FeedIcon from '@assets/feed.svg';
+import FeatureIcon from '@/components/FeatureIcon';
 
 const StyledHeader = styled.header`
   display: flex;
@@ -44,7 +40,7 @@ const Arrow = () => {
   return (
     <Icon>
       <Link to="/">
-        <img src={ArrowIcon} alt="Arrow" />
+        <FeatureIcon name={'arrow'} />
       </Link>
     </Icon>
   );
@@ -54,7 +50,7 @@ const MyPage = () => {
   return (
     <Icon>
       <Link to="/myPage">
-        <img src={MyPageIcon} alt="My Page" />
+        <FeatureIcon name={'mypage'} />
       </Link>
     </Icon>
   );
@@ -79,7 +75,7 @@ const Header: FC<Props> = ({
         <>
           <Icon>
             <Link to="/album">
-              <img src={AlbumIcon} alt="Album" />
+              <FeatureIcon name={'album'} />
             </Link>
           </Icon>
           <div>
@@ -90,7 +86,7 @@ const Header: FC<Props> = ({
                 role="button"
                 tabIndex={0}
               >
-                <img src={SaveIcon} alt="Save" />
+                <FeatureIcon name={'save'} />
               </div>
             </Icon>
             <MyPage />
@@ -145,7 +141,7 @@ const Header: FC<Props> = ({
         <>
           <Icon>
             <Link to="/feed">
-              <img src={FeedIcon} alt="Feed" />
+              <FeatureIcon name={'feed'} />
             </Link>
           </Icon>
           <MyPage />
