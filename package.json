@@ -1,8 +1,8 @@
 {
-  "name": "trip-in-my-room-client",
+  "name": "if-web",
   "version": "1.0.0",
   "main": "src/index.tsx",
-  "repository": "https://github.com/Nexters/TRIP-IN-MY-ROOM-CLIENT.git",
+  "repository": "https://github.com/Nexters/If-Web.git",
   "license": "MIT",
   "scripts": {
     "start": "webpack serve --config webpack.dev.js",
