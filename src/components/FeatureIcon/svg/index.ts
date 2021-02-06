@@ -4,5 +4,6 @@ import { ReactComponent as feed } from '@/components/FeatureIcon/svg/feed.svg';
 import { ReactComponent as mypage } from '@/components/FeatureIcon/svg/mypage.svg';
 import { ReactComponent as save } from '@/components/FeatureIcon/svg/save.svg';
 import { ReactComponent as search } from '@/components/FeatureIcon/svg/search.svg';
+import { ReactComponent as cancel } from '@/components/FeatureIcon/svg/cancel.svg';
 
-export { album, arrow, feed, mypage, save, search };
+export { album, arrow, feed, mypage, save, search, cancel };
