@@ -4,7 +4,7 @@ dist/
 .eslintrc.js
 .prettierrc.js
 
-.babelrc.js
+babel.config.js
 
 webpack.common.js
 webpack.dev.js
