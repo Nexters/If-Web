@@ -11,7 +11,7 @@ import FeedIcon from '@assets/feed.svg';
 const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
-  padding: 44px 24px 34px 24px;
+  padding: 20px 0 34px 0;
 `;
 
 const Icon = styled.div`
@@ -31,7 +31,7 @@ const Text = styled.p<{ completed?: boolean }>`
   cursor: ${({ completed = true }) => (completed ? 'pointer' : 'default')};
   display: inline-block;
   outline: none;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.fontSizes.headline};
   line-height: 20px;
   color: ${({ completed = true, theme }) =>
     completed ? theme.colors.darkbrown : theme.colors.darkgray};
