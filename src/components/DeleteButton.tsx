@@ -21,11 +21,8 @@ const ButtonWrapper = styled.button`
   align-items: center;
   width: 22px;
   height: 22px;
+  padding: 0;
   background-color: ${(props) => props.theme.colors.white};
   border: ${(props) => props.theme.borders.normal};
   border-radius: 100%;
-  .icon {
-    width: 22px;
-    height: 22px;
-  }
 `;

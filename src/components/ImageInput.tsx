@@ -4,7 +4,6 @@ import DeleteButton from './DeleteButton';
 
 interface IImageInputProps {
   image?: string;
-  // onDelete(): null
 }
 
 const ImageWrapper = styled.div`
@@ -12,7 +11,7 @@ const ImageWrapper = styled.div`
   width: 116px;
   height: 116px;
   flex: 0 0 auto;
-  margin-right: 8px;
+  margin: 6px 8px 0 0;
   background-color: ${(props) => props.theme.colors.white};
   border: 1px solid ${(props) => props.theme.colors.darkbrown};
 `;

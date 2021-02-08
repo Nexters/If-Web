@@ -2,20 +2,6 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import Icon from './FeatureIcon';
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 32px;
-  cursor: pointer;
-`;
-
-const InitialText = styled.span`
-  line-height: 28px;
-  color: ${(props) => props.theme.colors.darkgray};
-`;
-
-const LocationText = styled.span``;
-
 interface ILocationInputProps {
   nation: number | null;
 }
@@ -25,13 +11,21 @@ const LocationInput: FC<ILocationInputProps> = (props) => {
   return (
     <Wrapper>
       <Icon name="flag" />
-      {nation ? (
-        <LocationText>{nation}</LocationText>
-      ) : (
-        <InitialText>여행한 나라</InitialText>
-      )}
+      <LocationText>{nation || '여행한 나라'}</LocationText>
     </Wrapper>
   );
 };
 
 export default LocationInput;
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 26px;
+  cursor: pointer;
+`;
+
+const LocationText = styled.span`
+  margin-left: 8px;
+  line-height: 28px;
+`;

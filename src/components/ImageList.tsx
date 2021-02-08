@@ -5,7 +5,7 @@ import ImageInput from './ImageInput';
 const ImageListWrapper = styled.div`
   display: flex;
   flex-wrap: nowrap;
-  overflow-x: scroll;
+  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 `;
 
@@ -13,7 +13,7 @@ interface IImageListProps {
   imageList: Array<number>;
 }
 
-const ImageList: FC<IImageListProps> = (props) => {
+const ImageList: FC<IImageListProps> = () => {
   return (
     <ImageListWrapper>
       <ImageInput />

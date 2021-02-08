@@ -2,22 +2,6 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import Icon from './FeatureIcon';
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-`;
-
-const Text = styled.span`
-  margin: 0px 4px;
-  font-size: 14px;
-  opacity: 0.3;
-`;
-
-const LocationText = styled.span`
-  cursor: pointer;
-`;
-
 interface ILocationInputProps {
   location: string;
 }
@@ -34,3 +18,19 @@ const LocationInput: FC<ILocationInputProps> = (props) => {
 };
 
 export default LocationInput;
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+`;
+
+const Text = styled.span`
+  font-size: 14px;
+  opacity: 0.3;
+`;
+
+const LocationText = styled.span`
+  margin: 0 4px 0 8px;
+  cursor: pointer;
+`;
