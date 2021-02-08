@@ -5,5 +5,21 @@ import { ReactComponent as mypage } from '@/components/FeatureIcon/svg/mypage.sv
 import { ReactComponent as save } from '@/components/FeatureIcon/svg/save.svg';
 import { ReactComponent as search } from '@/components/FeatureIcon/svg/search.svg';
 import { ReactComponent as cancel } from '@/components/FeatureIcon/svg/cancel.svg';
+import { ReactComponent as add } from '@/components/FeatureIcon/svg/add.svg';
+import { ReactComponent as divider } from '@/components/FeatureIcon/svg/divider.svg';
+import { ReactComponent as flag } from '@/components/FeatureIcon/svg/flag.svg';
+import { ReactComponent as location } from '@/components/FeatureIcon/svg/location.svg';
 
-export { album, arrow, feed, mypage, save, search, cancel };
+export {
+  album,
+  arrow,
+  feed,
+  mypage,
+  save,
+  search,
+  cancel,
+  add,
+  divider,
+  flag,
+  location,
+};

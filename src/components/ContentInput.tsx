@@ -4,11 +4,13 @@ import styled from 'styled-components';
 const Input = styled.textarea`
   width: 100%;
   min-height: 400px;
+  padding: 0;
   border: none;
   background: none;
   font-size: 16px;
   line-height: 35px;
   resize: none;
+  outline: none;
   ::placeholder {
     color: ${(props) => props.theme.colors.darkgray};
   }
