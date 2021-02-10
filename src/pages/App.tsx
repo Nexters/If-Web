@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 
 import AddContent from '@/pages/AddContent';
-import Main from '@/pages/main';
+import Main from '@/pages/Main';
 import Login from '@/pages/Login/Login';
 
 import GlobalStyle from '@/styles/global';

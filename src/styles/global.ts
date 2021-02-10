@@ -11,26 +11,31 @@ const GlobalStyle = createGlobalStyle`
     }
     * {
         box-sizing: border-box;
+        font-family: "UhBeeSeulvely", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
     html {
+        font-family: "UhBeeSeulvely", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         width: 100vw;
         background-color: #FFFFFF;
     }
     body {
+        position: relative;
         max-width: 480px;
         min-height: 100vh; 
         height: auto;
         margin: 0 auto;
         background-color: #F4F4F4;
-        font-family: "UhBeeSeulvely", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         color: #1A1515;
         ::-webkit-scrollbar {
             display: none;
         }
     }
     a {
-    color: inherit;
-    text-decoration: none;
+        color: inherit;
+        text-decoration: none;
+    }
+    button {
+        padding: 0;
     }
 `;
 

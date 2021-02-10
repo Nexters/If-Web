@@ -22,9 +22,14 @@ const fontSizes: IStringObject = {
   caption03: '12px',
 };
 
+const borders: IStringObject = {
+  normal: '1px solid #1A1515',
+};
+
 const theme = {
   colors,
   fontSizes,
+  borders,
 };
 
 export default theme;

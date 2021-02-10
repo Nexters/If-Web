@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import Story from './Story';
-import AddButton from './AddButton';
+import Story from '@/components/Story';
+import AddButton from '@/components/AddButton';
 
 const Main: FC = () => {
   return (
