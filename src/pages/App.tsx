@@ -5,7 +5,7 @@ import { hot } from 'react-hot-loader';
 
 import AddContent from '@/pages/AddContent';
 import Main from '@/pages/Main';
-import Login from '@/pages/Login/Login';
+import Login from '@/pages/Login';
 
 import GlobalStyle from '@/styles/global';
 import theme from '@/styles/theme';
