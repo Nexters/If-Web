@@ -10,6 +10,7 @@ const KakaoButton: FC = () => {
     console.log(res);
     // res.profile: properties (nickname, profile_image, thumbnail_image 등등)
     // res.response: access_token, refresh_token 등등
+    // !!!!!!!!!!!!!!!! 서버랑 연결 작업하기 !!!!!!!!!!!!!!!!
   };
 
   const kakaoFail = () => {
@@ -39,7 +40,7 @@ const KakaoContent = () => {
 
 const KakaoContainer = styled(KakaoLogin)`
   margin: 0 auto 16px auto !important;
-  width: 87.2% !important;
+  width: 375px !important;
   height: 48px !important;
   background-color: #fee500 !important;
   color: ${(props) => props.theme.colors.darkbrown} !important;
@@ -53,7 +54,7 @@ const KakaoContainer = styled(KakaoLogin)`
   outline: none;
 
   // &:hover {
-  // 디자이너분들한테 여쭤보기!!
+  // !!!!!!!!!!!!!!!! 디자이너분들한테 여쭤보기 !!!!!!!!!!!!!!!!
   // }
 `;
 
