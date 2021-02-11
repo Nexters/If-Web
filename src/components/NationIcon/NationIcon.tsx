@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import * as svg from '@/components/NationIcon/svg';
 
-type NationIconType = keyof typeof svg;
+export type NationIconType = keyof typeof svg;
 interface INationIconProps {
   name: NationIconType;
   className?: string;

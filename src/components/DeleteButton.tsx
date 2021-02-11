@@ -5,7 +5,11 @@ import Icon from './FeatureIcon';
 const DeleteButton: FC = () => {
   return (
     <ButtonWrapper>
-      <Icon className="icon" name="cancel" />
+      <Icon
+        className="icon"
+        name="cancel"
+        style={{ width: '14px', height: '14px' }}
+      />
     </ButtonWrapper>
   );
 };
