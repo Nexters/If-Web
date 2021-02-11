@@ -6,6 +6,7 @@ const { naver } = window as any;
 
 const NaverButton: FC = () => {
   const location = useLocation();
+  const NAVER_KEY = String(process.env.NAVER_KEY);
 
   useEffect(() => {
     initializeNaverLogin();
@@ -13,8 +14,9 @@ const NaverButton: FC = () => {
   }, []);
 
   const initializeNaverLogin = () => {
+    console.log(NAVER_KEY);
     const naverLogin = new naver.LoginWithNaverId({
-      clientId: 'MOe1SdUK3tHmdcH3WyRx',
+      clientId: NAVER_KEY,
       callbackUrl: 'http://localhost:3000/login',
       isPopup: false,
       loginButton: {
