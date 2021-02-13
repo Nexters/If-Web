@@ -26,8 +26,9 @@ const FinderEmptyFallback: FC<IFinderEmptyFallback> = ({ keyword }) => {
 
   return (
     <SearchEmptyFallback
-      keyword={keyword}
+      searchKeyword={keyword}
       selectCustomKeyword={onChangeNation}
+      categoryText={'나라'}
     />
   );
 };

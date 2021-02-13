@@ -2,26 +2,28 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 interface ISearchEmptyFallback {
-  keyword: string;
+  searchKeyword: string;
   selectCustomKeyword: () => void;
+  categoryText: string;
 }
 
 const SearchEmptyFallback: FC<ISearchEmptyFallback> = ({
-  keyword,
+  searchKeyword,
   selectCustomKeyword,
+  categoryText,
 }) => {
   return (
     <Wrapper>
       <div />
       <p>
-        찾으시는 나라가 없습니다ㅠㅠ
+        찾으시는 {categoryText}가 없습니다ㅠㅠ
         <br />
-        검색하신 나라로 입력할까요?
+        검색하신 {categoryText}로 입력할까요?
       </p>
       <button
         onClick={selectCustomKeyword}
         tabIndex={0}
-      >{`'${keyword}'(으)로 입력하기`}</button>
+      >{`'${searchKeyword}'(으)로 입력하기`}</button>
     </Wrapper>
   );
 };
