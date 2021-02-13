@@ -1,11 +1,22 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { RecoilState, useRecoilState } from 'recoil';
-import { IStoryState } from '@/types';
+import { useStoryState } from '@/atoms/storyState';
 
-interface ITitleInputProps {
-  storyAtom: RecoilState<IStoryState>;
-}
+const TitleInput: FC = () => {
+  const { storyState, setStoryState } = useStoryState();
+
+  return (
+    <Input
+      placeholder="제목을 입력해주세요 :)"
+      onChange={({ target: { value } }) =>
+        setStoryState({ field: 'title', value })
+      }
+      value={storyState.title}
+    ></Input>
+  );
+};
+
+export default TitleInput;
 
 const Input = styled.input`
   width: 100%;
@@ -19,20 +30,3 @@ const Input = styled.input`
     color: ${(props) => props.theme.colors.darkgray};
   }
 `;
-
-const TitleInput: FC<ITitleInputProps> = ({ storyAtom }) => {
-  const [storyState, setStoryState] = useRecoilState(storyAtom);
-
-  const onChangeTitle = (value: string) =>
-    setStoryState({ ...storyState, title: value });
-
-  return (
-    <Input
-      placeholder="제목을 입력해주세요 :)"
-      onChange={(e) => onChangeTitle(e.target.value)}
-      value={storyState.title}
-    ></Input>
-  );
-};
-
-export default TitleInput;

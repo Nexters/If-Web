@@ -16,7 +16,14 @@ module.exports = merge(common, {
     overlay: true,
     hot: true,
     proxy: {
-      '/api': 'http://localhost:3000',
+      '/api': {
+        target: 'http://52.79.196.61:6150',
+        secure: false,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/',
+        },
+      },
     },
   },
 });

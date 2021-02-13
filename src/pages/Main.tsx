@@ -8,13 +8,13 @@ import Header from './Header';
 const Main: FC = () => {
   const [storyList, setStoryList] = useState([]);
 
-  async function getStoryList() {
+  const getStoryList = async () => {
     const data = await request({
       url: '/stories',
       method: 'GET',
     });
     setStoryList(data);
-  }
+  };
 
   useEffect(() => {
     getStoryList();

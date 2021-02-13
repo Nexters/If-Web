@@ -1,27 +1,17 @@
 import React, { FC } from 'react';
-import { IStoryState } from '@/types';
-import { RecoilState, useRecoilState } from 'recoil';
+import { useStoryState } from '@/atoms/storyState';
 import styled from 'styled-components';
 
-interface IContentInputProps {
-  storyAtom: RecoilState<IStoryState>;
-}
-
-const ContentInput: FC<IContentInputProps> = ({ storyAtom }) => {
-  const [storyState, setStoryState] = useRecoilState(storyAtom);
-
-  const onChangeContent = (value: string) =>
-    setStoryState({
-      ...storyState,
-      memo: value,
-    });
-
+const ContentInput: FC = () => {
+  const { storyState, setStoryState } = useStoryState();
   return (
     <>
       <Line />
       <TextArea
         value={storyState.memo}
-        onChange={({ target }) => onChangeContent(target.value)}
+        onChange={({ target: { value } }) =>
+          setStoryState({ field: 'memo', value })
+        }
         placeholder="무엇을 드셨나요?"
       ></TextArea>
     </>

@@ -1,10 +1,10 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useCallback } from 'react';
-import { addContentState } from '@/atoms/addContentState';
+import { StoryStateAtom } from '@/atoms/storyState';
 
 function useAddContent() {
-  const { nation } = useRecoilValue(addContentState);
-  const setAddContentState = useSetRecoilState(addContentState);
+  const { nation } = useRecoilValue(StoryStateAtom);
+  const setAddContentState = useSetRecoilState(StoryStateAtom);
 
   const changeNation = useCallback(
     (nationInfo) => {

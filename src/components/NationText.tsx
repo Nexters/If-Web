@@ -6,6 +6,7 @@ import {
 } from '@/atoms/addContentViewState';
 import NationIcon from '@/components/NationIcon';
 import { NationIconType } from '@/components/NationIcon/NationIcon';
+import Icon from './FeatureIcon';
 
 interface INationTextProps {
   nation: {
