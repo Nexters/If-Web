@@ -7,11 +7,10 @@ import LocationText from '@/components/LocationText';
 import NationText from '@/components/NationText';
 import ContentInput from '@/components/ContentInput';
 import ImageList from '@/components/ImageList';
+import useAddContent from '@/hooks/useAddContent';
+import { AddContentViewMode, useViewMode } from '@/atoms/addContentViewState';
+import NationFinder from '@/components/NationFinder';
 import Header from './Header';
-
-const AddContentWrapper = styled.div`
-  padding: 0 24px;
-`;
 
 const imageList = atom({
   key: 'imageList',
@@ -20,18 +19,29 @@ const imageList = atom({
 
 const AddContent: FC = () => {
   const [location, setLocation] = useState('음식을 먹은 장소');
-  const [nation, setNation] = useState(null);
+  const { nation } = useAddContent();
+  const mode = useViewMode();
   const imageListData = useRecoilValue(imageList);
+
   return (
-    <AddContentWrapper>
-      <Header type={HEADER_TYPES.ADD_EDIT} />
-      <TitleInput />
-      <LocationText location={location} />
-      <NationText nation={nation} />
-      <ImageList imageList={imageListData} />
-      <ContentInput />
-    </AddContentWrapper>
+    <>
+      {mode === AddContentViewMode.DEFAULT && (
+        <AddContentWrapper>
+          <Header type={HEADER_TYPES.ADD_EDIT} />
+          <TitleInput />
+          <LocationText location={location} />
+          <NationText nation={nation} />
+          <ImageList imageList={imageListData} />
+          <ContentInput />
+        </AddContentWrapper>
+      )}
+      {mode === AddContentViewMode.FIND_NATION && <NationFinder />}
+    </>
   );
 };
 
 export default AddContent;
+
+const AddContentWrapper = styled.div`
+  padding: 0 24px;
+`;
