@@ -24,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
         min-height: 100vh; 
         height: auto;
         margin: 0 auto;
-        background-color: #F4F4F4;
+        background-color: #F8F8F8;
         color: #1A1515;
         ::-webkit-scrollbar {
             display: none;
@@ -36,6 +36,9 @@ const GlobalStyle = createGlobalStyle`
     }
     button {
         padding: 0;
+        border: none;
+        margin: 0;
+        background: none;
     }
 `;
 
