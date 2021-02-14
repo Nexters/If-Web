@@ -7,6 +7,7 @@ import AddContent from '@/pages/AddContent';
 import Main from '@/pages/Main';
 import Login from '@/pages/Login';
 import MyPage from '@/pages/MyPage';
+import MyPageEdit from '@/pages/MyPageEdit';
 
 import GlobalStyle from '@/styles/global';
 import theme from '@/styles/theme';
@@ -24,7 +25,8 @@ const App: FC = () => {
             <Route path={'/album'} component={Album} />
             <Route exact path={'/'} component={Main} />
             <Route path={'/login'} component={Login} />
-            <Route path={'/myPage'} component={MyPage} />
+            <Route path={'/myPage'} component={MyPage} exact />
+            <Route path={'/myPage/edit'} component={MyPageEdit} />
           </Switch>
         </Router>
       </RecoilRoot>

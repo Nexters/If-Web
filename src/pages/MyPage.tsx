@@ -1,95 +1,84 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import Layout from '@/components/Layout';
 import HEADER_TYPES from '@/types/HeaderTypes';
 import styled from 'styled-components';
 import FeatureIcon from '@/components/FeatureIcon';
-import { atom, useRecoilValue } from 'recoil';
+import LoginIcon from '@/components/LoginIcon';
+import { useHistory } from 'react-router-dom';
 import Header from './Header';
 
-// 이 부분은 나중에 로그인으로 이동
-const usernameState = atom({
-  key: 'username',
-  default: '방구석 여행러',
-});
-
-enum STATUS {
-  VIEW,
-  INCOMPLETE,
-  COMPLETE,
-}
+// axios로 수정하기
+const usernameState = '방구석 여행러';
 
 const MyPage: FC = () => {
-  const username = useRecoilValue(usernameState);
-  const [currentStatus, setCurrentStatus] = useState(STATUS.VIEW);
-  const [usernameInput, setUsernameInput] = useState('');
+  const history = useHistory();
+
+  const username = usernameState;
 
   const handleEditClick = () => {
-    setCurrentStatus(STATUS.INCOMPLETE);
+    history.push('/myPage/edit');
   };
 
-  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsernameInput(e.target.value);
-    if (e.target.value.length === 0) {
-      setCurrentStatus(STATUS.INCOMPLETE);
-    } else {
-      setCurrentStatus(STATUS.COMPLETE);
-    }
+  const handleLogout = () => {
+    alert('LOGOUT');
+  };
+
+  const handleDeleteAccount = () => {
+    alert('DELETE ACCOUNT');
   };
 
   return (
     <Layout>
-      {/* View Page */}
-      {currentStatus === STATUS.VIEW && (
-        <>
-          <Header type={HEADER_TYPES.MY_PAGE} />
-          <MyPageContainer>
-            <Username>{username}</Username>
-            <EditIcon
-              onClick={handleEditClick}
-              onKeyPress={handleEditClick}
-              role="button"
-              tabIndex={0}
-            >
-              <FeatureIcon name={'edit'} />
-            </EditIcon>
-          </MyPageContainer>
-        </>
-      )}
+      <Header type={HEADER_TYPES.MY_PAGE} />
+      <MyPageContainer>
+        <UsernameRow>
+          <Username>{username}</Username>
+          <EditIcon
+            onClick={handleEditClick}
+            onKeyPress={handleEditClick}
+            role="button"
+            tabIndex={0}
+          >
+            <FeatureIcon name={'edit'} />
+          </EditIcon>
+        </UsernameRow>
+        <AccountRow>
+          <div>
+            <LoginIcon name={'kakao'} />
+            <p>카카오 계정 로그인</p>
+          </div>
+          <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
+        </AccountRow>
+        <Line />
 
-      {currentStatus === STATUS.INCOMPLETE && (
-        <>
-          <Header type={HEADER_TYPES.ADD_EDIT} completed={false} />
-          <input
-            type="text"
-            value={usernameInput}
-            onChange={handleUsernameChange}
-            placeholder={'이름을 입력하세요. (최대 10글자)'}
-          />
-        </>
-      )}
-      {currentStatus === STATUS.COMPLETE && (
-        <>
-          <Header type={HEADER_TYPES.ADD_EDIT} completed={true} />
-          <input
-            type="text"
-            value={usernameInput}
-            onChange={handleUsernameChange}
-            placeholder={'이름을 입력하세요. (최대 10글자)'}
-          />
-        </>
-      )}
+        {/* 이메일 계정 확인하기 */}
+        <a href="mailto:danakim21@gmail.com?subject=If 개발자에게 피드백 보내기">
+          <ActionRow>
+            <p>피드백 남기기</p>
+            <FeatureIcon name={'arrow2'} />
+          </ActionRow>
+        </a>
+
+        <ActionRow onClick={handleDeleteAccount}>
+          <p>탈퇴하기</p>
+          <FeatureIcon name={'arrow2'} />
+        </ActionRow>
+      </MyPageContainer>
     </Layout>
   );
 };
 
 const MyPageContainer = styled.div`
   margin-top: 26px;
+`;
+
+const UsernameRow = styled.div`
   display: flex;
 `;
 
 const Username = styled.p`
   font-weight: 400;
-  font-size: 24px;
+  font-size: ${({ theme }) => theme.fontSizes.title01};
   line-height: 30px;
 `;
 
@@ -98,6 +87,51 @@ const EditIcon = styled.div`
   line-height: 30px;
   cursor: pointer;
   outline: none;
+`;
+
+const AccountRow = styled.div`
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+
+    p {
+      margin-left: 4px;
+      font-weight: 400;
+      font-size: ${({ theme }) => theme.fontSizes.caption02};
+      line-height: 24px;
+    }
+  }
+`;
+
+const LogoutButton = styled.p`
+  font-weight: 400;
+  font-size: ${({ theme }) => theme.fontSizes.caption03};
+  line-height: 20px;
+  cursor: pointer;
+`;
+
+const Line = styled.hr`
+  color: ${({ theme }) => theme.colors.lightgray};
+  margin: 25px 0;
+`;
+
+const ActionRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  cursor: pointer;
+
+  p {
+    font-weight: 400;
+    font-size: ${({ theme }) => theme.fontSizes.caption01};
+    line-height: 28px;
+  }
+  svg {
+    margin-top: 3px;
+  }
 `;
 
 export default MyPage;

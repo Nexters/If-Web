@@ -10,6 +10,7 @@ import { ReactComponent as divider } from '@/components/FeatureIcon/svg/divider.
 import { ReactComponent as flag } from '@/components/FeatureIcon/svg/flag.svg';
 import { ReactComponent as location } from '@/components/FeatureIcon/svg/location.svg';
 import { ReactComponent as edit } from '@/components/FeatureIcon/svg/edit.svg';
+import { ReactComponent as arrow2 } from '@/components/FeatureIcon/svg/arrow2.svg';
 
 export {
   album,
@@ -24,4 +25,5 @@ export {
   flag,
   location,
   edit,
+  arrow2,
 };

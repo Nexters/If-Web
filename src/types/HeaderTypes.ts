@@ -4,6 +4,7 @@ enum HEADER_TYPES {
   DETAIL = 'DETAIL',
   ALBUM = 'ALBUM',
   MY_PAGE = 'MY_PAGE',
+  MY_PAGE_EDIT = 'MY_PAGE_EDIT',
 }
 
 export default HEADER_TYPES;
