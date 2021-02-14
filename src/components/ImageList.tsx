@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { useStoryState } from '@/atoms/storyState';
 import ImageInput from './ImageInput';
 
 const ImageListWrapper = styled.div`
@@ -9,14 +10,14 @@ const ImageListWrapper = styled.div`
   -webkit-overflow-scrolling: touch;
 `;
 
-interface IImageListProps {
-  imageList: Array<number>;
-}
-
-const ImageList: FC<IImageListProps> = () => {
+const ImageList: FC = () => {
+  const { storyState } = useStoryState();
   return (
     <ImageListWrapper>
-      <ImageInput />
+      {storyState.images.map((image, idx) => (
+        <ImageInput key={idx} index={idx} image={image} />
+      ))}
+      <ImageInput index={storyState.images.length} />
     </ImageListWrapper>
   );
 };
