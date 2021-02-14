@@ -1,5 +1,9 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import {
+  AddContentViewMode,
+  useChangeViewMode,
+} from '@/atoms/addContentViewState';
 import Icon from './FeatureIcon';
 
 interface ILocationInputProps {
@@ -8,8 +12,10 @@ interface ILocationInputProps {
 
 const LocationInput: FC<ILocationInputProps> = (props) => {
   const { location } = props;
+  const onChangeMode = useChangeViewMode(AddContentViewMode.FIND_PLACE);
+
   return (
-    <Wrapper>
+    <Wrapper onClick={onChangeMode}>
       <Icon name="location" />
       <LocationText>{location}</LocationText>
       <Text>에서 느낀</Text>

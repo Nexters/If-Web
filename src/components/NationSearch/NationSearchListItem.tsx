@@ -12,7 +12,7 @@ interface IFinderNationListItemProps {
   nation: INationList;
 }
 
-const FinderNationListItem: FC<IFinderNationListItemProps> = ({ nation }) => {
+const NationSearchListItem: FC<IFinderNationListItemProps> = ({ nation }) => {
   const { changeNation } = useAddContent();
   const changeToDefaultMode = useChangeViewMode(AddContentViewMode.DEFAULT);
 
@@ -40,7 +40,7 @@ const FinderNationListItem: FC<IFinderNationListItemProps> = ({ nation }) => {
   );
 };
 
-export default FinderNationListItem;
+export default NationSearchListItem;
 
 const NationListItem = styled.li`
   display: flex;

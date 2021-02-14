@@ -9,7 +9,8 @@ import ContentInput from '@/components/ContentInput';
 import ImageList from '@/components/ImageList';
 import useAddContent from '@/hooks/useAddContent';
 import { AddContentViewMode, useViewMode } from '@/atoms/addContentViewState';
-import NationFinder from '@/components/NationFinder';
+import NationFinder from '@/components/NationSearch';
+import PlaceSearch from '@/components/PlaceSearch';
 import Header from './Header';
 
 const imageList = atom({
@@ -36,6 +37,7 @@ const AddContent: FC = () => {
         </AddContentWrapper>
       )}
       {mode === AddContentViewMode.FIND_NATION && <NationFinder />}
+      {mode === AddContentViewMode.FIND_PLACE && <PlaceSearch />}
     </>
   );
 };
