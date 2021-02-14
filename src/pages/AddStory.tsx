@@ -1,11 +1,11 @@
 import React, { FC, useEffect } from 'react';
-import { atom, useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import HEADER_TYPES from '@/types/HeaderTypes';
 import TitleInput from '@/components/TitleInput';
 import LocationText from '@/components/LocationText';
 import NationText from '@/components/NationText';
 import ContentInput from '@/components/ContentInput';
+import ImageList from '@/components/ImageList';
 import { AddContentViewMode, useViewMode } from '@/atoms/addContentViewState';
 import NationFinder from '@/components/NationFinder';
 import Header from './Header';
@@ -21,7 +21,7 @@ const AddContent: FC = () => {
           <TitleInput />
           <LocationText />
           {/* <NationText /> */}
-          {/* <ImageList imageList={imageListData} /> */}
+          <ImageList />
           <ContentInput />
         </AddContentWrapper>
       )}
