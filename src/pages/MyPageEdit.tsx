@@ -1,8 +1,8 @@
 import React, { FC, useState, useRef } from 'react';
 import Layout from '@/components/Layout';
 import HEADER_TYPES from '@/types/HeaderTypes';
-import FeatureIcon from '@/components/FeatureIcon';
 import styled from 'styled-components';
+import CancelIcon from '@/components/CancelIcon';
 import Header from './Header';
 
 const MyPageEdit: FC = () => {
@@ -51,30 +51,12 @@ const MyPageEdit: FC = () => {
           ref={usernameInputRef}
           maxLength={10}
         />
-        {complete && (
-          <CancelIcon
-            onClick={handleCancelClick}
-            onKeyPress={handleCancelClick}
-            role="button"
-            tabIndex={0}
-          >
-            <FeatureIcon name={'cancel'} />
-          </CancelIcon>
-        )}
+        {complete && <CancelIcon handleCancelClick={handleCancelClick} />}
       </div>
       {complete && <Count>{usernameInput.length} / 10</Count>}
     </Layout>
   );
 };
-
-const CancelIcon = styled.div`
-  display: inline;
-  position: absolute;
-  margin-top: 32px;
-  margin-left: -24px;
-  outline: none;
-  cursor: pointer;
-`;
 
 const Input = styled.input`
   margin-top: 24px;
