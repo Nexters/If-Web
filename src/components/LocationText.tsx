@@ -1,17 +1,15 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { useStoryState } from '@/atoms/storyState';
 import Icon from './FeatureIcon';
 
-interface ILocationInputProps {
-  location: string;
-}
+const LocationInput: FC = () => {
+  const { storyState, setStoryState } = useStoryState();
 
-const LocationInput: FC<ILocationInputProps> = (props) => {
-  const { location } = props;
   return (
     <Wrapper>
       <Icon name="location" />
-      <LocationText>{location}</LocationText>
+      <LocationText>{storyState.place || '음식을 먹은 장소'}</LocationText>
       <Text>에서 느낀</Text>
     </Wrapper>
   );

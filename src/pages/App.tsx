@@ -3,7 +3,7 @@ import { RecoilRoot } from 'recoil';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 
-import AddContent from '@/pages/AddContent';
+import AddContent from '@/pages/AddStory';
 import Main from '@/pages/Main';
 import Login from '@/pages/Login';
 
