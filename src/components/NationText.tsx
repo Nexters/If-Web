@@ -1,11 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
-import {
-  AddContentViewMode,
-  useChangeViewMode,
-} from '@/atoms/addContentViewState';
 import NationIcon from '@/components/NationIcon';
 import { NationIconType } from '@/components/NationIcon/NationIcon';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
 interface INationTextProps {
   nation: {
@@ -16,10 +13,15 @@ interface INationTextProps {
 }
 
 const NationText: FC<INationTextProps> = ({ nation }) => {
-  const onChangeMode = useChangeViewMode(AddContentViewMode.FIND_NATION);
+  const { url } = useRouteMatch();
+  const history = useHistory();
+
+  const onChangeHistory = useCallback(() => {
+    history.push(`${url}/nation`);
+  }, [history, url]);
 
   return (
-    <Wrapper onClick={onChangeMode}>
+    <Wrapper onClick={onChangeHistory}>
       <NationIcon name={nation.name} />
       <LocationText>{nation.title || '여행한 나라'}</LocationText>
     </Wrapper>

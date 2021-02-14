@@ -3,10 +3,7 @@ import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
 import { INationList } from '@/lib/constants';
 import useAddContent from '@/hooks/useAddContent';
-import {
-  AddContentViewMode,
-  useChangeViewMode,
-} from '@/atoms/addContentViewState';
+import { useHistory } from 'react-router-dom';
 
 interface IFinderNationListItemProps {
   nation: INationList;
@@ -14,7 +11,7 @@ interface IFinderNationListItemProps {
 
 const NationSearchListItem: FC<IFinderNationListItemProps> = ({ nation }) => {
   const { changeNation } = useAddContent();
-  const changeToDefaultMode = useChangeViewMode(AddContentViewMode.DEFAULT);
+  const history = useHistory();
 
   const onChangeNation = useCallback(() => {
     const nationInfo = {
@@ -23,8 +20,8 @@ const NationSearchListItem: FC<IFinderNationListItemProps> = ({ nation }) => {
       title: nation.title,
     };
     changeNation(nationInfo);
-    changeToDefaultMode();
-  }, [nation, changeNation, changeToDefaultMode]);
+    history.push('/add');
+  }, [nation, changeNation, history]);
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLLIElement>) => {
     if (e.key === 'Enter') {

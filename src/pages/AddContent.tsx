@@ -8,9 +8,9 @@ import NationText from '@/components/NationText';
 import ContentInput from '@/components/ContentInput';
 import ImageList from '@/components/ImageList';
 import useAddContent from '@/hooks/useAddContent';
-import { AddContentViewMode, useViewMode } from '@/atoms/addContentViewState';
-import NationFinder from '@/components/NationSearch';
 import PlaceSearch from '@/components/PlaceSearch';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import NationSearch from '@/components/NationSearch';
 import Header from './Header';
 
 const imageList = atom({
@@ -19,25 +19,31 @@ const imageList = atom({
 });
 
 const AddContent: FC = () => {
-  const [location, setLocation] = useState('음식을 먹은 장소');
+  const { path } = useRouteMatch();
   const { nation } = useAddContent();
-  const mode = useViewMode();
+  const [location, setLocation] = useState('음식을 먹은 장소');
   const imageListData = useRecoilValue(imageList);
 
   return (
     <>
-      {mode === AddContentViewMode.DEFAULT && (
-        <AddContentWrapper>
-          <Header type={HEADER_TYPES.ADD_EDIT} />
-          <TitleInput />
-          <LocationText location={location} />
-          <NationText nation={nation} />
-          <ImageList imageList={imageListData} />
-          <ContentInput />
-        </AddContentWrapper>
-      )}
-      {mode === AddContentViewMode.FIND_NATION && <NationFinder />}
-      {mode === AddContentViewMode.FIND_PLACE && <PlaceSearch />}
+      <Switch>
+        <Route exact path={path}>
+          <AddContentWrapper>
+            <Header type={HEADER_TYPES.ADD_EDIT} />
+            <TitleInput />
+            <LocationText location={location} />
+            <NationText nation={nation} />
+            <ImageList imageList={imageListData} />
+            <ContentInput />
+          </AddContentWrapper>
+        </Route>
+        <Route path={`${path}/place`}>
+          <PlaceSearch />
+        </Route>
+        <Route path={`${path}/nation`}>
+          <NationSearch />
+        </Route>
+      </Switch>
     </>
   );
 };

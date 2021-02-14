@@ -1,9 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
-import {
-  AddContentViewMode,
-  useChangeViewMode,
-} from '@/atoms/addContentViewState';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import Icon from './FeatureIcon';
 
 interface ILocationInputProps {
@@ -12,10 +9,15 @@ interface ILocationInputProps {
 
 const LocationInput: FC<ILocationInputProps> = (props) => {
   const { location } = props;
-  const onChangeMode = useChangeViewMode(AddContentViewMode.FIND_PLACE);
+  const { url } = useRouteMatch();
+  const history = useHistory();
+
+  const onChangeHistory = useCallback(() => {
+    history.push(`${url}/place`);
+  }, [history, url]);
 
   return (
-    <Wrapper onClick={onChangeMode}>
+    <Wrapper onClick={onChangeHistory}>
       <Icon name="location" />
       <LocationText>{location}</LocationText>
       <Text>에서 느낀</Text>

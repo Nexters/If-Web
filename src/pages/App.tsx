@@ -19,10 +19,18 @@ const App: FC = () => {
       <RecoilRoot>
         <Router>
           <Switch>
-            <Route path={'/add'} component={AddContent} />
-            <Route path={'/album'} component={Album} />
-            <Route exact path={'/'} component={Main} />
-            <Route path={'/login'} component={Login} />
+            <Route path={'/add'}>
+              <AddContent />
+            </Route>
+            <Route path={'/album'}>
+              <Album />
+            </Route>
+            <Route exact path={'/'}>
+              <Main />
+            </Route>
+            <Route path={'/login'}>
+              <Login />
+            </Route>
           </Switch>
         </Router>
       </RecoilRoot>

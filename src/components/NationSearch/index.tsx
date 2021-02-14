@@ -6,31 +6,28 @@ import useInput from '@/hooks/useInput';
 import SearchInput from '@/components/SearchInput';
 import SearchHeader from '@/components/SearchHeader';
 import useAddContent from '@/hooks/useAddContent';
-import {
-  AddContentViewMode,
-  useChangeViewMode,
-} from '@/atoms/addContentViewState';
 import SearchEmptyFallback from '@/components/SearchEmptyFallback';
+import { useHistory } from 'react-router-dom';
 
 const NationSearch: FC = () => {
   const { value, onChangeValue } = useInput();
   const { changeNation } = useAddContent();
-  const changeToDefaultMode = useChangeViewMode(AddContentViewMode.DEFAULT);
+  const history = useHistory();
 
   const filteredNationList = useMemo(() => {
     if (value === '') return nationList;
     return nationList.filter((nation) => nation.title === value);
   }, [value]);
 
-  const onChangeNation = useCallback(() => {
+  const onChangeCustomNation = useCallback(() => {
     const nationInfo = {
       id: null,
       name: 'korea',
       title: value,
     };
     changeNation(nationInfo);
-    changeToDefaultMode();
-  }, [value, changeNation, changeToDefaultMode]);
+    history.push('/add');
+  }, [value, changeNation, history]);
 
   return (
     <Layout padding={'30px 24px'}>
@@ -46,7 +43,7 @@ const NationSearch: FC = () => {
       {filteredNationList.length === 0 && (
         <SearchEmptyFallback
           searchKeyword={value}
-          selectCustomKeyword={onChangeNation}
+          selectCustomKeyword={onChangeCustomNation}
           categoryText={'나라'}
         />
       )}
