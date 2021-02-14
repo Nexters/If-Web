@@ -40,7 +40,7 @@ const KakaoContent = () => {
 
 const KakaoContainer = styled(KakaoLogin)`
   margin: 0 auto 16px auto !important;
-  width: 375px !important;
+  width: 87.2% !important;
   height: 48px !important;
   background-color: #fee500 !important;
   color: ${(props) => props.theme.colors.darkbrown} !important;

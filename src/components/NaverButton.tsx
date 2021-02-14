@@ -42,7 +42,7 @@ const NaverButton: FC = () => {
 
 const NaverContainer = styled.div`
   margin: 0 auto;
-  width: 375px;
+  width: 87.2%;
 
   img {
     width: 100%;
