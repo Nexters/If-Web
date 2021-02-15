@@ -1,12 +1,25 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { useStoryState } from '@/atoms/storyState';
+import { useHistory } from 'react-router-dom';
 
-interface IPlaceSearchListItemProps {}
+interface IPlaceSearchListItem {
+  placeName: string;
+}
 
-const PlaceSearchListItem: FC<IPlaceSearchListItemProps> = () => {
+const PlaceSearchListItem: FC<IPlaceSearchListItem> = (props) => {
+  const { placeName } = props;
+  const { setStoryState } = useStoryState();
+  const history = useHistory();
+
+  const onClickPlaceItem = () => {
+    setStoryState({ field: 'place', value: placeName });
+    history.push('/add');
+  };
+
   return (
-    <ListItem>
-      <strong>맥도날드 양평SK점</strong>
+    <ListItem onClick={onClickPlaceItem}>
+      <strong>{placeName}</strong>
       <span>940m</span>
     </ListItem>
   );

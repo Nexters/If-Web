@@ -1,13 +1,31 @@
-import React from 'react';
+/* global kakao */
+import React, { useEffect, useState } from 'react';
 import Layout from '@/components/Layout';
 import SearchHeader from '@/components/SearchHeader';
 import SearchInput from '@/components/SearchInput';
 import useInput from '@/hooks/useInput';
 import SearchEmptyFallback from '@/components/SearchEmptyFallback';
 import PlaceSearchList from '@/components/PlaceSearch/PlaceSearchList';
+import { IPlace } from '@/types/Place';
+
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
 
 const PlaceSearch = () => {
+  const [placeList, setPlaceList] = useState<IPlace[]>([]);
   const { value, onChangeValue } = useInput();
+
+  const searchPlaceCb = (data: IPlace[], status: string) => {
+    if (status === 'OK') setPlaceList(data);
+  };
+
+  useEffect(() => {
+    const ps = new window.kakao.maps.services.Places();
+    ps.keywordSearch(value, searchPlaceCb);
+  }, [value]);
 
   return (
     <Layout padding={'30px 24px'}>
@@ -17,14 +35,15 @@ const PlaceSearch = () => {
         onChangeValue={onChangeValue}
         placeholder={'장소를 검색해보세요'}
       />
-      <PlaceSearchList />
-      {/* 검색된 항목이 없을 때의 fallback 컴포넌트
+      {placeList.length > 0 ? (
+        <PlaceSearchList places={placeList} />
+      ) : (
         <SearchEmptyFallback
-        searchKeyword={value}
-        selectCustomKeyword={() => {}}
-        categoryText={'장소'}
-      />
-      */}
+          searchKeyword={value}
+          selectCustomKeyword={() => {}}
+          categoryText={'장소'}
+        />
+      )}
     </Layout>
   );
 };

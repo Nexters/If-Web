@@ -1,13 +1,20 @@
 import React, { FC } from 'react';
 import PlaceSearchListItem from '@/components/PlaceSearch/PlaceSearchListItem';
 import styled from 'styled-components';
+import { IPlace } from '@/types/Place';
 
-interface IPlaceSearchListProps {}
+interface IPlaceSearchListProps {
+  places: IPlace[];
+}
 
-const PlaceSearchList: FC<IPlaceSearchListProps> = () => {
+/* eslint-disable camelcase */
+const PlaceSearchList: FC<IPlaceSearchListProps> = (props) => {
+  const { places } = props;
   return (
     <List>
-      <PlaceSearchListItem />
+      {places.map(({ id, place_name }) => (
+        <PlaceSearchListItem key={id} placeName={place_name} />
+      ))}
     </List>
   );
 };
