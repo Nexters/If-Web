@@ -5,3 +5,9 @@ export const getFormattedDate = (dateString: string) => {
   const day = date.getDate().toString().padStart(2, '0');
   return `${year}.${month}.${day}`;
 };
+
+export const getFormattedDistance = (distance: string) => {
+  const numberDist = +distance;
+  if (numberDist < 1000) return `${distance}m`;
+  return `${numberDist / 1000}km`;
+};
