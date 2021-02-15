@@ -1,7 +1,26 @@
 import React, { FC } from 'react';
+import { useStoryState } from '@/atoms/storyState';
 import styled from 'styled-components';
 
-const Input = styled.textarea`
+const ContentInput: FC = () => {
+  const { storyState, setStoryState } = useStoryState();
+  return (
+    <>
+      <Line />
+      <TextArea
+        value={storyState.memo}
+        onChange={({ target: { value } }) =>
+          setStoryState({ field: 'memo', value })
+        }
+        placeholder="무엇을 드셨나요?"
+      ></TextArea>
+    </>
+  );
+};
+
+export default ContentInput;
+
+const TextArea = styled.textarea`
   width: 100%;
   min-height: 400px;
   padding: 0;
@@ -22,14 +41,3 @@ const Line = styled.hr`
   margin: 24px 0;
   color: ${(props) => props.theme.colors.lightgray};
 `;
-
-const ContentInput: FC = () => {
-  return (
-    <>
-      <Line />
-      <Input placeholder="무엇을 드셨나요?"></Input>
-    </>
-  );
-};
-
-export default ContentInput;

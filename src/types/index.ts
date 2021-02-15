@@ -1,4 +1,4 @@
-interface IPicture {
+export interface IPicture {
   id: number;
   fileName: string;
   order: number;
