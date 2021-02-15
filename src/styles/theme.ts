@@ -8,6 +8,7 @@ const colors: IStringObject = {
   darkgray: '#AAA7A5',
   lightgray: '#C9C7C5',
   darkbrown: '#1A1515',
+  background: '#F4F4F4',
 };
 
 const fontSizes: IStringObject = {
