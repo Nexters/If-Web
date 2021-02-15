@@ -11,15 +11,17 @@ const AddImage: FC<IPlusIconProps> = ({ setImageState }) => {
   const onClickPlusIcon = () => inputFile.current?.click();
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
+    const { files } = e.target;
+    if (files && files.length > 0) {
+      const file = files[0];
       const reader = new FileReader();
       reader.onload = (e) => {
         if (e.target?.result && typeof e.target.result === 'string') {
-          setImageState({ file, imgUrl: e.target.result });
+          setImageState({ file, img: e.target.result });
         }
       };
       reader.readAsDataURL(file);
+      e.target.value = '';
     }
   };
 
