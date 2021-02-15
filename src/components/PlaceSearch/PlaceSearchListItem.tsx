@@ -2,13 +2,15 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { useStoryState } from '@/atoms/storyState';
 import { useHistory } from 'react-router-dom';
+import { getFormattedDistance } from '@/utils/formatter';
 
 interface IPlaceSearchListItem {
   placeName: string;
+  distance: string;
 }
 
 const PlaceSearchListItem: FC<IPlaceSearchListItem> = (props) => {
-  const { placeName } = props;
+  const { placeName, distance } = props;
   const { setStoryState } = useStoryState();
   const history = useHistory();
 
@@ -20,7 +22,7 @@ const PlaceSearchListItem: FC<IPlaceSearchListItem> = (props) => {
   return (
     <ListItem onClick={onClickPlaceItem}>
       <strong>{placeName}</strong>
-      <span>940m</span>
+      <span>{getFormattedDistance(distance)}</span>
     </ListItem>
   );
 };

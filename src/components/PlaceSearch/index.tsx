@@ -1,5 +1,6 @@
-/* global kakao */
 import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { GeolocationAtom } from '@/atoms/geolocation';
 import Layout from '@/components/Layout';
 import SearchHeader from '@/components/SearchHeader';
 import SearchInput from '@/components/SearchInput';
@@ -16,15 +17,30 @@ declare global {
 
 const PlaceSearch = () => {
   const [placeList, setPlaceList] = useState<IPlace[]>([]);
+  const [geolocation, setGeolocation] = useRecoilState(GeolocationAtom);
   const { value, onChangeValue } = useInput();
 
   const searchPlaceCb = (data: IPlace[], status: string) => {
     if (status === 'OK') setPlaceList(data);
   };
 
+  const getSearchOption = () => ({
+    x: geolocation.longitude,
+    y: geolocation.latitude,
+  });
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(({ coords }) => {
+        const { latitude, longitude } = coords;
+        setGeolocation({ latitude, longitude });
+      });
+    }
+  }, [setGeolocation]);
+
   useEffect(() => {
     const ps = new window.kakao.maps.services.Places();
-    ps.keywordSearch(value, searchPlaceCb);
+    if (value.trim()) ps.keywordSearch(value, searchPlaceCb, getSearchOption());
   }, [value]);
 
   return (
