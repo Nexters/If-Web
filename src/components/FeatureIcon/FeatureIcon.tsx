@@ -16,4 +16,4 @@ const FeatureIcon: FC<IFeatureIconProps> = ({
   return React.createElement(svg[name], { className, style });
 };
 
-export default FeatureIcon;
+export default React.memo(FeatureIcon);

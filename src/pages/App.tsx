@@ -3,7 +3,7 @@ import { RecoilRoot } from 'recoil';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 
-import AddContent from '@/pages/AddContent';
+import AddContent from '@/pages/AddStory';
 import Main from '@/pages/Main';
 import Login from '@/pages/Login';
 import MyPage from '@/pages/MyPage';
@@ -21,12 +21,24 @@ const App: FC = () => {
       <RecoilRoot>
         <Router>
           <Switch>
-            <Route path={'/add'} component={AddContent} />
-            <Route path={'/album'} component={Album} />
-            <Route exact path={'/'} component={Main} />
-            <Route path={'/login'} component={Login} />
-            <Route path={'/myPage'} component={MyPage} exact />
-            <Route path={'/myPage/edit'} component={MyPageEdit} />
+            <Route path={'/add'}>
+              <AddContent />
+            </Route>
+            <Route path={'/album'}>
+              <Album />
+            </Route>
+            <Route exact path={'/'}>
+              <Main />
+            </Route>
+            <Route path={'/login'}>
+              <Login />
+            </Route>
+            <Route exact path={'/myPage'}>
+              <MyPage />
+            </Route>
+            <Route exact path={'/myPage/edit'}>
+              <MyPageEdit />
+            </Route>
           </Switch>
         </Router>
       </RecoilRoot>
