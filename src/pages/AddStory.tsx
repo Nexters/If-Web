@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import HEADER_TYPES from '@/types/HeaderTypes';
 import TitleInput from '@/components/TitleInput';
@@ -6,26 +6,36 @@ import LocationText from '@/components/LocationText';
 import NationText from '@/components/NationText';
 import ContentInput from '@/components/ContentInput';
 import ImageList from '@/components/ImageList';
-import { AddContentViewMode, useViewMode } from '@/atoms/addContentViewState';
-import NationFinder from '@/components/NationFinder';
+import useAddContent from '@/hooks/useAddContent';
+import PlaceSearch from '@/components/PlaceSearch';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import NationSearch from '@/components/NationSearch';
 import Header from './Header';
 
 const AddContent: FC = () => {
-  const mode = useViewMode();
+  const { path } = useRouteMatch();
+  const { nation } = useAddContent();
 
   return (
     <>
-      {mode === AddContentViewMode.DEFAULT && (
-        <AddContentWrapper>
-          <Header type={HEADER_TYPES.ADD_EDIT} />
-          <TitleInput />
-          <LocationText />
-          {/* <NationText /> */}
-          <ImageList />
-          <ContentInput />
-        </AddContentWrapper>
-      )}
-      {mode === AddContentViewMode.FIND_NATION && <NationFinder />}
+      <Switch>
+        <Route exact path={path}>
+          <AddContentWrapper>
+            <Header type={HEADER_TYPES.ADD_EDIT} />
+            <TitleInput />
+            <LocationText />
+            <NationText nation={nation} />
+            <ImageList />
+            <ContentInput />
+          </AddContentWrapper>
+        </Route>
+        <Route path={`${path}/place`}>
+          <PlaceSearch />
+        </Route>
+        <Route path={`${path}/nation`}>
+          <NationSearch />
+        </Route>
+      </Switch>
     </>
   );
 };

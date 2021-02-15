@@ -1,13 +1,20 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
 import { useStoryState } from '@/atoms/storyState';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import Icon from './FeatureIcon';
 
 const LocationInput: FC = () => {
   const { storyState, setStoryState } = useStoryState();
+  const { url } = useRouteMatch();
+  const history = useHistory();
+
+  const onChangeHistory = useCallback(() => {
+    history.push(`${url}/place`);
+  }, [history, url]);
 
   return (
-    <Wrapper>
+    <Wrapper onClick={onChangeHistory}>
       <Icon name="location" />
       <LocationText>{storyState.place || '음식을 먹은 장소'}</LocationText>
       <Text>에서 느낀</Text>

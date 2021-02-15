@@ -3,18 +3,15 @@ import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
 import { INationList } from '@/lib/constants';
 import useAddContent from '@/hooks/useAddContent';
-import {
-  AddContentViewMode,
-  useChangeViewMode,
-} from '@/atoms/addContentViewState';
+import { useHistory } from 'react-router-dom';
 
 interface IFinderNationListItemProps {
   nation: INationList;
 }
 
-const FinderNationListItem: FC<IFinderNationListItemProps> = ({ nation }) => {
+const NationSearchListItem: FC<IFinderNationListItemProps> = ({ nation }) => {
   const { changeNation } = useAddContent();
-  const changeToDefaultMode = useChangeViewMode(AddContentViewMode.DEFAULT);
+  const history = useHistory();
 
   const onChangeNation = useCallback(() => {
     const nationInfo = {
@@ -23,8 +20,8 @@ const FinderNationListItem: FC<IFinderNationListItemProps> = ({ nation }) => {
       title: nation.title,
     };
     changeNation(nationInfo);
-    changeToDefaultMode();
-  }, [nation, changeNation, changeToDefaultMode]);
+    history.push('/add');
+  }, [nation, changeNation, history]);
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLLIElement>) => {
     if (e.key === 'Enter') {
@@ -40,7 +37,7 @@ const FinderNationListItem: FC<IFinderNationListItemProps> = ({ nation }) => {
   );
 };
 
-export default FinderNationListItem;
+export default NationSearchListItem;
 
 const NationListItem = styled.li`
   display: flex;

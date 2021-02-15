@@ -1,21 +1,22 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import FeatureIcon from '@/components/FeatureIcon';
 import styled from 'styled-components';
-import {
-  AddContentViewMode,
-  useChangeViewMode,
-} from '@/atoms/addContentViewState';
+import { useHistory } from 'react-router-dom';
 
 interface ISearchHeaderProps {
   title: string;
 }
 
 const SearchHeader: FC<ISearchHeaderProps> = ({ title }) => {
-  const changeToDefaultMode = useChangeViewMode(AddContentViewMode.DEFAULT);
+  const history = useHistory();
+
+  const onChangeHistory = useCallback(() => {
+    history.push('/add');
+  }, [history]);
 
   return (
     <Header>
-      <button onClick={changeToDefaultMode}>
+      <button onClick={onChangeHistory}>
         <FeatureIcon
           name={'cancel'}
           style={{ width: '24px', height: '24px' }}
