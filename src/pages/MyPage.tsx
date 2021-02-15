@@ -3,11 +3,12 @@ import Layout from '@/components/Layout';
 import HEADER_TYPES from '@/types/HeaderTypes';
 import styled from 'styled-components';
 import { UsernameRow, AccountRow, ActionRow } from '@/components/MyPage';
+import LOGIN_TYPES from '@/types/LoginTypes';
 import Header from './Header';
 
 // TODO: /users 경로로 이름 + 소셜 정보 가져오기
 const usernameState = '방구석 여행러';
-const socialState = 'kakao';
+const socialState = LOGIN_TYPES.KAKAO;
 
 const MyPage: FC = () => {
   const handleDeleteAccount = () => {

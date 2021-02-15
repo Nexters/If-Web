@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import LoginIcon from '@/components/LoginIcon';
 import LogoutModal from '@/components/MyPage/LogoutModal';
+import LOGIN_TYPES from '@/types/LoginTypes';
 
 interface AccountRowProps {
   social: string;
@@ -21,17 +22,16 @@ const AccountRow: FC<AccountRowProps> = ({ social }) => {
   return (
     <Wrapper>
       <div>
-        {social === 'kakao' && (
+        {social === LOGIN_TYPES.KAKAO && (
           <>
             <LoginIcon name={'kakao'} />
             <p>카카오 계정 로그인</p>
           </>
         )}
 
-        {social === 'naver' && (
+        {social === LOGIN_TYPES.NAVER && (
           <>
-            {/* TODO: 로고 수정  */}
-            <LoginIcon name={'kakao'} />
+            <LoginIcon name={'naver'} />
             <p>네이버 계정 로그인</p>
           </>
         )}
