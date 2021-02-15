@@ -14,7 +14,7 @@ const CancelIcon: FC<AccountRowProps> = ({ handleCancelClick }) => {
       role="button"
       tabIndex={0}
     >
-      <FeatureIcon name={'cancel'} />
+      <FeatureIcon name={'cancel'} style={{ width: '14px', height: '14px' }} />
     </Wrapper>
   );
 };
