@@ -149,6 +149,29 @@ const Header: FC<Props> = ({
       )}
 
       {type === HEADER_TYPES.MY_PAGE && <Arrow />}
+
+      {type === HEADER_TYPES.MY_PAGE_EDIT && (
+        <>
+          <Icon>
+            <Link to="/myPage">
+              <FeatureIcon name={'arrow'} />
+            </Link>
+          </Icon>
+          {completed ? (
+            <Text
+              completed={completed}
+              onClick={primaryFunction}
+              onKeyPress={primaryFunction}
+              role="button"
+              tabIndex={0}
+            >
+              완료
+            </Text>
+          ) : (
+            <Text completed={completed}>완료</Text>
+          )}
+        </>
+      )}
     </StyledHeader>
   );
 };

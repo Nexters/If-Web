@@ -6,6 +6,8 @@ import { hot } from 'react-hot-loader';
 import AddContent from '@/pages/AddStory';
 import Main from '@/pages/Main';
 import Login from '@/pages/Login';
+import MyPage from '@/pages/MyPage';
+import MyPageEdit from '@/pages/MyPageEdit';
 
 import GlobalStyle from '@/styles/global';
 import theme from '@/styles/theme';
@@ -30,6 +32,12 @@ const App: FC = () => {
             </Route>
             <Route path={'/login'}>
               <Login />
+            </Route>
+            <Route exact path={'/myPage'}>
+              <MyPage />
+            </Route>
+            <Route exact path={'/myPage/edit'}>
+              <MyPageEdit />
             </Route>
           </Switch>
         </Router>
