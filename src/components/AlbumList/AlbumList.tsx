@@ -10,6 +10,7 @@ import AlbumListItem from './AlbumListItem';
 interface IAlbumContent {
   id: number;
   name: string;
+  code: string;
   amount: number;
 }
 
@@ -17,36 +18,43 @@ const albumList: IAlbumContent[] = [
   {
     id: 1,
     name: '대만',
+    code: 'taiwan',
     amount: 3,
   },
   {
     id: 2,
     name: '대한민국',
+    code: 'korea',
     amount: 15,
   },
   {
     id: 3,
     name: '러시아',
+    code: 'russia',
     amount: 198,
   },
   {
     id: 4,
     name: '남아프리카공화국',
+    code: 'southafrica',
     amount: 2093,
   },
   {
     id: 5,
     name: '마카오',
+    code: 'macau',
     amount: 20,
   },
   {
     id: 6,
     name: '일본',
+    code: 'japan',
     amount: 356,
   },
   {
     id: 7,
     name: '미국',
+    code: 'usa',
     amount: 3563,
   },
 ];
@@ -77,14 +85,24 @@ const AlbumList: FC = () => {
           <PageTitle>기록한 나라</PageTitle>
           <AlbumListWrapper>
             <AlbumInitialList>
-              {albumList.slice(0, 4).map(({ id, name, amount }) => (
-                <AlbumListItem key={id} name={name} amount={amount} />
+              {albumList.slice(0, 4).map(({ id, name, code, amount }) => (
+                <AlbumListItem
+                  key={id}
+                  name={name}
+                  amount={amount}
+                  code={code}
+                />
               ))}
             </AlbumInitialList>
             {albumList.length > 4 && (
               <AlbumOverflowList>
-                {albumList.slice(4).map(({ id, name, amount }) => (
-                  <AlbumListItem key={id} name={name} amount={amount} />
+                {albumList.slice(4).map(({ id, name, code, amount }) => (
+                  <AlbumListItem
+                    key={id}
+                    name={name}
+                    amount={amount}
+                    code={code}
+                  />
                 ))}
               </AlbumOverflowList>
             )}
