@@ -7,7 +7,8 @@ export const getFormattedDate = (dateString: string) => {
 };
 
 export const getFormattedDistance = (distance: string) => {
+  if (!distance) return '';
   const numberDist = +distance;
   if (numberDist < 1000) return `${distance}m`;
-  return `${numberDist / 1000}km`;
+  return `${(numberDist / 1000).toFixed(1)}km`;
 };
