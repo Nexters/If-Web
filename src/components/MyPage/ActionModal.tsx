@@ -30,6 +30,7 @@ const ActionModal: FC<ActionModalProps> = ({
           <BodyText key={i}>{text}</BodyText>
         ))}
         <ButtonWrapper>
+          <YesButton onClick={actionFunction}>{buttonText}</YesButton>
           <NoButtonWrapper
             onClick={handleModalClose}
             onKeyPress={handleModalClose}
@@ -41,7 +42,6 @@ const ActionModal: FC<ActionModalProps> = ({
               <FeatureIcon name={'line'} />
             </LineWrapper>
           </NoButtonWrapper>
-          <YesButton onClick={actionFunction}>{buttonText}</YesButton>
         </ButtonWrapper>
       </StyledModal>
     </Wrapper>

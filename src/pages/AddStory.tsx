@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import Layout from '@/components/Layout';
 import styled from 'styled-components';
 import HEADER_TYPES from '@/types/HeaderTypes';
 import TitleInput from '@/components/TitleInput';
@@ -17,7 +18,7 @@ const AddContent: FC = () => {
   const { nation } = useAddContent();
 
   return (
-    <>
+    <Layout>
       <Switch>
         <Route exact path={path}>
           <AddContentWrapper>
@@ -36,12 +37,12 @@ const AddContent: FC = () => {
           <NationSearch />
         </Route>
       </Switch>
-    </>
+    </Layout>
   );
 };
 
 const AddContentWrapper = styled.div`
-  padding: 0 24px;
+  // padding: 0 24px;
 `;
 
 export default AddContent;
