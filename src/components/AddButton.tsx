@@ -7,7 +7,7 @@ const ButtonWrapper = styled.div`
   position: absolute;
   height: 72px;
   bottom: 0;
-  right: -0.5px;
+  right: 0;
 `;
 
 const AddButton: FC = () => {

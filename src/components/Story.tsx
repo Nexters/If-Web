@@ -42,7 +42,7 @@ const StoryWrapper = styled.div<{ position: string }>`
   width: 220px;
   height: 282px;
   margin: ${(props) =>
-    props.position === 'left' ? '0 auto 60px 24px' : '0 24px 60px auto'};
+    props.position === 'left' ? '0 auto 60px 0' : '0 0 60px auto'};
   padding: 12px;
   border: 1px solid ${(props) => props.theme.colors.darkbrown};
   background-color: ${(props) => props.theme.colors.white};
