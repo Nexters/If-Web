@@ -12,6 +12,7 @@ import { ReactComponent as location } from '@/components/FeatureIcon/svg/locatio
 import { ReactComponent as edit } from '@/components/FeatureIcon/svg/edit.svg';
 import { ReactComponent as arrow2 } from '@/components/FeatureIcon/svg/arrow2.svg';
 import { ReactComponent as plus } from '@/components/FeatureIcon/svg/plus.svg';
+import { ReactComponent as line } from '@/components/FeatureIcon/svg/line.svg';
 
 export {
   album,
@@ -28,4 +29,5 @@ export {
   edit,
   arrow2,
   plus,
+  line,
 };

@@ -20,30 +20,31 @@ const AccountRow: FC<AccountRowProps> = ({ social }) => {
   };
 
   return (
-    <Wrapper>
-      <div>
-        {social === LOGIN_TYPES.KAKAO && (
-          <>
-            <LoginIcon name={'kakao'} />
-            <p>카카오 계정 로그인</p>
-          </>
-        )}
+    <>
+      <Wrapper>
+        <div>
+          {social === LOGIN_TYPES.KAKAO && (
+            <>
+              <LoginIcon name={'kakao'} />
+              <p>카카오 계정 로그인</p>
+            </>
+          )}
 
-        {social === LOGIN_TYPES.NAVER && (
-          <>
-            <LoginIcon name={'naver'} />
-            <p>네이버 계정 로그인</p>
-          </>
-        )}
-      </div>
-      <LogoutButton onClick={handleLogoutClick}>로그아웃</LogoutButton>
-
+          {social === LOGIN_TYPES.NAVER && (
+            <>
+              <LoginIcon name={'naver'} />
+              <p>네이버 계정 로그인</p>
+            </>
+          )}
+        </div>
+        <LogoutButton onClick={handleLogoutClick}>로그아웃</LogoutButton>
+      </Wrapper>
       {/* 로그아웃 모달 */}
       <LogoutModal
         isOpen={showLogoutModal}
         handleModalClose={handleModalClose}
       />
-    </Wrapper>
+    </>
   );
 };
 
