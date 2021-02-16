@@ -51,7 +51,7 @@ const AlbumFeedList = () => {
           return <Story key={id} position={pos} {...feed} />;
         })}
       </div>
-      <AddButton />
+      <AddButton nation={name} />
     </Layout>
   );
 };

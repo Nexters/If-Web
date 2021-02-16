@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import styled from 'styled-components';
 import HEADER_TYPES from '@/types/HeaderTypes';
@@ -11,11 +11,21 @@ import useAddContent from '@/hooks/useAddContent';
 import PlaceSearch from '@/components/PlaceSearch';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import NationSearch from '@/components/NationSearch';
+import useQueryString from '@/hooks/useQueryString';
 import Header from './Header';
 
 const AddContent: FC = () => {
   const { path } = useRouteMatch();
-  const { nation } = useAddContent();
+  const { nation, changeNation } = useAddContent();
+  const qs = useQueryString();
+
+  useEffect(() => {
+    const nation = qs.get('nation');
+    if (qs.get('nation')) {
+      // TODO: changeNation에 필요한 정보 넣어주기
+      // changeNation({});
+    }
+  }, [qs, changeNation]);
 
   return (
     <Layout>
