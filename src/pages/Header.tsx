@@ -140,7 +140,7 @@ const Header: FC<Props> = ({
       {type === HEADER_TYPES.ALBUM && (
         <>
           <Icon>
-            <Link to="/feed">
+            <Link to="/">
               <FeatureIcon name={'feed'} />
             </Link>
           </Icon>
