@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
+import { useResetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import HEADER_TYPES from '@/types/HeaderTypes';
 import TitleInput from '@/components/TitleInput';
@@ -10,11 +11,17 @@ import useAddContent from '@/hooks/useAddContent';
 import PlaceSearch from '@/components/PlaceSearch';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import NationSearch from '@/components/NationSearch';
+import { StoryStateAtom } from '@/atoms/storyState';
 import Header from './Header';
 
 const AddContent: FC = () => {
+  const resetStoryState = useResetRecoilState(StoryStateAtom);
   const { path } = useRouteMatch();
   const { nation } = useAddContent();
+
+  useEffect(() => {
+    return () => resetStoryState();
+  }, []);
 
   return (
     <>
