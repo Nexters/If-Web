@@ -1,0 +1,15 @@
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
