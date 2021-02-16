@@ -16,13 +16,13 @@ const SearchHeader: FC<ISearchHeaderProps> = ({ title }) => {
 
   return (
     <Header>
+      <h2>{title}</h2>
       <button onClick={onChangeHistory}>
         <FeatureIcon
           name={'cancel'}
           style={{ width: '24px', height: '24px' }}
         />
       </button>
-      <h2>{title}</h2>
     </Header>
   );
 };
@@ -38,6 +38,13 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  h2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   button {
     border: none;
     background: none;
@@ -45,12 +52,5 @@ const Header = styled.div`
     width: 24px;
     height: 24px;
     cursor: pointer;
-  }
-
-  h2 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
   }
 `;
