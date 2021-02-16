@@ -17,10 +17,12 @@ const LogoutModal: FC<LogoutModalProps> = ({ isOpen, handleModalClose }) => {
     <ActionModal
       isOpen={isOpen}
       handleModalClose={handleModalClose}
-      bodyText={
-        '언제든지 다시 기록하고 싶다면 찾아오세요! 로그아웃 하시겠어요?'
-      }
-      buttonText={'로그아웃 할게요'}
+      bodyText={[
+        '언제든지 다시',
+        '기록하고 싶다면 찾아오세요!',
+        '로그아웃 하시겠어요?',
+      ]}
+      buttonText={'로그아웃할게요'}
       actionFunction={handleLogout}
     />
   );
