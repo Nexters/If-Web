@@ -1,5 +1,4 @@
 import React from 'react';
-import Layout from '@/components/Layout';
 import SearchHeader from '@/components/SearchHeader';
 import SearchInput from '@/components/SearchInput';
 import useInput from '@/hooks/useInput';
@@ -10,7 +9,7 @@ const PlaceSearch = () => {
   const { value, onChangeValue } = useInput();
 
   return (
-    <Layout padding={'30px 24px'}>
+    <>
       <SearchHeader title={'장소 검색하기'} />
       <SearchInput
         value={value}
@@ -25,7 +24,7 @@ const PlaceSearch = () => {
         categoryText={'장소'}
       />
       */}
-    </Layout>
+    </>
   );
 };
 

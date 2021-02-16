@@ -28,7 +28,7 @@ const AddContent: FC = () => {
   }, [qs, changeNation]);
 
   return (
-    <Layout>
+    <Layout padding={'44px 24px'}>
       <Switch>
         <Route exact path={path}>
           <AddContentWrapper>

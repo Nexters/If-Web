@@ -1,5 +1,4 @@
 import React, { FC, useCallback, useMemo } from 'react';
-import Layout from '@/components/Layout';
 import NationSearchList from '@/components/NationSearch/NationSearchList';
 import { nationList } from '@/lib/constants';
 import useInput from '@/hooks/useInput';
@@ -30,7 +29,7 @@ const NationSearch: FC = () => {
   }, [value, changeNation, history]);
 
   return (
-    <Layout padding={'30px 24px'}>
+    <>
       <SearchHeader title={'여행한 나라 찾기'} />
       <SearchInput
         value={value}
@@ -47,7 +46,7 @@ const NationSearch: FC = () => {
           categoryText={'나라'}
         />
       )}
-    </Layout>
+    </>
   );
 };
 
