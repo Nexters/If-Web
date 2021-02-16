@@ -1,9 +1,14 @@
 import { atom } from 'recoil';
 
-export const GeolocationAtom = atom({
+interface IGeolocationAtom {
+  latitude: number | null;
+  longitude: number | null;
+}
+
+export const GeolocationAtom = atom<IGeolocationAtom>({
   key: 'geolocation',
   default: {
-    latitude: 37.555,
-    longitude: 126.91,
+    latitude: null,
+    longitude: null,
   },
 });
