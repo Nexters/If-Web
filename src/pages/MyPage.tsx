@@ -28,11 +28,8 @@ const MyPage: FC = () => {
       <MyPageContainer>
         <UsernameRow username={usernameState} />
         <AccountRow social={socialState} />
-
         <Line />
-
-        {/* TODO: 이메일 계정 확인하기 */}
-        <a href="mailto:danakim21@gmail.com?subject=If 개발자에게 피드백 보내기">
+        <a href="mailto:if.traveler@gmail.com?subject=If 개발자에게 피드백 보내기">
           <ActionRow title={'피드백 남기기'} />
         </a>
         <ActionRow title={'탈퇴하기'} onClickFunction={handleDeleteAccount} />

@@ -13,6 +13,7 @@ import { ReactComponent as edit } from '@/components/FeatureIcon/svg/edit.svg';
 import { ReactComponent as arrow2 } from '@/components/FeatureIcon/svg/arrow2.svg';
 import { ReactComponent as plus } from '@/components/FeatureIcon/svg/plus.svg';
 import { ReactComponent as line } from '@/components/FeatureIcon/svg/line.svg';
+import { ReactComponent as noResult } from '@/components/FeatureIcon/svg/no_result.svg';
 
 export {
   album,
@@ -30,4 +31,5 @@ export {
   arrow2,
   plus,
   line,
+  noResult,
 };
