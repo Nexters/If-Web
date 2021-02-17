@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { UsernameRow, AccountRow, ActionRow } from '@/components/MyPage';
 import LOGIN_TYPES from '@/types/LoginTypes';
 import LeaveModal from '@/components/MyPage/LeaveModal';
+import { MyPageStateAtom } from '@/atoms/myPageState';
+import { useRecoilValue } from 'recoil';
 import Header from './Header';
 
 // TODO: /users 경로로 이름 + 소셜 정보 가져오기
@@ -13,6 +15,8 @@ const socialState = LOGIN_TYPES.KAKAO;
 
 const MyPage: FC = () => {
   const [showLeaveModal, setShowLeaveModal] = useState(false);
+
+  const { parent } = useRecoilValue(MyPageStateAtom);
 
   const handleModalClose = () => {
     setShowLeaveModal(false);
@@ -24,7 +28,7 @@ const MyPage: FC = () => {
 
   return (
     <Layout>
-      <Header type={HEADER_TYPES.MY_PAGE} />
+      <Header type={HEADER_TYPES.MY_PAGE} parentRoute={parent} />
       <MyPageContainer>
         <UsernameRow username={usernameState} />
         <AccountRow social={socialState} />
