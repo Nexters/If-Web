@@ -5,7 +5,7 @@ import { useHistory, useRouteMatch } from 'react-router-dom';
 import Icon from './FeatureIcon';
 
 const LocationInput: FC = () => {
-  const { storyState, setStoryState } = useStoryState();
+  const { storyState } = useStoryState();
   const { url } = useRouteMatch();
   const history = useHistory();
 

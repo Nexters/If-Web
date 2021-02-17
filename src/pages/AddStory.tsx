@@ -31,8 +31,8 @@ const AddContent: FC = () => {
             <Header type={HEADER_TYPES.ADD_EDIT} />
             <TitleInput />
             <LocationText />
-            <NationText nation={nation} />
-            <ImageList />
+            <NationText type="INPUT" nation={nation} />
+            <ImageList type="INPUT" />
             <ContentInput />
           </AddContentWrapper>
         </Route>

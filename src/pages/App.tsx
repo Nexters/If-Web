@@ -6,6 +6,7 @@ import { hot } from 'react-hot-loader';
 import AddContent from '@/pages/AddStory';
 import Main from '@/pages/Main';
 import Login from '@/pages/Login';
+import Story from '@/pages/Story';
 
 import GlobalStyle from '@/styles/global';
 import theme from '@/styles/theme';
@@ -30,6 +31,9 @@ const App: FC = () => {
             </Route>
             <Route path={'/login'}>
               <Login />
+            </Route>
+            <Route path={'/story/:id'}>
+              <Story />
             </Route>
           </Switch>
         </Router>

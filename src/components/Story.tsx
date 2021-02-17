@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { getFormattedDate } from '@/utils/formatter';
+import { useHistory } from 'react-router-dom';
 import Icon from './FeatureIcon';
 
 interface IPicture {
@@ -12,18 +13,26 @@ interface IPicture {
 }
 
 interface IStoryProps {
+  id: string | null;
   position: string;
   date: string;
   memo: string;
   picture_list: Array<IPicture>;
+  isEmpty?: boolean;
 }
 
 const Story: FC<IStoryProps> = (props) => {
-  const { date, memo, position, picture_list } = props;
+  const { id, date, memo, position, picture_list, isEmpty } = props;
+  const history = useHistory();
+  const onClickPicture = () => {
+    if (isEmpty) history.push('/add');
+    else history.push(`/story/${id}`);
+  };
   return (
     <StoryWrapper position={position}>
-      <PictureWrapper>
+      <PictureWrapper onClick={onClickPicture}>
         {picture_list.length > 0 && <img src={picture_list[0].url} />}
+        {isEmpty && <Icon name="plus" />}
       </PictureWrapper>
       <Date>
         <DateText>{getFormattedDate(date)}</DateText>
@@ -49,9 +58,14 @@ const StoryWrapper = styled.div<{ position: string }>`
 `;
 
 const PictureWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 196px;
   height: 196px;
   margin-bottom: 12px;
   border: 1px solid ${(props) => props.theme.colors.darkbrown};
+  cursor: pointer;
 `;
 
 const Date = styled.div`

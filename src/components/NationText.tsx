@@ -6,6 +6,7 @@ import { useHistory, useRouteMatch } from 'react-router-dom';
 import Icon from './FeatureIcon';
 
 interface INationTextProps {
+  type: 'INPUT' | 'PLAIN';
   nation: {
     id: number | null;
     name: NationIconType;
@@ -13,12 +14,12 @@ interface INationTextProps {
   };
 }
 
-const NationText: FC<INationTextProps> = ({ nation }) => {
+const NationText: FC<INationTextProps> = ({ type, nation }) => {
   const { url } = useRouteMatch();
   const history = useHistory();
 
   const onChangeHistory = useCallback(() => {
-    history.push(`${url}/nation`);
+    if (type === 'INPUT') history.push(`${url}/nation`);
   }, [history, url]);
 
   return (
