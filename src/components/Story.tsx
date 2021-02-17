@@ -30,6 +30,7 @@ const Story: FC<IStoryProps> = (props) => {
   };
   return (
     <StoryWrapper position={position}>
+      {!isEmpty && <MaskingTape />}
       <PictureWrapper onClick={onClickPicture}>
         {picture_list.length > 0 && <img src={picture_list[0].url} />}
         {isEmpty && <Icon name="plus" />}
@@ -45,9 +46,18 @@ const Story: FC<IStoryProps> = (props) => {
   );
 };
 
+const MaskingTape: FC = () => {
+  return (
+    <MaskingTapeWrapper>
+      <Icon name="masking" />
+    </MaskingTapeWrapper>
+  );
+};
+
 export default Story;
 
 const StoryWrapper = styled.div<{ position: string }>`
+  position: relative;
   width: 220px;
   height: 282px;
   margin: ${(props) =>
@@ -90,4 +100,11 @@ const Memo = styled.div`
   line-height: 20px;
   letter-spacing: 0.05em;
   color: ${(props) => props.theme.colors.darkgray};
+`;
+
+const MaskingTapeWrapper = styled.span`
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
 `;
