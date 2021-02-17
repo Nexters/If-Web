@@ -9,7 +9,11 @@ import { ReactComponent as add } from '@/components/FeatureIcon/svg/add.svg';
 import { ReactComponent as divider } from '@/components/FeatureIcon/svg/divider.svg';
 import { ReactComponent as flag } from '@/components/FeatureIcon/svg/flag.svg';
 import { ReactComponent as location } from '@/components/FeatureIcon/svg/location.svg';
+import { ReactComponent as edit } from '@/components/FeatureIcon/svg/edit.svg';
+import { ReactComponent as arrow2 } from '@/components/FeatureIcon/svg/arrow2.svg';
 import { ReactComponent as plus } from '@/components/FeatureIcon/svg/plus.svg';
+import { ReactComponent as line } from '@/components/FeatureIcon/svg/line.svg';
+import { ReactComponent as noResult } from '@/components/FeatureIcon/svg/no_result.svg';
 
 export {
   album,
@@ -23,5 +27,9 @@ export {
   divider,
   flag,
   location,
+  edit,
+  arrow2,
   plus,
+  line,
+  noResult,
 };

@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import Layout from '@/components/Layout';
 import Story from '@/components/Story';
 import AddButton from '@/components/AddButton';
 import HEADER_TYPES from '@/types/HeaderTypes';
@@ -28,7 +29,7 @@ const Main: FC = () => {
   };
 
   return (
-    <>
+    <Layout>
       <Header type={HEADER_TYPES.FEED} />
       {storyList.length > 0 ? (
         storyList.map((story, idx) => {
@@ -40,7 +41,7 @@ const Main: FC = () => {
         <Story key={0} position="left" {...initialData} isEmpty={true} />
       )}
       <AddButton />
-    </>
+    </Layout>
   );
 };
 

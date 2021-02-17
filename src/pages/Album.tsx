@@ -1,53 +1,21 @@
-import React, { FC, useMemo } from 'react';
-import Layout from '@/components/Layout';
-import NationList from '@/components/NationList';
+import React, { FC } from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import AlbumList from '@/components/AlbumList';
-import HEADER_TYPES from '@/types/HeaderTypes';
-import Header from '@/pages/Header';
-import styled from 'styled-components';
-import { atom, useRecoilValue } from 'recoil';
-
-const album = atom({
-  key: 'album',
-  default: [111],
-});
+import AlbumFeedList from '@/components/AlbumFeedList';
 
 const Album: FC = () => {
-  const albumData = useRecoilValue(album);
-  const isEmptyAlbum = useMemo(() => albumData.length === 0, [albumData]);
+  const { path } = useRouteMatch();
 
   return (
-    <Layout padding={'0 24px'}>
-      <Header type={HEADER_TYPES.ALBUM} />
-
-      {isEmptyAlbum && (
-        <>
-          <PageTitle>
-            오늘 식사시간에는
-            <br />
-            어떤 나라의 음식을 드셨나요?
-          </PageTitle>
-          <NationList />
-        </>
-      )}
-
-      {!isEmptyAlbum && (
-        <>
-          <PageTitle>기록한 나라</PageTitle>
-          <AlbumList />
-          <NationList useTitle={true} />
-        </>
-      )}
-    </Layout>
+    <Switch>
+      <Route exact path={path}>
+        <AlbumList />
+      </Route>
+      <Route path={`${path}/:name`}>
+        <AlbumFeedList />
+      </Route>
+    </Switch>
   );
 };
 
 export default Album;
-
-const PageTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes.title03};
-  font-weight: normal;
-  letter-spacing: 0.1em;
-  line-height: 30px;
-  padding: 0 0 32px 0;
-`;

@@ -7,6 +7,8 @@ import AddContent from '@/pages/AddStory';
 import Main from '@/pages/Main';
 import Login from '@/pages/Login';
 import Story from '@/pages/Story';
+import MyPage from '@/pages/MyPage';
+import MyPageEdit from '@/pages/MyPageEdit';
 
 import GlobalStyle from '@/styles/global';
 import theme from '@/styles/theme';
@@ -34,6 +36,12 @@ const App: FC = () => {
             </Route>
             <Route path={'/story/:id'}>
               <Story />
+            </Route>
+            <Route exact path={'/myPage'}>
+              <MyPage />
+            </Route>
+            <Route exact path={'/myPage/edit'}>
+              <MyPageEdit />
             </Route>
           </Switch>
         </Router>

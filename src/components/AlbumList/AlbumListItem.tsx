@@ -1,14 +1,22 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 interface IAlbumListItemProps {
   name: string;
+  code: string;
   amount: number;
 }
 
-const AlbumListItem: FC<IAlbumListItemProps> = ({ name, amount }) => {
+const AlbumListItem: FC<IAlbumListItemProps> = ({ name, code, amount }) => {
+  const history = useHistory();
+
+  const onChangeHistory = useCallback(() => {
+    history.push(`/album/${code}`);
+  }, [history, code]);
+
   return (
-    <ListItem>
+    <ListItem onClick={onChangeHistory}>
       <figure>
         <AlbumImageWrapper>
           {/* <img src="/#" alt="앨범 기본이미지" />   */}
