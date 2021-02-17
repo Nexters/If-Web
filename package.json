@@ -24,6 +24,7 @@
     "react-hot-loader": "^4.13.0",
     "react-kakao-login": "^2.0.3",
     "react-modal": "^3.12.1",
+    "react-query": "^3.9.8",
     "react-router-dom": "^5.2.0",
     "recoil": "^0.1.2",
     "styled-components": "^5.2.1",
