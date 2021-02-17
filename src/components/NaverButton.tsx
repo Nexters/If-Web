@@ -1,5 +1,6 @@
 import React, { useEffect, FC } from 'react';
 import { useLocation } from 'react-router-dom';
+import LoginIcon from '@/components/LoginIcon';
 import styled from 'styled-components';
 
 const { naver } = window as any;
@@ -12,6 +13,11 @@ const NaverButton: FC = () => {
     initializeNaverLogin();
     getNaverToken();
   }, []);
+
+  const handleButtonClick = () => {
+    console.log('click');
+    document.getElementById('naverIdLogin_loginButton')?.click();
+  };
 
   const initializeNaverLogin = () => {
     console.log(NAVER_KEY);
@@ -37,16 +43,39 @@ const NaverButton: FC = () => {
     console.log(token);
   };
 
-  return <NaverContainer id="naverIdLogin" />;
+  return (
+    <>
+      <div id="naverIdLogin" style={{ display: 'none' }} />
+      <NaverContainer onClick={handleButtonClick}>
+        <LoginIcon name={'naver2'} />
+        <NaverText>네이버로 로그인하기</NaverText>
+      </NaverContainer>
+    </>
+  );
 };
 
 const NaverContainer = styled.div`
   margin: 0 auto;
   width: 87.2%;
+  background-color: #1ec800;
+  height: 48px;
+  font-weight: 400;
+  font-size: ${({ theme }) => theme.fontSizes.body};
+  line-height: 48px;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  text-align: left;
 
-  img {
-    width: 100%;
+  svg {
+    position: absolute;
+    margin-left: 5.5%;
+    margin-top: 14px;
   }
+`;
+
+const NaverText = styled.p`
+  text-align: center;
 `;
 
 export default NaverButton;
