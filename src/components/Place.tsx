@@ -1,11 +1,12 @@
 import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
-import { useStoryState } from '@/atoms/storyState';
 import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useStoryState } from '@/atoms/storyState';
+import COMPONENT_TYPES from '@/types/ComponentTypes';
 import Icon from './FeatureIcon';
 
 interface IPlaceProps {
-  type: 'INPUT' | 'PLAIN';
+  type: COMPONENT_TYPES;
 }
 
 const Place: FC<IPlaceProps> = ({ type }) => {
@@ -14,7 +15,7 @@ const Place: FC<IPlaceProps> = ({ type }) => {
   const history = useHistory();
 
   const onChangeHistory = useCallback(() => {
-    if (type === 'INPUT') history.push(`${url}/place`);
+    if (type === COMPONENT_TYPES.INPUT) history.push(`${url}/place`);
   }, [history, url]);
 
   return (

@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { useStoryState } from '@/atoms/storyState';
+import COMPONENT_TYPES from '@/types/ComponentTypes';
 import ImageInput from './ImageInput';
 import Image from './Image';
 
 interface IImageListProps {
-  type: 'INPUT' | 'PLAIN';
+  type: COMPONENT_TYPES;
 }
 
 const ImageList: FC<IImageListProps> = (props) => {
@@ -14,11 +15,11 @@ const ImageList: FC<IImageListProps> = (props) => {
   return (
     <ImageListWrapper>
       {storyState.images.map((image, idx) => {
-        if (type === 'INPUT')
+        if (type === COMPONENT_TYPES.INPUT)
           return <ImageInput key={idx} index={idx} image={image} />;
         return <Image key={idx} image={image} />;
       })}
-      {type === 'INPUT' && storyState.images.length > 4 && (
+      {type === COMPONENT_TYPES.INPUT && storyState.images.length > 4 && (
         <ImageInput index={storyState.images.length} />
       )}
     </ImageListWrapper>

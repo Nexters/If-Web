@@ -1,11 +1,12 @@
 import React, { FC, useCallback } from 'react';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 import NationIcon from '@/components/NationIcon';
 import { NationIconType } from '@/components/NationIcon/NationIcon';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import COMPONENT_TYPES from '@/types/ComponentTypes';
 
 interface INationTextProps {
-  type: 'INPUT' | 'PLAIN';
+  type: COMPONENT_TYPES;
   nation: {
     id: number | null;
     name: NationIconType;
@@ -18,7 +19,7 @@ const Nation: FC<INationTextProps> = ({ type, nation }) => {
   const history = useHistory();
 
   const onChangeHistory = useCallback(() => {
-    if (type === 'INPUT') history.push(`${url}/nation`);
+    if (type === COMPONENT_TYPES.INPUT) history.push(`${url}/nation`);
   }, [history, url]);
 
   return (
