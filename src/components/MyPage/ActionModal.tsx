@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import Modal from 'react-modal';
+import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import FeatureIcon from '@/components/FeatureIcon';
+import './actionModal.css';
 
 interface ActionModalProps {
   isOpen: boolean;
@@ -25,6 +26,7 @@ const ActionModal: FC<ActionModalProps> = ({
         onRequestClose={handleModalClose}
         ariaHideApp={false}
         shouldCloseOnOverlayClick={false}
+        closeTimeoutMS={300}
       >
         {bodyText.map((text, i) => (
           <BodyText key={i}>{text}</BodyText>
@@ -53,7 +55,7 @@ const Wrapper = styled.div`
   text-align: center;
 `;
 
-const StyledModal = styled(Modal)`
+const StyledModal = styled(ReactModal)`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -69,15 +71,6 @@ const StyledModal = styled(Modal)`
   text-align: center;
   background-color: ${({ theme }) => theme.colors.white2};
   color: ${({ theme }) => theme.colors.darkbrown};
-
-  &__overlay {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    background-color: red;
-  }
 `;
 
 const BodyText = styled.p`

@@ -9,7 +9,6 @@ interface LogoutModalProps {
 const LogoutModal: FC<LogoutModalProps> = ({ isOpen, handleModalClose }) => {
   const handleLogout = () => {
     // TODO: /logout 경로 & /login으로 이동?
-    alert('LOGOUT');
     handleModalClose();
   };
 
