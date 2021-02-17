@@ -18,7 +18,9 @@ const ImageList: FC<IImageListProps> = (props) => {
           return <ImageInput key={idx} index={idx} image={image} />;
         return <Image key={idx} image={image} />;
       })}
-      {type === 'INPUT' && <ImageInput index={storyState.images.length} />}
+      {type === 'INPUT' && storyState.images.length > 4 && (
+        <ImageInput index={storyState.images.length} />
+      )}
     </ImageListWrapper>
   );
 };
