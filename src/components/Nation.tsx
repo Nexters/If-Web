@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import NationIcon from '@/components/NationIcon';
 import { NationIconType } from '@/components/NationIcon/NationIcon';
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import Icon from './FeatureIcon';
 
 interface INationTextProps {
   type: 'INPUT' | 'PLAIN';
@@ -14,7 +13,7 @@ interface INationTextProps {
   };
 }
 
-const NationText: FC<INationTextProps> = ({ type, nation }) => {
+const Nation: FC<INationTextProps> = ({ type, nation }) => {
   const { url } = useRouteMatch();
   const history = useHistory();
 
@@ -25,12 +24,12 @@ const NationText: FC<INationTextProps> = ({ type, nation }) => {
   return (
     <Wrapper onClick={onChangeHistory}>
       <NationIcon name={nation.name} />
-      <LocationText>{nation.title || '여행한 나라'}</LocationText>
+      <NationText>{nation.title || '여행한 나라'}</NationText>
     </Wrapper>
   );
 };
 
-export default NationText;
+export default Nation;
 
 const Wrapper = styled.div`
   display: flex;
@@ -45,7 +44,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const LocationText = styled.span`
+const NationText = styled.span`
   margin-left: 8px;
   line-height: 28px;
 `;
