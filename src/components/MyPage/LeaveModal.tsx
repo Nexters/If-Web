@@ -14,7 +14,6 @@ const LeaveModal: FC<LeaveModalProps> = ({
 }) => {
   const handleLeave = () => {
     // TODO: /Leave 경로 & /login으로 이동?
-    alert('Leave');
     handleModalClose();
   };
 

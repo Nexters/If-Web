@@ -13,19 +13,29 @@ import PlaceSearch from '@/components/PlaceSearch';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import NationSearch from '@/components/NationSearch';
 import { StoryStateAtom } from '@/atoms/storyState';
+import useQueryString from '@/hooks/useQueryString';
 import Header from './Header';
 
 const AddContent: FC = () => {
   const resetStoryState = useResetRecoilState(StoryStateAtom);
   const { path } = useRouteMatch();
-  const { nation } = useAddContent();
+  const { nation, changeNation } = useAddContent();
+  const qs = useQueryString();
+
+  useEffect(() => {
+    const nation = qs.get('nation');
+    if (qs.get('nation')) {
+      // TODO: changeNation에 필요한 정보 넣어주기
+      // changeNation({});
+    }
+  }, [qs, changeNation]);
 
   useEffect(() => {
     return () => resetStoryState();
   }, []);
 
   return (
-    <Layout>
+    <Layout padding={'44px 24px'}>
       <Switch>
         <Route exact path={path}>
           <AddContentWrapper>

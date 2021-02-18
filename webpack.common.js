@@ -15,7 +15,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src'),
     },
     extensions: ['.tsx', '.ts', '.js', '.json'],
   },
@@ -56,6 +56,10 @@ module.exports = {
             },
           },
         ],
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },

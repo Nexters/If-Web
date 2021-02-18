@@ -52,10 +52,6 @@ const KakaoContainer = styled(KakaoLogin)`
   font-size: ${({ theme }) => theme.fontSizes.body};
   line-height: 28px;
   outline: none;
-
-  // &:hover {
-  // !!!!!!!!!!!!!!!! 디자이너분들한테 여쭤보기 !!!!!!!!!!!!!!!!
-  // }
 `;
 
 const Content = styled.div`

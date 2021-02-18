@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import FeatureIcon from '@/components/FeatureIcon';
 
 interface ISearchEmptyFallback {
   searchKeyword: string;
@@ -14,7 +15,7 @@ const SearchEmptyFallback: FC<ISearchEmptyFallback> = ({
 }) => {
   return (
     <Wrapper>
-      <div />
+      <FeatureIcon name={'noResult'} />
       <p>
         찾으시는 {categoryText}가 없습니다ㅠㅠ
         <br />
