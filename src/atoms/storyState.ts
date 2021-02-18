@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { atom, useRecoilState, useSetRecoilState } from 'recoil';
+import { atom, selector, useRecoilState, useSetRecoilState } from 'recoil';
 import { NationIconType } from '@/components/NationIcon/NationIcon';
 import { IImage } from '@/types';
 
@@ -10,7 +10,9 @@ export enum StoryStateField {
 
 interface IStoryState {
   title: string;
-  place: string | null;
+  placeName: string | null;
+  placeLatitude?: number | null;
+  placeLongitude?: number | null;
   nation: {
     id: number | null;
     name: NationIconType;
@@ -18,13 +20,15 @@ interface IStoryState {
   };
   memo: string;
   images: IImage[];
+  date?: string;
+  pictures: FormData[];
 }
 
 export const StoryStateAtom = atom<IStoryState>({
   key: 'addStoryState',
   default: {
     title: '',
-    place: null,
+    placeName: null,
     nation: {
       id: null,
       name: 'korea',
@@ -32,6 +36,33 @@ export const StoryStateAtom = atom<IStoryState>({
     },
     memo: '',
     images: [],
+    pictures: [],
+  },
+});
+
+export const sendedStoryState = selector({
+  key: 'sendedStoryState',
+  get: ({ get }) => {
+    const storyState = get(StoryStateAtom);
+    const {
+      title,
+      placeName,
+      placeLatitude,
+      placeLongitude,
+      pictures,
+      date,
+      memo,
+    } = storyState;
+
+    return {
+      title,
+      placeName,
+      placeLatitude,
+      placeLongitude,
+      pictures,
+      date,
+      memo,
+    };
   },
 });
 
@@ -60,20 +91,34 @@ export const useStoryState = () => {
     [setStoryStateAtom]
   );
 
+  const setStoryPlace = useCallback(
+    ({ placeName, placeLatitude, placeLongitude }) => {
+      setStoryStateAtom((prevState) => ({
+        ...prevState,
+        placeName,
+        placeLatitude,
+        placeLongitude,
+      }));
+    },
+    [setStoryStateAtom]
+  );
+
   return {
     storyState,
     setStoryState,
     setStoryDetail,
+    setStoryPlace,
   };
 };
 
 export const useStoryImage = () => {
   const setStoryStateAtom = useSetRecoilState(StoryStateAtom);
   const setStoryImageState = useCallback(
-    ({ image }) => {
+    ({ image, file }) => {
       setStoryStateAtom((prevState) => ({
         ...prevState,
         images: [...prevState.images, { url: image }],
+        pictures: [...prevState.pictures, file],
       }));
     },
     [setStoryStateAtom]
