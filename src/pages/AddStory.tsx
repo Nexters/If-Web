@@ -4,7 +4,7 @@ import Layout from '@/components/Layout';
 import styled from 'styled-components';
 import HEADER_TYPES from '@/types/HeaderTypes';
 import COMPONENT_TYPES from '@/types/ComponentTypes';
-import TitleInput from '@/components/TitleInput';
+import Title from '@/components/Title';
 import Place from '@/components/Place';
 import Country from '@/components/Country';
 import ContentInput from '@/components/ContentInput';
@@ -55,7 +55,7 @@ const AddContent: FC = () => {
               type={HEADER_TYPES.ADD_EDIT}
               primaryFunction={onClickCreateButton}
             />
-            <TitleInput />
+            <Title type={COMPONENT_TYPES.INPUT} />
             <Place type={COMPONENT_TYPES.INPUT} />
             <Country type={COMPONENT_TYPES.INPUT} />
             <ImageList type={COMPONENT_TYPES.INPUT} />

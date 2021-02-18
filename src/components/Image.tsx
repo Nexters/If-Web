@@ -27,6 +27,6 @@ const ImageWrapper = styled.div`
 `;
 
 const ImageContent = styled.img`
-  width: 270px;
-  height: 270px;
+  width: 268px;
+  height: 268px;
 `;
