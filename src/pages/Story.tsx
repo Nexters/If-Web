@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useResetRecoilState } from 'recoil';
 import HEADER_TYPES from '@/types/HeaderTypes';
+import COMPONENT_TYPES from '@/types/ComponentTypes';
 import Layout from '@/components/Layout';
 import Title from '@/components/Title';
 import Place from '@/components/Place';
@@ -40,9 +41,9 @@ const Story: FC = () => {
     <Layout padding={'44px 24px'}>
       <Header type={HEADER_TYPES.DETAIL} />
       <Title />
-      <Place type="PLAIN" />
-      <Nation type="PLAIN" nation={nation} />
-      <ImageList type="PLAIN" />
+      <Place type={COMPONENT_TYPES.PLAIN}  />
+      <Nation type={COMPONENT_TYPES.PLAIN} nation={nation} />
+      <ImageList type={COMPONENT_TYPES.PLAIN} />
       <Content />
     </Layout>
   );
