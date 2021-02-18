@@ -20,7 +20,7 @@ interface IStoryState {
   };
   memo: string;
   images: IImage[];
-  date?: string;
+  date: string;
   pictures: FormData[];
 }
 
@@ -29,6 +29,7 @@ export const StoryStateAtom = atom<IStoryState>({
   default: {
     title: '',
     placeName: null,
+    date: new Date().toString(),
     country: {
       id: null,
       name: 'korea',
@@ -79,13 +80,16 @@ export const useStoryState = () => {
   );
 
   const setStoryDetail = useCallback(
-    ({ date, memo, picture_list, experience_place }) => {
+    ({ id, country, date, title, memo, place, picture_list }) => {
       setStoryStateAtom((prevState) => ({
         ...prevState,
+        id,
+        country,
         date,
+        title,
         memo,
+        place,
         images: picture_list,
-        place: experience_place,
       }));
     },
     [setStoryStateAtom]

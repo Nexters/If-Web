@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { getFormattedDate } from '@/utils/formatter';
 import { useHistory } from 'react-router-dom';
+import Date from './Date';
 import Icon from './FeatureIcon';
 
 interface IPicture {
@@ -35,12 +36,7 @@ const Story: FC<IStoryProps> = (props) => {
         {picture_list.length > 0 && <img src={picture_list[0].url} />}
         {isEmpty && <Icon name="plus" />}
       </PictureWrapper>
-      <Date>
-        <DateText>{getFormattedDate(date)}</DateText>
-        <Divider>
-          <Icon className="icon" name="divider" />
-        </Divider>
-      </Date>
+      <Date date={date} />
       <Memo>{memo}</Memo>
     </StoryWrapper>
   );
@@ -77,25 +73,8 @@ const PictureWrapper = styled.div`
   border: 1px solid ${(props) => props.theme.colors.darkbrown};
   cursor: pointer;
   img {
-    width: 196px;
-    height: 196px;
-  }
-`;
-
-const Date = styled.div`
-  position: relative;
-  margin-bottom: 16px;
-`;
-
-const DateText = styled.div`
-  font-size: 12px;
-  letter-spacing: 0.1em;
-`;
-
-const Divider = styled.div`
-  .icon {
-    position: absolute;
-    top: 13px;
+    width: 194px;
+    height: 194px;
   }
 `;
 
