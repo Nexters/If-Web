@@ -5,7 +5,7 @@ interface ILayoutProps {
 }
 
 const Layout = styled.section<ILayoutProps>`
-  padding: ${(props) => props.padding || '24px 24px'};
+  padding: ${(props) => props.padding || '44px 24px'};
 `;
 
 export default Layout;

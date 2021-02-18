@@ -7,7 +7,8 @@ import FeatureIcon from '@/components/FeatureIcon';
 const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
-  padding: 20px 0 34px 0;
+  align-items: center;
+  padding-bottom: 24px;
 `;
 
 const Icon = styled.div`

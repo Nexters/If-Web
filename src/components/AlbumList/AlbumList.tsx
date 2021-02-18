@@ -68,7 +68,7 @@ const AlbumList: FC = () => {
   const albumData = useRecoilValue(album);
   const isEmptyAlbum = useMemo(() => albumData.length === 0, [albumData]);
   return (
-    <Layout padding={'0 24px'}>
+    <Layout>
       <Header type={HEADER_TYPES.ALBUM} />
       {isEmptyAlbum && (
         <>
