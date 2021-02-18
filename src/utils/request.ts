@@ -9,6 +9,9 @@ export default async (props: IRequestProps) => {
   const { data } = await axios({
     url: `/api${props.url}`,
     method: props.method,
+    headers: {
+      Authorization: `Bearer ${process.env.TEST_TOKEN}`,
+    },
   });
   return data;
 };

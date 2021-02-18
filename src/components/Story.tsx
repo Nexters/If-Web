@@ -76,6 +76,10 @@ const PictureWrapper = styled.div`
   margin-bottom: 12px;
   border: 1px solid ${(props) => props.theme.colors.darkbrown};
   cursor: pointer;
+  img {
+    width: 196px;
+    height: 196px;
+  }
 `;
 
 const Date = styled.div`
