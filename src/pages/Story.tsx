@@ -5,7 +5,7 @@ import COMPONENT_TYPES from '@/types/ComponentTypes';
 import Layout from '@/components/Layout';
 import Title from '@/components/Title';
 import Place from '@/components/Place';
-import Nation from '@/components/Nation';
+import Country from '@/components/Country';
 import Content from '@/components/Content';
 import ImageList from '@/components/ImageList';
 import useAddContent from '@/hooks/useAddContent';
@@ -22,7 +22,6 @@ const Story: FC = () => {
   const resetStoryState = useResetRecoilState(StoryStateAtom);
   const { setStoryDetail } = useStoryState();
   const { params } = useRouteMatch<IMatchStoryParams>();
-  const { nation } = useAddContent();
 
   const getStoryDetail = async () => {
     const data = await request({
@@ -42,7 +41,7 @@ const Story: FC = () => {
       <Header type={HEADER_TYPES.DETAIL} />
       <Title />
       <Place type={COMPONENT_TYPES.PLAIN}  />
-      <Nation type={COMPONENT_TYPES.PLAIN} nation={nation} />
+      <Country type={COMPONENT_TYPES.PLAIN} />
       <ImageList type={COMPONENT_TYPES.PLAIN} />
       <Content />
     </Layout>

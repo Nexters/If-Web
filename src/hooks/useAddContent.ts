@@ -3,22 +3,22 @@ import { useCallback } from 'react';
 import { StoryStateAtom } from '@/atoms/storyState';
 
 function useAddContent() {
-  const { nation } = useRecoilValue(StoryStateAtom);
+  const { country } = useRecoilValue(StoryStateAtom);
   const setAddContentState = useSetRecoilState(StoryStateAtom);
 
-  const changeNation = useCallback(
-    (nationInfo) => {
+  const changeCountry = useCallback(
+    (countryInfo) => {
       setAddContentState((prevState) => ({
         ...prevState,
-        nation: nationInfo,
+        country: countryInfo,
       }));
     },
     [setAddContentState]
   );
 
   return {
-    nation,
-    changeNation,
+    country,
+    changeCountry,
   };
 }
 

@@ -13,8 +13,8 @@ interface IStoryState {
   placeName: string | null;
   placeLatitude?: number | null;
   placeLongitude?: number | null;
-  nation: {
-    id: number | null;
+  country: {
+    id: string | null;
     name: NationIconType;
     title: string;
   };
@@ -29,7 +29,7 @@ export const StoryStateAtom = atom<IStoryState>({
   default: {
     title: '',
     placeName: null,
-    nation: {
+    country: {
       id: null,
       name: 'korea',
       title: '여행한 나라',
