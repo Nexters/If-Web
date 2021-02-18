@@ -1,14 +1,15 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { IImage } from '@/types'
 
 interface IImageInputProps {
-  image?: string;
+  image?: IImage;
 }
 
 const Image: FC<IImageInputProps> = ({ image }) => {
   return (
     <ImageWrapper>
-      <ImageContent src={image} />
+      <ImageContent src={image?.url} />
     </ImageWrapper>
   );
 };

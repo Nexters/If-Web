@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { atom, useRecoilState, useSetRecoilState } from 'recoil';
 import { NationIconType } from '@/components/NationIcon/NationIcon';
+import { IImage } from '@/types';
 
 export enum StoryStateField {
   TITLE = 'title',
@@ -16,7 +17,7 @@ interface IStoryState {
     title: string;
   };
   memo: string;
-  images: string[];
+  images: IImage[];
 }
 
 export const StoryStateAtom = atom<IStoryState>({
@@ -72,7 +73,7 @@ export const useStoryImage = () => {
     ({ image }) => {
       setStoryStateAtom((prevState) => ({
         ...prevState,
-        images: [...prevState.images, image],
+        images: [...prevState.images, { url: image }],
       }));
     },
     [setStoryStateAtom]

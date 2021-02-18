@@ -1,21 +1,23 @@
 import React, { FC, useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useStoryImage } from '@/atoms/storyState';
+import { IImage } from '@/types';
 import DeleteButton from './DeleteButton';
 import AddImage from './AddImage';
 
 interface IImageInputProps {
-  image?: string;
+  image?: IImage;
   index: number;
 }
 
 const ImageInput: FC<IImageInputProps> = ({ image, index }) => {
-  const [imageState, setImageState] = useState({ file: {}, img: image });
+  const [imageState, setImageState] = useState({ file: {}, img: image?.url });
   const viewImage = useRef<HTMLImageElement>(null);
   const { setStoryImageState } = useStoryImage();
 
   useEffect(() => {
-    if (image !== imageState.img) setStoryImageState({ image: imageState.img });
+    if (image?.url !== imageState.img)
+      setStoryImageState({ image: imageState.img });
   }, [imageState, image, setStoryImageState]);
 
   return (
