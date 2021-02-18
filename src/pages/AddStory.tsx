@@ -3,6 +3,7 @@ import { useResetRecoilState } from 'recoil';
 import Layout from '@/components/Layout';
 import styled from 'styled-components';
 import HEADER_TYPES from '@/types/HeaderTypes';
+import COMPONENT_TYPES from '@/types/ComponentTypes';
 import TitleInput from '@/components/TitleInput';
 import Place from '@/components/Place';
 import Nation from '@/components/Nation';
@@ -41,9 +42,9 @@ const AddContent: FC = () => {
           <AddContentWrapper>
             <Header type={HEADER_TYPES.ADD_EDIT} />
             <TitleInput />
-            <Place type="INPUT" />
-            <Nation type="INPUT" nation={nation} />
-            <ImageList type="INPUT" />
+            <Place type={COMPONENT_TYPES.INPUT} />
+            <Nation type={COMPONENT_TYPES.INPUT} nation={nation} />
+            <ImageList type={COMPONENT_TYPES.INPUT} />
             <ContentInput />
           </AddContentWrapper>
         </Route>
