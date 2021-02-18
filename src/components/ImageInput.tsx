@@ -10,14 +10,15 @@ interface IImageInputProps {
   index: number;
 }
 
-const ImageInput: FC<IImageInputProps> = ({ image, index }) => {
-  const [imageState, setImageState] = useState({ file: {}, img: image?.url });
-  const viewImage = useRef<HTMLImageElement>(null);
+const ImageInput: FC<IImageInputProps> = ({ image }) => {
+  const [imageState, setImageState] = useState({ file: null, img: image?.url });
   const { setStoryImageState } = useStoryImage();
 
   useEffect(() => {
-    if (image?.url !== imageState.img)
-      setStoryImageState({ image: imageState.img });
+    if (image?.url !== imageState.img) {
+      console.log(imageState.file);
+      setStoryImageState({ file: imageState.file, image: imageState.img });
+    }
   }, [imageState, image, setStoryImageState]);
 
   return (
@@ -25,7 +26,7 @@ const ImageInput: FC<IImageInputProps> = ({ image, index }) => {
       {image ? (
         <>
           <DeleteButton />
-          <Image src={imageState.img} ref={viewImage} />
+          <Image src={imageState.img} />
         </>
       ) : (
         <AddImage setImageState={setImageState} />
