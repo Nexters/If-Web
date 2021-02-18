@@ -23,6 +23,7 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-empty-function": "off",
     '@typescript-eslint/no-shadow': 'off',
+    'camelcase': 'off',
     'no-shadow': 'off',
     'consistent-return': 'off',
     'no-use-before-define': 'off',
