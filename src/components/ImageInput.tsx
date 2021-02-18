@@ -15,7 +15,6 @@ const ImageInput: FC<IImageInputProps> = ({ image, index }) => {
   const { setStoryImageState } = useStoryImage();
 
   useEffect(() => {
-    console.log(imageState);
     if (image !== imageState.img) setStoryImageState({ image: imageState.img });
   }, [imageState, image, setStoryImageState]);
 

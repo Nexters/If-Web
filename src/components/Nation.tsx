@@ -1,11 +1,12 @@
 import React, { FC, useCallback } from 'react';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 import NationIcon from '@/components/NationIcon';
 import { NationIconType } from '@/components/NationIcon/NationIcon';
-import { useHistory, useRouteMatch } from 'react-router-dom';
-import Icon from './FeatureIcon';
+import COMPONENT_TYPES from '@/types/ComponentTypes';
 
 interface INationTextProps {
+  type: COMPONENT_TYPES;
   nation: {
     id: number | null;
     name: NationIconType;
@@ -13,23 +14,23 @@ interface INationTextProps {
   };
 }
 
-const NationText: FC<INationTextProps> = ({ nation }) => {
+const Nation: FC<INationTextProps> = ({ type, nation }) => {
   const { url } = useRouteMatch();
   const history = useHistory();
 
   const onChangeHistory = useCallback(() => {
-    history.push(`${url}/nation`);
+    if (type === COMPONENT_TYPES.INPUT) history.push(`${url}/nation`);
   }, [history, url]);
 
   return (
     <Wrapper onClick={onChangeHistory}>
       <NationIcon name={nation.name} />
-      <LocationText>{nation.title || '여행한 나라'}</LocationText>
+      <NationText>{nation.title || '여행한 나라'}</NationText>
     </Wrapper>
   );
 };
 
-export default NationText;
+export default Nation;
 
 const Wrapper = styled.div`
   display: flex;
@@ -44,7 +45,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const LocationText = styled.span`
+const NationText = styled.span`
   margin-left: 8px;
   line-height: 28px;
 `;
