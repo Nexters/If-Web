@@ -14,38 +14,43 @@ import GlobalStyle from '@/styles/global';
 import theme from '@/styles/theme';
 import { ThemeProvider } from 'styled-components';
 import Album from '@/pages/Album';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 const App: FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <RecoilRoot>
-        <Router>
-          <Switch>
-            <Route path={'/add'}>
-              <AddContent />
-            </Route>
-            <Route path={'/album'}>
-              <Album />
-            </Route>
-            <Route exact path={'/'}>
-              <Main />
-            </Route>
-            <Route path={'/login'}>
-              <Login />
-            </Route>
-            <Route path={'/story/:id'}>
-              <Story />
-            </Route>
-            <Route exact path={'/myPage'}>
-              <MyPage />
-            </Route>
-            <Route exact path={'/myPage/edit'}>
-              <MyPageEdit />
-            </Route>
-          </Switch>
-        </Router>
-      </RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <RecoilRoot>
+          <Router>
+            <Switch>
+              <Route path={'/add'}>
+                <AddContent />
+              </Route>
+              <Route path={'/album'}>
+                <Album />
+              </Route>
+              <Route exact path={'/'}>
+                <Main />
+              </Route>
+              <Route path={'/login'}>
+                <Login />
+              </Route>
+              <Route path={'/story/:id'}>
+                <Story />
+              </Route>
+              <Route exact path={'/myPage'}>
+                <MyPage />
+              </Route>
+              <Route exact path={'/myPage/edit'}>
+                <MyPageEdit />
+              </Route>
+            </Switch>
+          </Router>
+        </RecoilRoot>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 };
