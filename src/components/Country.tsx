@@ -21,7 +21,7 @@ const Country: FC<INationTextProps> = ({ type }) => {
 
   return (
     <Wrapper onClick={onChangeHistory}>
-      <NationIcon name={country.name} />
+      {/* <NationIcon name={country.name} /> */}
       <CountryText>{country.title || '여행한 나라'}</CountryText>
     </Wrapper>
   );
