@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useResetRecoilState } from 'recoil';
 import HEADER_TYPES from '@/types/HeaderTypes';
+import COMPONENT_TYPES from '@/types/ComponentTypes';
 import Layout from '@/components/Layout';
 import Title from '@/components/Title';
 import Place from '@/components/Place';
@@ -11,7 +12,6 @@ import useAddContent from '@/hooks/useAddContent';
 import { useRouteMatch } from 'react-router-dom';
 import { StoryStateAtom, useStoryState } from '@/atoms/storyState';
 import request from '@/utils/request';
-import COMPONENT_TYPES from '@/types/ComponentTypes';
 import Header from './Header';
 
 interface IMatchStoryParams {
@@ -41,7 +41,7 @@ const Story: FC = () => {
     <Layout padding={'44px 24px'}>
       <Header type={HEADER_TYPES.DETAIL} />
       <Title />
-      <Place type={COMPONENT_TYPES.PLAIN} />
+      <Place type={COMPONENT_TYPES.PLAIN}  />
       <Nation type={COMPONENT_TYPES.PLAIN} nation={nation} />
       <ImageList type={COMPONENT_TYPES.PLAIN} />
       <Content />
