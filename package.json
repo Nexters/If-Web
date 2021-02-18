@@ -47,7 +47,7 @@
     "compression-webpack-plugin": "^7.1.2",
     "core-js": "3.8.3",
     "dotenv-webpack": "^6.0.0",
-    "eslint": "^7.18.0",
+    "eslint": "^7.20.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^7.1.0",
     "eslint-import-resolver-typescript": "^2.3.0",
