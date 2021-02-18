@@ -14,6 +14,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import NationSearch from '@/components/NationSearch';
 import { StoryStateAtom } from '@/atoms/storyState';
 import useQueryString from '@/hooks/useQueryString';
+import COMPONENT_TYPES from '@/types/ComponentTypes';
 import Header from './Header';
 
 const AddContent: FC = () => {
@@ -38,14 +39,14 @@ const AddContent: FC = () => {
     <Layout>
       <Switch>
         <Route exact path={path}>
-          <AddContentWrapper>
+          <div>
             <Header type={HEADER_TYPES.ADD_EDIT} />
             <TitleInput />
-            <Place type="INPUT" />
-            <Nation type="INPUT" nation={nation} />
-            <ImageList type="INPUT" />
+            <Place type={COMPONENT_TYPES.INPUT} />
+            <Nation type={COMPONENT_TYPES.INPUT} nation={nation} />
+            <ImageList type={COMPONENT_TYPES.INPUT} />
             <ContentInput />
-          </AddContentWrapper>
+          </div>
         </Route>
         <Route path={`${path}/place`}>
           <PlaceSearch />
@@ -57,9 +58,5 @@ const AddContent: FC = () => {
     </Layout>
   );
 };
-
-const AddContentWrapper = styled.div`
-  padding: 0 24px;
-`;
 
 export default AddContent;
