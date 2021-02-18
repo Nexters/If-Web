@@ -1,4 +1,5 @@
 import React, { FC, useEffect } from 'react';
+import { useResetRecoilState } from 'recoil';
 import Layout from '@/components/Layout';
 import styled from 'styled-components';
 import HEADER_TYPES from '@/types/HeaderTypes';
@@ -11,10 +12,12 @@ import useAddContent from '@/hooks/useAddContent';
 import PlaceSearch from '@/components/PlaceSearch';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import NationSearch from '@/components/NationSearch';
+import { StoryStateAtom } from '@/atoms/storyState';
 import useQueryString from '@/hooks/useQueryString';
 import Header from './Header';
 
 const AddContent: FC = () => {
+  const resetStoryState = useResetRecoilState(StoryStateAtom);
   const { path } = useRouteMatch();
   const { nation, changeNation } = useAddContent();
   const qs = useQueryString();
@@ -26,6 +29,10 @@ const AddContent: FC = () => {
       // changeNation({});
     }
   }, [qs, changeNation]);
+
+  useEffect(() => {
+    return () => resetStoryState();
+  }, []);
 
   return (
     <Layout padding={'44px 24px'}>

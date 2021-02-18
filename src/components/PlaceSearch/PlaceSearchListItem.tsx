@@ -1,13 +1,28 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { useStoryState } from '@/atoms/storyState';
+import { useHistory } from 'react-router-dom';
+import { getFormattedDistance } from '@/utils/formatter';
 
-interface IPlaceSearchListItemProps {}
+interface IPlaceSearchListItem {
+  placeName: string;
+  distance: string;
+}
 
-const PlaceSearchListItem: FC<IPlaceSearchListItemProps> = () => {
+const PlaceSearchListItem: FC<IPlaceSearchListItem> = (props) => {
+  const { placeName, distance } = props;
+  const { setStoryState } = useStoryState();
+  const history = useHistory();
+
+  const onClickPlaceItem = () => {
+    setStoryState({ field: 'place', value: placeName });
+    history.push('/add');
+  };
+
   return (
-    <ListItem>
-      <strong>맥도날드 양평SK점</strong>
-      <span>940m</span>
+    <ListItem onClick={onClickPlaceItem}>
+      <strong>{placeName}</strong>
+      <span>{getFormattedDistance(distance)}</span>
     </ListItem>
   );
 };
