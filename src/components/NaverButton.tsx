@@ -20,7 +20,6 @@ const NaverButton: FC = () => {
   };
 
   const initializeNaverLogin = () => {
-    console.log(NAVER_KEY);
     const naverLogin = new naver.LoginWithNaverId({
       clientId: NAVER_KEY,
       callbackUrl: 'http://localhost:3000/login',
@@ -36,10 +35,8 @@ const NaverButton: FC = () => {
   };
 
   const getNaverToken = () => {
-    console.log(location);
     if (!location.hash) return;
     const token = location.hash.split('=')[1].split('&')[0];
-    console.log('Getting Token');
     console.log(token);
   };
 

@@ -1,20 +1,23 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import KakaoLogin from 'react-kakao-login';
 import LoginIcon from '@/components/LoginIcon';
 
 const KakaoButton: FC = () => {
+  const history = useHistory();
+
   const KAKAO_KEY = String(process.env.KAKAO_KEY);
 
   const kakaoSuccess = (res: any) => {
-    console.log(res);
-    // res.profile: properties (nickname, profile_image, thumbnail_image 등등)
-    // res.response: access_token, refresh_token 등등
-    // !!!!!!!!!!!!!!!! 서버랑 연결 작업하기 !!!!!!!!!!!!!!!!
+    const { response } = res;
+    localStorage.setItem('token', response.access_token);
+    history.push('/');
   };
 
-  const kakaoFail = () => {
-    console.log('FAIL');
+  const kakaoFail = (res: any) => {
+    console.log(res);
+    alert('문제가 생겼습니다. ');
   };
 
   return (
