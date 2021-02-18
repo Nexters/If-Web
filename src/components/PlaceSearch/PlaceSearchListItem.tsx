@@ -7,15 +7,17 @@ import { getFormattedDistance } from '@/utils/formatter';
 interface IPlaceSearchListItem {
   placeName: string;
   distance: string;
+  placeLatitude?: number;
+  placeLongitude?: number;
 }
 
 const PlaceSearchListItem: FC<IPlaceSearchListItem> = (props) => {
-  const { placeName, distance } = props;
-  const { setStoryState } = useStoryState();
+  const { placeName, distance, placeLatitude, placeLongitude } = props;
+  const { setStoryPlace } = useStoryState();
   const history = useHistory();
 
   const onClickPlaceItem = () => {
-    setStoryState({ field: 'place', value: placeName });
+    setStoryPlace({ placeName, placeLatitude, placeLongitude });
     history.push('/add');
   };
 
