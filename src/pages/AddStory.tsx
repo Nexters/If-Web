@@ -1,20 +1,23 @@
 import React, { FC, useEffect } from 'react';
+import { useResetRecoilState } from 'recoil';
 import Layout from '@/components/Layout';
 import styled from 'styled-components';
 import HEADER_TYPES from '@/types/HeaderTypes';
 import TitleInput from '@/components/TitleInput';
-import LocationText from '@/components/LocationText';
-import NationText from '@/components/NationText';
+import Place from '@/components/Place';
+import Nation from '@/components/Nation';
 import ContentInput from '@/components/ContentInput';
 import ImageList from '@/components/ImageList';
 import useAddContent from '@/hooks/useAddContent';
 import PlaceSearch from '@/components/PlaceSearch';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import NationSearch from '@/components/NationSearch';
+import { StoryStateAtom } from '@/atoms/storyState';
 import useQueryString from '@/hooks/useQueryString';
 import Header from './Header';
 
 const AddContent: FC = () => {
+  const resetStoryState = useResetRecoilState(StoryStateAtom);
   const { path } = useRouteMatch();
   const { nation, changeNation } = useAddContent();
   const qs = useQueryString();
@@ -27,6 +30,10 @@ const AddContent: FC = () => {
     }
   }, [qs, changeNation]);
 
+  useEffect(() => {
+    return () => resetStoryState();
+  }, []);
+
   return (
     <Layout>
       <Switch>
@@ -34,9 +41,9 @@ const AddContent: FC = () => {
           <AddContentWrapper>
             <Header type={HEADER_TYPES.ADD_EDIT} />
             <TitleInput />
-            <LocationText />
-            <NationText nation={nation} />
-            <ImageList />
+            <Place type="INPUT" />
+            <Nation type="INPUT" nation={nation} />
+            <ImageList type="INPUT" />
             <ContentInput />
           </AddContentWrapper>
         </Route>
@@ -52,7 +59,7 @@ const AddContent: FC = () => {
 };
 
 const AddContentWrapper = styled.div`
-  // padding: 0 24px;
+  padding: 0 24px;
 `;
 
 export default AddContent;

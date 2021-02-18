@@ -1,56 +1,43 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import HEADER_TYPES from '@/types/HeaderTypes';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import FeatureIcon from '@/components/FeatureIcon';
+import { MyPageStateAtom, MyPageStateField } from '@/atoms/myPageState';
+import { useSetRecoilState } from 'recoil';
 
-const StyledHeader = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 24px;
-`;
+interface ArrowProps {
+  route: string;
+}
 
-const Icon = styled.div`
-  cursor: pointer;
-  display: inline-block;
-  outline: none;
-  & + & {
-    margin-left: 24px;
-  }
-  div,
-  img {
-    outline: none;
-  }
-`;
-
-const Text = styled.p<{ completed?: boolean }>`
-  cursor: ${({ completed = true }) => (completed ? 'pointer' : 'default')};
-  display: inline-block;
-  outline: none;
-  font-size: ${(props) => props.theme.fontSizes.headline};
-  line-height: 20px;
-  color: ${({ completed = true, theme }) =>
-    completed ? theme.colors.darkbrown : theme.colors.darkgray};
-  & + & {
-    margin-left: 24px;
-  }
-`;
-
-const Arrow = () => {
+const Arrow: FC<ArrowProps> = ({ route }) => {
   return (
     <Icon>
-      <Link to="/">
+      <Link to={route}>
         <FeatureIcon name={'arrow'} />
       </Link>
     </Icon>
   );
 };
 
-const MyPage = () => {
+interface MyPageProps {
+  updateParent: (parent: MyPageStateField) => void;
+  parent: MyPageStateField;
+}
+
+const MyPage: FC<MyPageProps> = ({ updateParent, parent }) => {
+  const handleClick = () => {
+    updateParent(parent);
+  };
+
   return (
-    <Icon>
-      <Link to="/myPage">
+    <Icon
+      onClick={handleClick}
+      onKeyPress={handleClick}
+      role="button"
+      tabIndex={0}
+    >
+      <Link to={'/myPage'}>
         <FeatureIcon name={'mypage'} />
       </Link>
     </Icon>
@@ -62,6 +49,7 @@ interface Props {
   completed?: boolean;
   primaryFunction?: () => void;
   deleteFunction?: () => void;
+  parentRoute?: MyPageStateField;
 }
 
 const Header: FC<Props> = ({
@@ -69,7 +57,20 @@ const Header: FC<Props> = ({
   completed = true,
   primaryFunction = () => {},
   deleteFunction = () => {},
+  parentRoute = MyPageStateField.FEED,
 }) => {
+  const setMyPageState = useSetRecoilState(MyPageStateAtom);
+
+  const updateMyPageParent = useCallback(
+    (parent: MyPageStateField) => {
+      setMyPageState((prevState) => ({
+        ...prevState,
+        parent,
+      }));
+    },
+    [setMyPageState]
+  );
+
   return (
     <StyledHeader>
       {type === HEADER_TYPES.FEED && (
@@ -90,14 +91,17 @@ const Header: FC<Props> = ({
                 <FeatureIcon name={'save'} />
               </div>
             </Icon>
-            <MyPage />
+            <MyPage
+              updateParent={updateMyPageParent}
+              parent={MyPageStateField.FEED}
+            />
           </div>
         </>
       )}
 
       {type === HEADER_TYPES.ADD_EDIT && (
         <>
-          <Arrow />
+          <Arrow route={'/'} />
           {completed ? (
             <Text
               completed={completed}
@@ -116,7 +120,7 @@ const Header: FC<Props> = ({
 
       {type === HEADER_TYPES.DETAIL && (
         <>
-          <Arrow />
+          <Arrow route={'/'} />
           <div>
             <Text
               onClick={primaryFunction}
@@ -145,19 +149,24 @@ const Header: FC<Props> = ({
               <FeatureIcon name={'feed'} />
             </Link>
           </Icon>
-          <MyPage />
+          <MyPage
+            updateParent={updateMyPageParent}
+            parent={MyPageStateField.ALBUM}
+          />
         </>
       )}
 
-      {type === HEADER_TYPES.MY_PAGE && <Arrow />}
+      {type === HEADER_TYPES.MY_PAGE && (
+        <Icon>
+          <Link to={parentRoute === MyPageStateField.ALBUM ? '/album' : '/'}>
+            <FeatureIcon name={'arrow'} />
+          </Link>
+        </Icon>
+      )}
 
       {type === HEADER_TYPES.MY_PAGE_EDIT && (
         <>
-          <Icon>
-            <Link to="/myPage">
-              <FeatureIcon name={'arrow'} />
-            </Link>
-          </Icon>
+          <Arrow route={'/myPage'} />
           {completed ? (
             <Text
               completed={completed}
@@ -176,5 +185,37 @@ const Header: FC<Props> = ({
     </StyledHeader>
   );
 };
+
+const StyledHeader = styled.header`
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0 34px 0;
+`;
+
+const Icon = styled.div`
+  cursor: pointer;
+  display: inline-block;
+  outline: none;
+  & + & {
+    margin-left: 24px;
+  }
+  div,
+  img {
+    outline: none;
+  }
+`;
+
+const Text = styled.p<{ completed?: boolean }>`
+  cursor: ${({ completed = true }) => (completed ? 'pointer' : 'default')};
+  display: inline-block;
+  outline: none;
+  font-size: ${(props) => props.theme.fontSizes.headline};
+  line-height: 20px;
+  color: ${({ completed = true, theme }) =>
+    completed ? theme.colors.darkbrown : theme.colors.darkgray};
+  & + & {
+    margin-left: 24px;
+  }
+`;
 
 export default Header;

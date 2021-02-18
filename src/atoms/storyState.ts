@@ -46,9 +46,23 @@ export const useStoryState = () => {
     [setStoryStateAtom]
   );
 
+  const setStoryDetail = useCallback(
+    ({ date, memo, picture_list, experience_place }) => {
+      setStoryStateAtom((prevState) => ({
+        ...prevState,
+        date,
+        memo,
+        images: picture_list,
+        place: experience_place,
+      }));
+    },
+    [setStoryStateAtom]
+  );
+
   return {
     storyState,
     setStoryState,
+    setStoryDetail,
   };
 };
 

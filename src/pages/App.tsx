@@ -6,6 +6,7 @@ import { hot } from 'react-hot-loader';
 import AddContent from '@/pages/AddStory';
 import Main from '@/pages/Main';
 import Login from '@/pages/Login';
+import Story from '@/pages/Story';
 import MyPage from '@/pages/MyPage';
 import MyPageEdit from '@/pages/MyPageEdit';
 
@@ -32,6 +33,9 @@ const App: FC = () => {
             </Route>
             <Route path={'/login'}>
               <Login />
+            </Route>
+            <Route path={'/story/:id'}>
+              <Story />
             </Route>
             <Route exact path={'/myPage'}>
               <MyPage />

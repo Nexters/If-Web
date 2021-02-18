@@ -1,28 +1,33 @@
 import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
-import { useStoryState } from '@/atoms/storyState';
 import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useStoryState } from '@/atoms/storyState';
+import COMPONENT_TYPES from '@/types/ComponentTypes';
 import Icon from './FeatureIcon';
 
-const LocationInput: FC = () => {
-  const { storyState, setStoryState } = useStoryState();
+interface IPlaceProps {
+  type: COMPONENT_TYPES;
+}
+
+const Place: FC<IPlaceProps> = ({ type }) => {
+  const { storyState } = useStoryState();
   const { url } = useRouteMatch();
   const history = useHistory();
 
   const onChangeHistory = useCallback(() => {
-    history.push(`${url}/place`);
+    if (type === COMPONENT_TYPES.INPUT) history.push(`${url}/place`);
   }, [history, url]);
 
   return (
     <Wrapper onClick={onChangeHistory}>
       <Icon name="location" />
-      <LocationText>{storyState.place || '음식을 먹은 장소'}</LocationText>
+      <PlaceText>{storyState.place || '음식을 먹은 장소'}</PlaceText>
       <Text>에서 느낀</Text>
     </Wrapper>
   );
 };
 
-export default LocationInput;
+export default Place;
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,7 +40,7 @@ const Text = styled.span`
   opacity: 0.3;
 `;
 
-const LocationText = styled.span`
+const PlaceText = styled.span`
   margin: 0 4px 0 8px;
   cursor: pointer;
 `;
