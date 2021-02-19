@@ -49,7 +49,7 @@ const AddContent: FC = () => {
     <Layout>
       <Switch>
         <Route exact path={path}>
-          <AddContentWrapper>
+          <div>
             <Header
               type={HEADER_TYPES.ADD_EDIT}
               primaryFunction={onClickCreateButton}

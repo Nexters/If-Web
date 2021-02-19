@@ -21,7 +21,7 @@ interface IStoryState {
   memo: string;
   images: IImage[];
   date: string;
-  pictures: FormData[];
+  pictures: File[];
 }
 
 export const StoryStateAtom = atom<IStoryState>({
@@ -54,7 +54,8 @@ export const sendedStoryState = selector({
       date,
       memo,
     } = storyState;
-
+    console.log('aaa');
+    console.log(pictures);
     return {
       title,
       placeName,
@@ -63,6 +64,7 @@ export const sendedStoryState = selector({
       pictures,
       date,
       memo,
+      countryId: '0f5d5f2e-e477-4993-bdff-3ea07a97791f',
     };
   },
 });
