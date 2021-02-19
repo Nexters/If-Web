@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { atom, selector, useRecoilState, useSetRecoilState } from 'recoil';
 import { IImage } from '@/types';
+import { getFormattedFullDate } from '@/utils/formatter';
 
 export enum StoryStateField {
   TITLE = 'title',
@@ -9,27 +10,32 @@ export enum StoryStateField {
 
 interface IStoryState {
   title: string;
-  placeName: string | null;
-  placeLatitude?: number | null;
-  placeLongitude?: number | null;
-  memo: string;
-  images: IImage[];
-  date: string;
-  pictures: FormData[];
+  place: {
+    id?: string | null;
+    name: string;
+    latitude?: number | null;
+    longitude?: number | null;
+  };
   country: {
     id: string;
     name: string;
     type: string;
     imgUrl?: string;
   };
+  memo: string;
+  images: IImage[];
+  date: string;
+  pictures: File[];
 }
 
 export const StoryStateAtom = atom<IStoryState>({
   key: 'addStoryState',
   default: {
     title: '',
-    placeName: null,
-    date: new Date().toString(),
+    place: {
+      name: '',
+    },
+    date: '',
     country: {
       id: '',
       name: '',
@@ -43,31 +49,34 @@ export const StoryStateAtom = atom<IStoryState>({
   },
 });
 
-export const sendedStoryState = selector({
+export const StoryFormData = selector({
   key: 'sendedStoryState',
   get: ({ get }) => {
     const storyState = get(StoryStateAtom);
-    const {
-      title,
-      placeName,
-      placeLatitude,
-      placeLongitude,
-      pictures,
-      date,
-      memo,
-      country,
-    } = storyState;
+    const { title, place, pictures, country, date, memo } = storyState;
+    const form = new FormData();
+    form.append('title', title);
+    form.append('placeName', place.name);
+    form.append('placeLatitude', `${place.latitude}`);
+    form.append('placeLongitude', `${place.longitude}`);
+    form.append('date', date || getFormattedFullDate(new Date().toString()));
+    form.append('countryId', `8f5e436d-789e-4f42-8e0f-31f2e7bbbbfe`);
+    form.append('memo', memo);
+    form.append('newCountryName', country.id);
+    pictures.map((picture) => form.append('pictures', picture));
 
-    return {
-      title,
-      placeName,
-      placeLatitude,
-      placeLongitude,
-      pictures,
-      date,
-      memo,
-      country,
-    };
+    return form;
+  },
+});
+
+export const StoryFormCondition = selector({
+  key: 'isAvailabePostStory',
+  get: ({ get }) => {
+    const storyState = get(StoryStateAtom);
+    const { title, place, pictures, country, memo } = storyState;
+    if (!title || !place.name || pictures.length === 0) return false;
+    if (!country.id || !memo) return false;
+    return true;
   },
 });
 
@@ -100,12 +109,13 @@ export const useStoryState = () => {
   );
 
   const setStoryPlace = useCallback(
-    ({ placeName, placeLatitude, placeLongitude }) => {
+    ({ place }) => {
       setStoryStateAtom((prevState) => ({
         ...prevState,
-        placeName,
-        placeLatitude,
-        placeLongitude,
+        place: {
+          ...prevState.place,
+          ...place,
+        },
       }));
     },
     [setStoryStateAtom]
