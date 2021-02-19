@@ -2,7 +2,6 @@ import decode from 'jwt-decode';
 
 export const checkAuth = () => {
   const token = localStorage.getItem('token');
-  console.log(token);
 
   // No token
   if (!token) {
