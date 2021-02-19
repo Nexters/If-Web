@@ -4,8 +4,12 @@ import Layout from '@/components/Layout';
 import styled from 'styled-components';
 import FeatureIcon from '@/components/FeatureIcon';
 import Story from '@/components/Story';
-import request from '@/utils/request';
 import AddButton from '@/components/AddButton';
+import { useQuery } from 'react-query';
+import {
+  getCountryByType,
+  ICountryByTypeForView,
+} from '@/lib/api/getCountryByType';
 
 interface IParamTypes {
   name: string;
@@ -14,24 +18,17 @@ interface IParamTypes {
 const AlbumFeedList = () => {
   const history = useHistory();
   const { name } = useParams<IParamTypes>();
-  const [albumFeedList, setAlbumFeedList] = useState([]);
-
-  useEffect(() => {
-    getAlbumFeedList();
-  }, []);
-
-  const getAlbumFeedList = async () => {
-    const data = await request({
-      url: '/stories',
-      method: 'GET',
-    });
-    setAlbumFeedList(data);
-  };
+  const { data, error } = useQuery<ICountryByTypeForView[], Error>(
+    'countryByType',
+    getCountryByType(name)
+  );
 
   const onChangeHistory = useCallback(() => {
     history.push('/album');
   }, []);
 
+  if (!data) return <div>Loading...</div>;
+  if (error) return <div>Error...</div>;
   return (
     <Layout>
       <Header>
@@ -42,13 +39,21 @@ const AlbumFeedList = () => {
             style={{ width: '24px', height: '24px' }}
           />
         </button>
-        <span>{'12'}</span>
+        <span>{data.length || 0}</span>
       </Header>
       <div>
-        {albumFeedList.map((feed, idx) => {
-          const { id } = feed;
+        {data.map(({ id, date, title, memo, picture_list }, idx) => {
           const pos = idx % 2 === 0 ? 'left' : 'right';
-          return <Story key={id} position={pos} {...feed} />;
+          return (
+            <Story
+              key={id}
+              position={pos}
+              id={id}
+              date={date}
+              memo={memo}
+              picture_list={picture_list}
+            />
+          );
         })}
       </div>
       <AddButton nation={name} />

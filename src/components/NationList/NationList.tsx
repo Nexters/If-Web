@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { ICountriesDataForView } from '@/lib/api/album';
+import { ICountriesDataForView } from '@/lib/api/getCountries';
 import { useQueryClient } from 'react-query';
 import NationListItem from './NationListItem';
 
