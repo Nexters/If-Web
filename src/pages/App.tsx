@@ -5,7 +5,6 @@ import {
   Switch,
   Route,
   Redirect,
-  RouteProps,
 } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 
@@ -22,6 +21,7 @@ import Album from '@/pages/Album';
 
 import PrivateRoute from '@/routes/PrivateRoute';
 import PublicRoute from '@/routes/PublicRoute';
+import { checkAuth } from '@/utils/checkAuth';
 
 const App: FC = () => {
   return (
@@ -48,6 +48,16 @@ const App: FC = () => {
             <PrivateRoute exact path={'/myPage/edit'}>
               <MyPageEdit />
             </PrivateRoute>
+            <Route
+              path={'*'}
+              render={() => {
+                return checkAuth() ? (
+                  <Redirect to={{ pathname: '/' }} />
+                ) : (
+                  <Redirect to={{ pathname: '/login' }} />
+                );
+              }}
+            />
           </Switch>
         </Router>
       </RecoilRoot>
