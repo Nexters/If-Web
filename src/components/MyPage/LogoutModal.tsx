@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import request from '@/utils/request';
 import { useHistory } from 'react-router-dom';
 import ActionModal from './ActionModal';
+import axios from 'axios';
 
 interface LogoutModalProps {
   isOpen: boolean;
@@ -12,15 +12,18 @@ const LogoutModal: FC<LogoutModalProps> = ({ isOpen, handleModalClose }) => {
   const history = useHistory();
 
   const handleLogout = async () => {
-    // TODO: CORS로 추정되는 문제 해결하기 (403 에러)
-    // const res = await request({
-    //   url: '/users/logout',
-    //   method: 'POST',
-    // });
-    // console.log(res);
-    handleModalClose();
-    localStorage.removeItem('token');
-    history.push('/login');
+    const accessToken = localStorage.getItem('token');
+    const result = await axios({
+      url: `/api/users/logout`,
+      method: 'POST',
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    if (result.status === 200) {
+      handleModalClose();
+      localStorage.removeItem('token');
+      localStorage.removeItem('refresh_token');
+      history.push('/myPage');
+    }
   };
 
   return (

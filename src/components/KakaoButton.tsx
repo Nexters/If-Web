@@ -1,10 +1,8 @@
 import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import KakaoLogin from 'react-kakao-login';
 import LoginIcon from '@/components/LoginIcon';
 import request from '@/utils/request';
-import axios from 'axios';
 
 declare global {
   interface Window {
@@ -14,17 +12,15 @@ declare global {
 
 const KakaoButton: FC = () => {
   const { Kakao } = window;
-
   const history = useHistory();
-
   const KAKAO_KEY = String(process.env.KAKAO_KEY);
-  // const KAKAO_REST_API_KEY = String(process.env.KAKAO_REST_API_KEY);
-  // const REDIRECT_URI = 'http://52.79.196.61:6150/users/login/kakao';
+  // 300일
+  const JWT_EXPIRATION = 300 * 24 * 60 * 60 * 1000;
 
   useEffect(() => {
-    Kakao.init(KAKAO_KEY);
-    // 연결되었는지 확인
-    // console.log(Kakao.isInitialized());
+    if (!Kakao.isInitialized()) {
+      Kakao.init(KAKAO_KEY);
+    }
   }, []);
 
   const handleKakaoLogin = () => {
@@ -41,13 +37,31 @@ const KakaoButton: FC = () => {
     });
 
     if (tokenInformation.access_token) {
-      localStorage.setItem('token', tokenInformation.access_token);
+      const { access_token, refresh_token } = tokenInformation;
+      localStorage.setItem('token', access_token);
+      localStorage.setItem('refresh_token', refresh_token);
       history.push('/');
+      setTimeout(() => {
+        silentRefresh();
+      }, JWT_EXPIRATION);
     }
   };
 
   const kakaoFail = (res: any) => {
     console.log(res);
+  };
+
+  const silentRefresh = async () => {
+    const refreshToken = localStorage.getItem('refresh_token');
+    if (refreshToken) {
+      const tokenInformation = await request({
+        url: '/users/token/refresh',
+        method: 'POST',
+        data: { refresh_token: refreshToken },
+      });
+      localStorage.setItem('token', tokenInformation.access_token);
+      localStorage.setItem('refresh_token', tokenInformation.refresh_token);
+    }
   };
 
   return (

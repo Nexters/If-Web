@@ -28,7 +28,6 @@ const MyPageEdit: FC = () => {
   };
 
   const handleComplete = async () => {
-    // TODO: CORS로 추정되는 문제 해결하기 (403 에러)
     const res = await request({
       url: '/users',
       method: 'PUT',
