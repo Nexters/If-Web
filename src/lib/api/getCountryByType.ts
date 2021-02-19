@@ -59,7 +59,11 @@ const convertCountryByTypeDataFromApi = (
 export const getCountryByType = (countryType: string) => async () => {
   try {
     const token = localStorage.getItem('token');
-    const { data } = await axios.get(`/api/stories/countries/${countryType}`, {
+    const url =
+      process.env.NODE_ENV === 'production'
+        ? `/stories/countries/${countryType}`
+        : `/api/stories/countries/${countryType}`;
+    const { data } = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
