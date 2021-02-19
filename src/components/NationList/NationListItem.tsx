@@ -18,7 +18,7 @@ const NationListItem: FC<INationListItemProps> = ({
   const history = useHistory();
 
   const onChangeHistory = useCallback(() => {
-    history.push(`/add?nation=${type}`);
+    history.push(`/add?nation=${name}`);
   }, []);
 
   return (
@@ -51,6 +51,12 @@ const NationImageWrapper = styled.div`
   height: 48px;
   background-color: ${({ theme }) => theme.colors.lightgray};
   margin-right: 12px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const NationDefinitionList = styled.dl`

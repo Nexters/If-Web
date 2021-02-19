@@ -25,7 +25,7 @@ const AlbumList: FC = () => {
     }
   }, [albumList]);
 
-  if (!data) return <div>Loading...</div>;
+  if (!data) return null;
   if (error) return <div>에러 발생...</div>;
   return (
     <Layout>
@@ -54,13 +54,19 @@ const AlbumList: FC = () => {
                 albumList
                   .slice(0, 4)
                   .map(
-                    ({ id, type, name, numberOfStories, letterImageUrl }) => (
+                    ({
+                      id,
+                      type,
+                      name,
+                      numberOfStories,
+                      albumStickerImageUrl,
+                    }) => (
                       <AlbumListItem
                         key={id}
                         name={name}
                         type={type}
                         amount={numberOfStories}
-                        imgUrl={letterImageUrl}
+                        imgUrl={albumStickerImageUrl}
                       />
                     )
                   )}
@@ -70,13 +76,19 @@ const AlbumList: FC = () => {
                 {albumList
                   .slice(4)
                   .map(
-                    ({ id, type, name, numberOfStories, letterImageUrl }) => (
+                    ({
+                      id,
+                      type,
+                      name,
+                      numberOfStories,
+                      albumStickerImageUrl,
+                    }) => (
                       <AlbumListItem
                         key={id}
                         name={name}
                         type={type}
                         amount={numberOfStories}
-                        imgUrl={letterImageUrl}
+                        imgUrl={albumStickerImageUrl}
                       />
                     )
                   )}

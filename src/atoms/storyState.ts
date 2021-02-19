@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { atom, selector, useRecoilState, useSetRecoilState } from 'recoil';
-import { NationIconType } from '@/components/NationIcon/NationIcon';
 import { IImage } from '@/types';
 
 export enum StoryStateField {
@@ -13,15 +12,16 @@ interface IStoryState {
   placeName: string | null;
   placeLatitude?: number | null;
   placeLongitude?: number | null;
-  country: {
-    id: string | null;
-    name: NationIconType;
-    title: string;
-  };
   memo: string;
   images: IImage[];
   date: string;
   pictures: FormData[];
+  country: {
+    id: string;
+    name: string;
+    type: string;
+    imgUrl?: string;
+  };
 }
 
 export const StoryStateAtom = atom<IStoryState>({
@@ -31,9 +31,11 @@ export const StoryStateAtom = atom<IStoryState>({
     placeName: null,
     date: new Date().toString(),
     country: {
-      id: null,
-      name: 'korea',
-      title: '여행한 나라',
+      id: '',
+      name: '',
+      type: '',
+      imgUrl:
+        'https://tripinmyroom.s3.ap-northeast-2.amazonaws.com/flags/etc.svg',
     },
     memo: '',
     images: [],
@@ -53,6 +55,7 @@ export const sendedStoryState = selector({
       pictures,
       date,
       memo,
+      country,
     } = storyState;
 
     return {
@@ -63,6 +66,7 @@ export const sendedStoryState = selector({
       pictures,
       date,
       memo,
+      country,
     };
   },
 });

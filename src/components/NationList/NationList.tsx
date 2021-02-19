@@ -12,20 +12,20 @@ const NationList: FC<INationListProps> = ({ useTitle = false }) => {
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData<ICountriesDataForView[]>('countries');
 
-  if (!data) return <div>Loading...</div>;
+  if (!data) return null;
   return (
     <>
       {useTitle && (
         <NationListTitle>새로운 나라도 기록해보세요!</NationListTitle>
       )}
       <ul>
-        {data.map(({ id, name, type, letterImageUrl }) => (
+        {data.map(({ id, name, type, mainFood, albumStickerImageUrl }) => (
           <NationListItem
             key={id}
             name={name}
             type={type}
-            foods={''}
-            imgUrl={letterImageUrl}
+            foods={mainFood}
+            imgUrl={albumStickerImageUrl}
           />
         ))}
       </ul>

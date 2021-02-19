@@ -29,7 +29,8 @@
     "recoil": "^0.1.2",
     "style-loader": "^2.0.0",
     "styled-components": "^5.2.1",
-    "styled-reset": "^4.3.4"
+    "styled-reset": "^4.3.4",
+    "use-debounce": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
