@@ -21,7 +21,7 @@ const Login: FC = () => {
 
 const Logo = styled.div`
   text-align: center;
-  margin-top: 243px;
+  margin-top: 219px;
   img {
     width: 175px;
     height: 175px;
