@@ -16,7 +16,6 @@ const NaverButton: FC = () => {
   }, []);
 
   const handleButtonClick = () => {
-    console.log('click');
     document.getElementById('naverIdLogin_loginButton')?.click();
   };
 
@@ -54,7 +53,7 @@ const NaverButton: FC = () => {
 
 const NaverContainer = styled.div`
   margin: 0 auto;
-  width: 87.2%;
+  width: 100%;
   background-color: #1ec800;
   height: 48px;
   font-weight: 400;
