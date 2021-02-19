@@ -1,14 +1,17 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { ICountriesDataForView } from '@/lib/api/album';
+import { useQueryClient } from 'react-query';
 import NationListItem from './NationListItem';
 
 interface INationListProps {
   useTitle?: boolean;
-  data: ICountriesDataForView[] | undefined;
 }
 
-const NationList: FC<INationListProps> = ({ useTitle = false, data }) => {
+const NationList: FC<INationListProps> = ({ useTitle = false }) => {
+  const queryClient = useQueryClient();
+  const data = queryClient.getQueryData<ICountriesDataForView[]>('countries');
+
   if (!data) return <div>Loading...</div>;
   return (
     <>

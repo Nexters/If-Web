@@ -39,7 +39,7 @@ const AlbumList: FC = () => {
               어떤 나라의 음식을 드셨나요?
             </h3>
           </PageTitleWrapper>
-          <NationList data={data} />
+          <NationList />
         </>
       )}
       {!isEmptyAlbum && (
@@ -83,7 +83,7 @@ const AlbumList: FC = () => {
               </AlbumOverflowList>
             )}
           </AlbumListWrapper>
-          <NationList useTitle={true} data={data} />
+          <NationList useTitle={true} />
         </>
       )}
     </Layout>
