@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import HEADER_TYPES from '@/types/HeaderTypes';
 import styled from 'styled-components';
@@ -6,17 +6,26 @@ import { UsernameRow, AccountRow, ActionRow } from '@/components/MyPage';
 import LOGIN_TYPES from '@/types/LoginTypes';
 import LeaveModal from '@/components/MyPage/LeaveModal';
 import { MyPageStateAtom } from '@/atoms/myPageState';
+import request from '@/utils/request';
 import { useRecoilValue } from 'recoil';
 import Header from './Header';
 
-// TODO: /users 경로로 이름 + 소셜 정보 가져오기
-const usernameState = '테스터';
-const socialState = LOGIN_TYPES.KAKAO;
-
 const MyPage: FC = () => {
+  const [username, setUsername] = useState<string>('');
+  const [socialState, setSocialState] = useState<LOGIN_TYPES>(
+    LOGIN_TYPES.KAKAO
+  );
   const [showLeaveModal, setShowLeaveModal] = useState(false);
-
   const { parent } = useRecoilValue(MyPageStateAtom);
+
+  const getUserInfo = async () => {
+    const { name, social } = await request({
+      url: '/users',
+      method: 'GET',
+    });
+    setUsername(name);
+    setSocialState(social === 'kakao' ? LOGIN_TYPES.KAKAO : LOGIN_TYPES.NAVER);
+  };
 
   const handleModalClose = () => {
     setShowLeaveModal(false);
@@ -26,14 +35,18 @@ const MyPage: FC = () => {
     setShowLeaveModal(true);
   };
 
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
   return (
     <Layout>
       <Header type={HEADER_TYPES.MY_PAGE} parentRoute={parent} />
       <MyPageContainer>
-        <UsernameRow username={usernameState} />
+        <UsernameRow username={username} />
         <AccountRow social={socialState} />
         <Line />
-        <a href="mailto:if.traveler@gmail.com?subject=If 개발자에게 피드백 보내기">
+        <a href="mailto:if.traveler.dev@gmail.com?subject=If 개발자에게 피드백 보내기">
           <ActionRow title={'피드백 남기기'} />
         </a>
         <ActionRow title={'탈퇴하기'} onClickFunction={handleDeleteAccount} />
@@ -44,7 +57,7 @@ const MyPage: FC = () => {
         <LeaveModal
           isOpen={showLeaveModal}
           handleModalClose={handleModalClose}
-          username={usernameState}
+          username={username}
         />
       </MyPageContainer>
     </Layout>

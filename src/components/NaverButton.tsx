@@ -2,6 +2,7 @@ import React, { useEffect, FC } from 'react';
 import { useLocation } from 'react-router-dom';
 import LoginIcon from '@/components/LoginIcon';
 import styled from 'styled-components';
+import request from '@/utils/request';
 
 const { naver } = window as any;
 

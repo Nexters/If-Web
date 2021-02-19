@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
+import { useHistory } from 'react-router-dom';
 import ActionModal from './ActionModal';
+import axios from 'axios';
 
 interface LogoutModalProps {
   isOpen: boolean;
@@ -7,9 +9,21 @@ interface LogoutModalProps {
 }
 
 const LogoutModal: FC<LogoutModalProps> = ({ isOpen, handleModalClose }) => {
-  const handleLogout = () => {
-    // TODO: /logout 경로 & /login으로 이동?
-    handleModalClose();
+  const history = useHistory();
+
+  const handleLogout = async () => {
+    const accessToken = localStorage.getItem('token');
+    const result = await axios({
+      url: `/api/users/logout`,
+      method: 'POST',
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    if (result.status === 200) {
+      handleModalClose();
+      localStorage.removeItem('token');
+      localStorage.removeItem('refresh_token');
+      history.push('/myPage');
+    }
   };
 
   return (

@@ -1,31 +1,75 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import KakaoLogin from 'react-kakao-login';
 import LoginIcon from '@/components/LoginIcon';
+import request from '@/utils/request';
+
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
 
 const KakaoButton: FC = () => {
+  const { Kakao } = window;
   const history = useHistory();
-
   const KAKAO_KEY = String(process.env.KAKAO_KEY);
+  // 300일
+  const JWT_EXPIRATION = 300 * 24 * 60 * 60 * 1000;
 
-  const kakaoSuccess = (res: any) => {
-    const { response } = res;
-    localStorage.setItem('token', response.access_token);
-    history.push('/');
+  useEffect(() => {
+    if (!Kakao.isInitialized()) {
+      Kakao.init(KAKAO_KEY);
+    }
+  }, []);
+
+  const handleKakaoLogin = () => {
+    Kakao.Auth.login({
+      success: kakaoSuccess,
+      fail: kakaoFail,
+    });
+  };
+
+  const kakaoSuccess = async (res: any) => {
+    const tokenInformation = await request({
+      url: `/users/login/kakao/tokens?token=${res.access_token}&tokenType=bearer`,
+      method: 'GET',
+    });
+
+    if (tokenInformation.access_token) {
+      const { access_token, refresh_token } = tokenInformation;
+      localStorage.setItem('token', access_token);
+      localStorage.setItem('refresh_token', refresh_token);
+      history.push('/');
+      setTimeout(() => {
+        silentRefresh();
+      }, JWT_EXPIRATION);
+    }
   };
 
   const kakaoFail = (res: any) => {
     console.log(res);
-    alert('문제가 생겼습니다. ');
+  };
+
+  const silentRefresh = async () => {
+    const refreshToken = localStorage.getItem('refresh_token');
+    if (refreshToken) {
+      const tokenInformation = await request({
+        url: '/users/token/refresh',
+        method: 'POST',
+        data: { refresh_token: refreshToken },
+      });
+      localStorage.setItem('token', tokenInformation.access_token);
+      localStorage.setItem('refresh_token', tokenInformation.refresh_token);
+    }
   };
 
   return (
     <KakaoContainer
-      token={KAKAO_KEY}
-      needProfile={true}
-      onSuccess={kakaoSuccess}
-      onFail={kakaoFail}
+      onClick={handleKakaoLogin}
+      onKeyPress={handleKakaoLogin}
+      role="button"
+      tabIndex={0}
     >
       <KakaoContent />
     </KakaoContainer>
@@ -41,7 +85,7 @@ const KakaoContent = () => {
   );
 };
 
-const KakaoContainer = styled(KakaoLogin)`
+const KakaoContainer = styled.div`
   margin: 0 auto 16px auto !important;
   width: 87.2% !important;
   height: 48px !important;
@@ -53,7 +97,7 @@ const KakaoContainer = styled(KakaoLogin)`
   text-align: left !important;
   font-weight: 400;
   font-size: ${({ theme }) => theme.fontSizes.body};
-  line-height: 28px;
+  line-height: 48px;
   outline: none;
 `;
 
