@@ -4,22 +4,28 @@ import { useHistory } from 'react-router-dom';
 
 interface IAlbumListItemProps {
   name: string;
-  code: string;
+  type: string;
   amount: number;
+  imgUrl: string;
 }
 
-const AlbumListItem: FC<IAlbumListItemProps> = ({ name, code, amount }) => {
+const AlbumListItem: FC<IAlbumListItemProps> = ({
+  name,
+  type,
+  amount,
+  imgUrl,
+}) => {
   const history = useHistory();
 
   const onChangeHistory = useCallback(() => {
-    history.push(`/album/${code}`);
-  }, [history, code]);
+    history.push(`/album/${type}`);
+  }, [history, type]);
 
   return (
     <ListItem onClick={onChangeHistory}>
       <figure>
         <AlbumImageWrapper>
-          {/* <img src="/#" alt="앨범 기본이미지" />   */}
+          <img src={imgUrl} alt={name} />
         </AlbumImageWrapper>
       </figure>
       <AlbumFigCaption>

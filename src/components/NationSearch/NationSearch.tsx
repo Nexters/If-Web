@@ -15,7 +15,7 @@ const NationSearch: FC = () => {
 
   const filteredNationList = useMemo(() => {
     if (value === '') return nationList;
-    return nationList.filter((nation) => nation.title === value);
+    return nationList.filter((nation) => nation.title.includes(value));
   }, [value]);
 
   const onChangeCustomNation = useCallback(() => {
