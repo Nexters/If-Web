@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { atom, selector, useRecoilState, useSetRecoilState } from 'recoil';
 import { NationIconType } from '@/components/NationIcon/NationIcon';
 import { IImage } from '@/types';
+import Country from '@/components/Country';
 
 export enum StoryStateField {
   TITLE = 'title',
@@ -10,9 +11,12 @@ export enum StoryStateField {
 
 interface IStoryState {
   title: string;
-  placeName: string | null;
-  placeLatitude?: number | null;
-  placeLongitude?: number | null;
+  place: {
+    id?: string | null;
+    name: string;
+    latitude?: number | null;
+    longitude?: number | null;
+  };
   country: {
     id: string | null;
     name: NationIconType;
@@ -28,7 +32,9 @@ export const StoryStateAtom = atom<IStoryState>({
   key: 'addStoryState',
   default: {
     title: '',
-    placeName: null,
+    place: {
+      name: '',
+    },
     date: new Date().toString(),
     country: {
       id: null,
@@ -41,31 +47,22 @@ export const StoryStateAtom = atom<IStoryState>({
   },
 });
 
-export const sendedStoryState = selector({
+export const StoryFormData = selector({
   key: 'sendedStoryState',
   get: ({ get }) => {
     const storyState = get(StoryStateAtom);
-    const {
-      title,
-      placeName,
-      placeLatitude,
-      placeLongitude,
-      pictures,
-      date,
-      memo,
-    } = storyState;
-    console.log('aaa');
-    console.log(pictures);
-    return {
-      title,
-      placeName,
-      placeLatitude,
-      placeLongitude,
-      pictures,
-      date,
-      memo,
-      countryId: '0f5d5f2e-e477-4993-bdff-3ea07a97791f',
-    };
+    const { title, place, pictures, country, date, memo } = storyState;
+    const form = new FormData();
+    form.append('title', title);
+    form.append('placeName', place.name);
+    form.append('placeLatitude', `${place.latitude}`);
+    form.append('placeLongitude', `${place.longitude}`);
+    form.append('date', '2021-02-20 00:00:01');
+    form.append('countryId', `8f5e436d-789e-4f42-8e0f-31f2e7bbbbfe`);
+    form.append('memo', memo);
+    pictures.map((picture) => form.append('pictures', picture));
+
+    return form;
   },
 });
 

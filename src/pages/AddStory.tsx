@@ -9,28 +9,29 @@ import ContentInput from '@/components/ContentInput';
 import ImageList from '@/components/ImageList';
 import useAddContent from '@/hooks/useAddContent';
 import PlaceSearch from '@/components/PlaceSearch';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Route, Switch, useRouteMatch, useHistory } from 'react-router-dom';
 import NationSearch from '@/components/NationSearch';
-import { StoryStateAtom, sendedStoryState } from '@/atoms/storyState';
+import { StoryStateAtom, StoryFormData } from '@/atoms/storyState';
 import useQueryString from '@/hooks/useQueryString';
-import request from '@/utils/request';
+import { multiRequest } from '@/utils/request';
 import COMPONENT_TYPES from '@/types/ComponentTypes';
 import Header from './Header';
 
 const AddContent: FC = () => {
-  const sendedData = useRecoilValue(sendedStoryState);
+  const sendedData = useRecoilValue(StoryFormData);
   const resetStoryState = useResetRecoilState(StoryStateAtom);
   const { path } = useRouteMatch();
+  const history = useHistory();
   const { country, changeCountry } = useAddContent();
   const qs = useQueryString();
 
   const onClickCreateButton = async () => {
-    const result = await request({
+    const result = await multiRequest({
       method: 'POST',
       url: '/stories',
       data: sendedData,
     });
-    console.log(result);
+    if (result) history.push('/');
   };
 
   useEffect(() => {
