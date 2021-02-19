@@ -1,15 +1,14 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { getFormattedDate } from '@/utils/formatter';
 import { useHistory } from 'react-router-dom';
 import Date from './Date';
 import Icon from './FeatureIcon';
 
 interface IPicture {
-  id: number;
-  fileName: string;
-  order: number;
-  storyId: number;
+  id?: number;
+  fileName?: string;
+  order?: number;
+  storyId?: number;
   url: string;
 }
 
@@ -72,9 +71,11 @@ const PictureWrapper = styled.div`
   margin-bottom: 12px;
   border: 1px solid ${(props) => props.theme.colors.darkbrown};
   cursor: pointer;
+  
   img {
-    width: 194px;
-    height: 194px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `;
 

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { IImage } from '@/types'
+import { IImage } from '@/types';
 
 interface IImageInputProps {
   image?: IImage;

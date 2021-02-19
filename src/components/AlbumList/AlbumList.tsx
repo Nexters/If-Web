@@ -5,7 +5,7 @@ import HEADER_TYPES from '@/types/HeaderTypes';
 import NationList from '@/components/NationList/NationList';
 import Layout from '@/components/Layout';
 import { useQuery } from 'react-query';
-import { getCountries, ICountriesDataForView } from '@/lib/api/album';
+import { getCountries, ICountriesDataForView } from '@/lib/api/getCountries';
 import AlbumListItem from './AlbumListItem';
 
 const AlbumList: FC = () => {
@@ -39,7 +39,7 @@ const AlbumList: FC = () => {
               어떤 나라의 음식을 드셨나요?
             </h3>
           </PageTitleWrapper>
-          <NationList data={data} />
+          <NationList />
         </>
       )}
       {!isEmptyAlbum && (
@@ -83,7 +83,7 @@ const AlbumList: FC = () => {
               </AlbumOverflowList>
             )}
           </AlbumListWrapper>
-          <NationList useTitle={true} data={data} />
+          <NationList useTitle={true} />
         </>
       )}
     </Layout>
