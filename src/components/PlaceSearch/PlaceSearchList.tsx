@@ -12,11 +12,13 @@ const PlaceSearchList: FC<IPlaceSearchListProps> = (props) => {
   const { places } = props;
   return (
     <List>
-      {places.map(({ id, place_name, distance }) => (
+      {places.map(({ id, place_name, distance, x, y }) => (
         <PlaceSearchListItem
           key={id}
           placeName={place_name}
           distance={distance}
+          placeLatitude={+y}
+          placeLongitude={+x}
         />
       ))}
     </List>

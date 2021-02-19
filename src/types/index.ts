@@ -15,3 +15,10 @@ export interface IStory {
   updatedAt: string;
   userPlaceId: number;
 }
+
+export interface IImage {
+  id?: string;
+  file_name?: string;
+  url: string;
+  order?: number;
+}
