@@ -15,11 +15,12 @@ const ImageList: FC<IImageListProps> = (props) => {
   return (
     <ImageListWrapper>
       {storyState.images.map((image, idx) => {
-        if (type === COMPONENT_TYPES.INPUT)
+        if (type === COMPONENT_TYPES.INPUT) {
           return <ImageInput key={idx} index={idx} image={image} />;
+        }
         return <Image key={idx} image={image} />;
       })}
-      {type === COMPONENT_TYPES.INPUT && storyState.images.length > 4 && (
+      {type === COMPONENT_TYPES.INPUT && storyState.images.length < 5 && (
         <ImageInput index={storyState.images.length} />
       )}
     </ImageListWrapper>

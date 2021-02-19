@@ -2,19 +2,16 @@ import React, { FC, useCallback } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 import NationIcon from '@/components/NationIcon';
-import { NationIconType } from '@/components/NationIcon/NationIcon';
+import { useStoryState } from '@/atoms/storyState';
 import COMPONENT_TYPES from '@/types/ComponentTypes';
 
 interface INationTextProps {
   type: COMPONENT_TYPES;
-  nation: {
-    id: number | null;
-    name: NationIconType;
-    title: string;
-  };
 }
 
-const Nation: FC<INationTextProps> = ({ type, nation }) => {
+const Country: FC<INationTextProps> = ({ type }) => {
+  const { storyState } = useStoryState();
+  const { country } = storyState;
   const { url } = useRouteMatch();
   const history = useHistory();
 
@@ -24,13 +21,13 @@ const Nation: FC<INationTextProps> = ({ type, nation }) => {
 
   return (
     <Wrapper onClick={onChangeHistory}>
-      <NationIcon name={nation.name} />
-      <NationText>{nation.title || '여행한 나라'}</NationText>
+      {/* <NationIcon name={country.name} /> */}
+      <CountryText>{country.title || '여행한 나라'}</CountryText>
     </Wrapper>
   );
 };
 
-export default Nation;
+export default Country;
 
 const Wrapper = styled.div`
   display: flex;
@@ -45,7 +42,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const NationText = styled.span`
+const CountryText = styled.span`
   margin-left: 8px;
   line-height: 28px;
 `;

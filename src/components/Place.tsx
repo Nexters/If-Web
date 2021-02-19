@@ -21,7 +21,7 @@ const Place: FC<IPlaceProps> = ({ type }) => {
   return (
     <Wrapper onClick={onChangeHistory}>
       <Icon name="location" />
-      <PlaceText>{storyState.place || '음식을 먹은 장소'}</PlaceText>
+      <PlaceText>{storyState.placeName || '음식을 먹은 장소'}</PlaceText>
       <Text>에서 느낀</Text>
     </Wrapper>
   );

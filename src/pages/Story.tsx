@@ -1,15 +1,15 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+import { Redirect, useHistory, useRouteMatch } from 'react-router-dom';
 import { useResetRecoilState } from 'recoil';
 import HEADER_TYPES from '@/types/HeaderTypes';
 import COMPONENT_TYPES from '@/types/ComponentTypes';
 import Layout from '@/components/Layout';
 import Title from '@/components/Title';
 import Place from '@/components/Place';
-import Nation from '@/components/Nation';
+import Country from '@/components/Country';
 import Content from '@/components/Content';
+import Date from '@/components/Date';
 import ImageList from '@/components/ImageList';
-import useAddContent from '@/hooks/useAddContent';
-import { useRouteMatch } from 'react-router-dom';
 import { StoryStateAtom, useStoryState } from '@/atoms/storyState';
 import request from '@/utils/request';
 import Header from './Header';
@@ -19,18 +19,29 @@ interface IMatchStoryParams {
 }
 
 const Story: FC = () => {
+  const [isInvalidId, setIsInvalidID] = useState(false)
   const resetStoryState = useResetRecoilState(StoryStateAtom);
-  const { setStoryDetail } = useStoryState();
+  const { storyState, setStoryDetail } = useStoryState();
   const { params } = useRouteMatch<IMatchStoryParams>();
-  const { nation } = useAddContent();
+  const history = useHistory(); 
 
   const getStoryDetail = async () => {
     const data = await request({
       url: `/stories/${params.id}`,
       method: 'GET',
     });
-    setStoryDetail(data);
+    if (data) setStoryDetail(data);
+    else setIsInvalidID(true)
   };
+
+  const onClickDeleteButton = async () => {
+    const data = await request({
+      url: `/stories/${params.id}`,
+      method: 'DELETE',
+    });
+    console.log(data)
+    history.push('/');
+  }
 
   useEffect(() => {
     getStoryDetail();
@@ -39,10 +50,12 @@ const Story: FC = () => {
 
   return (
     <Layout padding={'44px 24px'}>
-      <Header type={HEADER_TYPES.DETAIL} />
-      <Title />
+      {isInvalidId && <Redirect to='/'/>}
+      <Header type={HEADER_TYPES.DETAIL} deleteFunction={onClickDeleteButton} />
+      <Date date={storyState.date} bigger={true}/>
+      <Title type={COMPONENT_TYPES.PLAIN} />
       <Place type={COMPONENT_TYPES.PLAIN}  />
-      <Nation type={COMPONENT_TYPES.PLAIN} nation={nation} />
+      <Country type={COMPONENT_TYPES.PLAIN} />
       <ImageList type={COMPONENT_TYPES.PLAIN} />
       <Content />
     </Layout>

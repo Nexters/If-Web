@@ -1,10 +1,20 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { useStoryState } from '@/atoms/storyState';
+import TitleInput from './TitleInput'
+import COMPONENT_TYPES from '@/types/ComponentTypes';
 
-const Title: FC = () => {
+interface ITitleProps {
+  type: COMPONENT_TYPES;
+}
+
+const Title: FC<ITitleProps> = ({ type }) => {
   const { storyState } = useStoryState();
-  return <TitleText>{storyState.title}</TitleText>;
+  return (
+      <>
+      {type === COMPONENT_TYPES.PLAIN ? <TitleText>{storyState.title}</TitleText> : <TitleInput/> }
+      </>
+  )
 };
 
 export default Title;
