@@ -14,3 +14,6 @@ stats.json
 
 # mac temporary file
 .DS_store
+
+# deploy folder
+dist
