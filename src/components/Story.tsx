@@ -15,6 +15,7 @@ interface IPicture {
 interface IStoryProps {
   id: string | null;
   position: string;
+  title?: string;
   date: string;
   memo: string;
   picture_list: Array<IPicture>;
@@ -22,7 +23,7 @@ interface IStoryProps {
 }
 
 const Story: FC<IStoryProps> = (props) => {
-  const { id, date, memo, position, picture_list, isEmpty } = props;
+  const { id, date, title, position, picture_list, isEmpty } = props;
   const history = useHistory();
   const onClickPicture = () => {
     if (isEmpty) history.push('/add');
@@ -36,7 +37,7 @@ const Story: FC<IStoryProps> = (props) => {
         {isEmpty && <Icon name="plus" />}
       </PictureWrapper>
       <Date date={date} />
-      <Memo>{memo}</Memo>
+      <Title>{title}</Title>
     </StoryWrapper>
   );
 };
@@ -71,7 +72,7 @@ const PictureWrapper = styled.div`
   margin-bottom: 12px;
   border: 1px solid ${(props) => props.theme.colors.darkbrown};
   cursor: pointer;
-  
+
   img {
     width: 100%;
     height: 100%;
@@ -79,11 +80,14 @@ const PictureWrapper = styled.div`
   }
 `;
 
-const Memo = styled.div`
+const Title = styled.div`
   font-size: 17px;
   line-height: 20px;
   letter-spacing: 0.05em;
   color: ${(props) => props.theme.colors.darkgray};
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 const MaskingTapeWrapper = styled.span`

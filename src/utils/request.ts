@@ -10,7 +10,7 @@ export default async (props: IRequestProps) => {
   const accessToken = localStorage.getItem('token');
   axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   const url =
-  process.env.NODE_ENV === 'production' ? props.url : `/api${props.url}`;
+    process.env.NODE_ENV === 'production' ? props.url : `/api${props.url}`;
   try {
     const { data } = await axios({
       url,
@@ -18,6 +18,26 @@ export default async (props: IRequestProps) => {
       data: props.data,
     });
     return data;
+  } catch (e) {
+    return false;
+  }
+};
+
+export const multiRequest = async (props: IRequestProps) => {
+  const accessToken = localStorage.getItem('token');
+  axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+  const url =
+    process.env.NODE_ENV === 'production' ? props.url : `/api${props.url}`;
+  try {
+    const { status } = await axios({
+      url,
+      method: props.method,
+      data: props.data,
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    });
+    return status;
   } catch (e) {
     return false;
   }

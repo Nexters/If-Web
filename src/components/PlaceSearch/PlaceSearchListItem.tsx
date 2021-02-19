@@ -5,25 +5,27 @@ import { useHistory } from 'react-router-dom';
 import { getFormattedDistance } from '@/utils/formatter';
 
 interface IPlaceSearchListItem {
-  placeName: string;
+  place: {
+    name: string;
+    latitude: number;
+    longitude: number;
+  };
   distance: string;
-  placeLatitude?: number;
-  placeLongitude?: number;
 }
 
 const PlaceSearchListItem: FC<IPlaceSearchListItem> = (props) => {
-  const { placeName, distance, placeLatitude, placeLongitude } = props;
+  const { place, distance } = props;
   const { setStoryPlace } = useStoryState();
   const history = useHistory();
 
   const onClickPlaceItem = () => {
-    setStoryPlace({ placeName, placeLatitude, placeLongitude });
+    setStoryPlace({ place });
     history.push('/add');
   };
 
   return (
     <ListItem onClick={onClickPlaceItem}>
-      <strong>{placeName}</strong>
+      <strong>{place.name}</strong>
       <span>{getFormattedDistance(distance)}</span>
     </ListItem>
   );
