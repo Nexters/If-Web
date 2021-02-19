@@ -59,7 +59,7 @@ const AddContent: FC = () => {
       });
     } else if (!data || data.length === 0) {
       changeCountry({
-        id: 'ab23f7d9-cee0-41ce-8562-40b1ea1e851d',
+        id: null,
         name: '기타',
         type: 'OTHER',
         imgUrl:

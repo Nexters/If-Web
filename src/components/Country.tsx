@@ -21,7 +21,14 @@ const Country: FC<INationTextProps> = ({ type }) => {
   return (
     <Wrapper onClick={onChangeHistory}>
       <CountryFlagImageWrapper>
-        {country.imgUrl && <img src={country.imgUrl} alt={country.name} />}
+        <img
+          src={
+            country.imgUrl ||
+            country.flag_image_url ||
+            'https://tripinmyroom.s3.ap-northeast-2.amazonaws.com/flags/etc.svg'
+          }
+          alt={country.name}
+        />
       </CountryFlagImageWrapper>
       <CountryText>{country.name || '여행한 나라'}</CountryText>
     </Wrapper>

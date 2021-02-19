@@ -21,6 +21,7 @@ interface IStoryState {
     name: string;
     type: string;
     imgUrl?: string;
+    flag_image_url?: string;
   };
   memo: string;
   images: IImage[];
@@ -42,6 +43,7 @@ export const StoryStateAtom = atom<IStoryState>({
       type: '',
       imgUrl:
         'https://tripinmyroom.s3.ap-northeast-2.amazonaws.com/flags/etc.svg',
+      flag_image_url: '',
     },
     memo: '',
     images: [],
@@ -60,9 +62,12 @@ export const StoryFormData = selector({
     form.append('placeLatitude', `${place.latitude}`);
     form.append('placeLongitude', `${place.longitude}`);
     form.append('date', date || getFormattedFullDate(new Date().toString()));
-    form.append('countryId', `8f5e436d-789e-4f42-8e0f-31f2e7bbbbfe`);
     form.append('memo', memo);
-    form.append('newCountryName', country.id);
+    if (country.id && country.type !== 'OTHER') {
+      form.append('countryId', country.id);
+    } else {
+      form.append('newCountryName', country.name);
+    }
     pictures.map((picture) => form.append('pictures', picture));
 
     return form;
@@ -74,8 +79,8 @@ export const StoryFormCondition = selector({
   get: ({ get }) => {
     const storyState = get(StoryStateAtom);
     const { title, place, pictures, country, memo } = storyState;
-    if (!title || !place.name || pictures.length === 0) return false;
-    if (!country.id || !memo) return false;
+    if (!title || !place.name || pictures.length === 0 || !memo) return false;
+    if (!country.id && !country.name) return false;
     return true;
   },
 });
