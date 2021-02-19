@@ -1,113 +1,89 @@
 import React, { FC, useMemo } from 'react';
 import styled from 'styled-components';
-import { atom, useRecoilValue } from 'recoil';
 import Header from '@/pages/Header';
 import HEADER_TYPES from '@/types/HeaderTypes';
 import NationList from '@/components/NationList/NationList';
 import Layout from '@/components/Layout';
+import { useQuery } from 'react-query';
+import { getCountries, ICountriesDataForView } from '@/lib/api/album';
 import AlbumListItem from './AlbumListItem';
 
-interface IAlbumContent {
-  id: number;
-  name: string;
-  code: string;
-  amount: number;
-}
-
-const albumList: IAlbumContent[] = [
-  {
-    id: 1,
-    name: '대만',
-    code: 'taiwan',
-    amount: 3,
-  },
-  {
-    id: 2,
-    name: '대한민국',
-    code: 'korea',
-    amount: 15,
-  },
-  {
-    id: 3,
-    name: '러시아',
-    code: 'russia',
-    amount: 198,
-  },
-  {
-    id: 4,
-    name: '남아프리카공화국',
-    code: 'southafrica',
-    amount: 2093,
-  },
-  {
-    id: 5,
-    name: '마카오',
-    code: 'macau',
-    amount: 20,
-  },
-  {
-    id: 6,
-    name: '일본',
-    code: 'japan',
-    amount: 356,
-  },
-  {
-    id: 7,
-    name: '미국',
-    code: 'usa',
-    amount: 3563,
-  },
-];
-
-const album = atom({
-  key: 'album',
-  default: [111],
-});
-
 const AlbumList: FC = () => {
-  const albumData = useRecoilValue(album);
-  const isEmptyAlbum = useMemo(() => albumData.length === 0, [albumData]);
+  const { data, error } = useQuery<ICountriesDataForView[], Error>(
+    'countries',
+    getCountries
+  );
+
+  const albumList = useMemo(() => {
+    if (data && data.length > 0) {
+      return data.filter((data) => data.numberOfStories > 0);
+    }
+  }, [data]);
+  const isEmptyAlbum = useMemo(() => {
+    if (albumList) {
+      return albumList.length === 0;
+    }
+  }, [albumList]);
+
+  if (!data) return <div>Loading...</div>;
+  if (error) return <div>에러 발생...</div>;
   return (
-    <Layout padding={'0 24px'}>
+    <Layout>
       <Header type={HEADER_TYPES.ALBUM} />
       {isEmptyAlbum && (
         <>
-          <PageTitle>
-            오늘 식사시간에는
-            <br />
-            어떤 나라의 음식을 드셨나요?
-          </PageTitle>
-          <NationList />
+          <PageTitleWrapper>
+            <h3>
+              오늘 식사시간에는
+              <br />
+              어떤 나라의 음식을 드셨나요?
+            </h3>
+          </PageTitleWrapper>
+          <NationList data={data} />
         </>
       )}
       {!isEmptyAlbum && (
         <>
-          <PageTitle>기록한 나라</PageTitle>
+          <PageTitleWrapper>
+            <h3>기록한 나라</h3>
+            <span>{albumList ? albumList.length : ''}</span>
+          </PageTitleWrapper>
           <AlbumListWrapper>
             <AlbumInitialList>
-              {albumList.slice(0, 4).map(({ id, name, code, amount }) => (
-                <AlbumListItem
-                  key={id}
-                  name={name}
-                  amount={amount}
-                  code={code}
-                />
-              ))}
+              {albumList &&
+                albumList
+                  .slice(0, 4)
+                  .map(
+                    ({ id, type, name, numberOfStories, letterImageUrl }) => (
+                      <AlbumListItem
+                        key={id}
+                        name={name}
+                        type={type}
+                        amount={numberOfStories}
+                        imgUrl={letterImageUrl}
+                      />
+                    )
+                  )}
             </AlbumInitialList>
-            {albumList.length > 4 && (
+            {albumList && albumList.length > 4 && (
               <AlbumOverflowList>
-                {albumList.slice(4).map(({ id, name, code, amount }) => (
-                  <AlbumListItem
-                    key={id}
-                    name={name}
-                    amount={amount}
-                    code={code}
-                  />
-                ))}
+                {albumList
+                  .slice(4)
+                  .map(
+                    ({ id, type, name, numberOfStories, letterImageUrl }) => (
+                      <AlbumListItem
+                        key={id}
+                        name={name}
+                        type={type}
+                        amount={numberOfStories}
+                        imgUrl={letterImageUrl}
+                      />
+                    )
+                  )}
               </AlbumOverflowList>
             )}
           </AlbumListWrapper>
-          <NationList useTitle={true} />
+          <NationList useTitle={true} data={data} />
         </>
       )}
     </Layout>
@@ -116,12 +92,17 @@ const AlbumList: FC = () => {
 
 export default AlbumList;
 
-const PageTitle = styled.h3`
+const PageTitleWrapper = styled.div`
+  display: flex;
+  margin-bottom: 37px;
+  line-height: 30px;
   font-size: ${({ theme }) => theme.fontSizes.title03};
   font-weight: normal;
   letter-spacing: 0.1em;
-  line-height: 30px;
-  padding: 0 0 32px 0;
+
+  span {
+    padding-left: 12px;
+  }
 `;
 
 const AlbumListWrapper = styled.div`

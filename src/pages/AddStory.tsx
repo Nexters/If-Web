@@ -1,9 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useResetRecoilState } from 'recoil';
 import Layout from '@/components/Layout';
-import styled from 'styled-components';
 import HEADER_TYPES from '@/types/HeaderTypes';
-import COMPONENT_TYPES from '@/types/ComponentTypes';
 import TitleInput from '@/components/TitleInput';
 import Place from '@/components/Place';
 import Nation from '@/components/Nation';
@@ -15,6 +13,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import NationSearch from '@/components/NationSearch';
 import { StoryStateAtom } from '@/atoms/storyState';
 import useQueryString from '@/hooks/useQueryString';
+import COMPONENT_TYPES from '@/types/ComponentTypes';
 import Header from './Header';
 
 const AddContent: FC = () => {
@@ -36,17 +35,17 @@ const AddContent: FC = () => {
   }, []);
 
   return (
-    <Layout padding={'44px 24px'}>
+    <Layout>
       <Switch>
         <Route exact path={path}>
-          <AddContentWrapper>
+          <div>
             <Header type={HEADER_TYPES.ADD_EDIT} />
             <TitleInput />
             <Place type={COMPONENT_TYPES.INPUT} />
             <Nation type={COMPONENT_TYPES.INPUT} nation={nation} />
             <ImageList type={COMPONENT_TYPES.INPUT} />
             <ContentInput />
-          </AddContentWrapper>
+          </div>
         </Route>
         <Route path={`${path}/place`}>
           <PlaceSearch />
@@ -58,9 +57,5 @@ const AddContent: FC = () => {
     </Layout>
   );
 };
-
-const AddContentWrapper = styled.div`
-  padding: 0 24px;
-`;
 
 export default AddContent;
