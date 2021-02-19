@@ -33,8 +33,8 @@ const NationSearch: FC = () => {
 
   const onChangeCustomNation = useCallback(() => {
     const nationInfo = {
-      id: 'ab23f7d9-cee0-41ce-8562-40b1ea1e851d',
-      name: '기타',
+      id: null,
+      name: `${value}`,
       type: 'OTHER',
       imgUrl:
         'https://tripinmyroom.s3.ap-northeast-2.amazonaws.com/flags/etc.svg',
