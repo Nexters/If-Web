@@ -19,16 +19,15 @@ const NationList: FC<INationListProps> = ({ useTitle = false }) => {
         <NationListTitle>새로운 나라도 기록해보세요!</NationListTitle>
       )}
       <ul>
-        {data &&
-          data.map(({ id, name, type, letterImageUrl }) => (
-            <NationListItem
-              key={id}
-              name={name}
-              type={type}
-              foods={''}
-              imgUrl={letterImageUrl}
-            />
-          ))}
+        {data.map(({ id, name, type, letterImageUrl }) => (
+          <NationListItem
+            key={id}
+            name={name}
+            type={type}
+            foods={''}
+            imgUrl={letterImageUrl}
+          />
+        ))}
       </ul>
     </>
   );
