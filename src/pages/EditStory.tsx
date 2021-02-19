@@ -21,7 +21,7 @@ import { multiRequest } from '@/utils/request';
 import COMPONENT_TYPES from '@/types/ComponentTypes';
 import Header from './Header';
 
-const AddStory: FC = () => {
+const EditStory: FC = () => {
   const sendedData = useRecoilValue(StoryFormData);
   const isAvailabe = useRecoilValue(StoryFormCondition);
   const resetStoryState = useResetRecoilState(StoryStateAtom);
@@ -33,24 +33,12 @@ const AddStory: FC = () => {
   const onClickCreateButton = async () => {
     if (!isAvailabe) return;
     const result = await multiRequest({
-      method: 'POST',
+      method: 'PATCH',
       url: '/stories',
       data: sendedData,
     });
     if (result) history.push('/');
   };
-
-  useEffect(() => {
-    const nation = qs.get('nation');
-    if (qs.get('nation')) {
-      // TODO: changeNation에 필요한 정보 넣어주기
-      // changeNation({});
-    }
-  }, [qs, changeCountry]);
-
-  useEffect(() => {
-    return () => resetStoryState();
-  }, []);
 
   return (
     <Layout>
@@ -80,4 +68,4 @@ const AddStory: FC = () => {
   );
 };
 
-export default AddStory;
+export default EditStory;

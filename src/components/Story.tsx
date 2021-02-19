@@ -25,10 +25,12 @@ interface IStoryProps {
 const Story: FC<IStoryProps> = (props) => {
   const { id, date, title, position, picture_list, isEmpty } = props;
   const history = useHistory();
+
   const onClickPicture = () => {
     if (isEmpty) history.push('/add');
     else history.push(`/story/${id}`);
   };
+
   return (
     <StoryWrapper position={position}>
       {!isEmpty && <MaskingTape />}

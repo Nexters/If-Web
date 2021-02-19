@@ -70,9 +70,9 @@ export const StoryFormCondition = selector({
   key: 'isAvailabePostStory',
   get: ({ get }) => {
     const storyState = get(StoryStateAtom);
-    const { title, place, pictures, country, memo } = storyState;
-    if (!title || !place.name || pictures.length === 0) return false;
-    if (!country.id || !memo) return false;
+    const { title, place, images, pictures, country, memo } = storyState;
+    if (!title || !place.name || !country.id || !memo) return false;
+    if (pictures.length === 0 && images.length === 0) return false;
     return true;
   },
 });

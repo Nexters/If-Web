@@ -1,12 +1,15 @@
 import React, { FC, useEffect, useState } from 'react';
+import { useResetRecoilState } from 'recoil';
 import Layout from '@/components/Layout';
 import Story from '@/components/Story';
 import AddButton from '@/components/AddButton';
+import { StoryStateAtom } from '@/atoms/storyState';
 import HEADER_TYPES from '@/types/HeaderTypes';
 import request from '@/utils/request';
 import Header from './Header';
 
 const Main: FC = () => {
+  const resetStoryState = useResetRecoilState(StoryStateAtom);
   const [storyList, setStoryList] = useState([]);
 
   const getStoryList = async () => {
@@ -18,6 +21,7 @@ const Main: FC = () => {
   };
 
   useEffect(() => {
+    resetStoryState();
     getStoryList();
   }, []);
 
