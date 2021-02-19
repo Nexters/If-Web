@@ -1,7 +1,6 @@
 import React, { FC, useCallback } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
-import NationIcon from '@/components/NationIcon';
 import { useStoryState } from '@/atoms/storyState';
 import COMPONENT_TYPES from '@/types/ComponentTypes';
 
@@ -21,8 +20,10 @@ const Country: FC<INationTextProps> = ({ type }) => {
 
   return (
     <Wrapper onClick={onChangeHistory}>
-      {/* <NationIcon name={country.name} /> */}
-      <CountryText>{country.title || '여행한 나라'}</CountryText>
+      <CountryFlagImageWrapper>
+        {country.imgUrl && <img src={country.imgUrl} alt={country.name} />}
+      </CountryFlagImageWrapper>
+      <CountryText>{country.name || '여행한 나라'}</CountryText>
     </Wrapper>
   );
 };
@@ -39,6 +40,18 @@ const Wrapper = styled.div`
     width: 24px;
     height: 16px;
     border: 1px solid ${({ theme }) => theme.colors.darkbrown};
+  }
+`;
+
+const CountryFlagImageWrapper = styled.div`
+  width: 24px;
+  height: 16px;
+  background: ${({ theme }) => theme.colors.background};
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `;
 

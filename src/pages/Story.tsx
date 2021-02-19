@@ -19,11 +19,11 @@ interface IMatchStoryParams {
 }
 
 const Story: FC = () => {
-  const [isInvalidId, setIsInvalidID] = useState(false)
+  const [isInvalidId, setIsInvalidID] = useState(false);
   const resetStoryState = useResetRecoilState(StoryStateAtom);
   const { storyState, setStoryDetail } = useStoryState();
   const { params } = useRouteMatch<IMatchStoryParams>();
-  const history = useHistory(); 
+  const history = useHistory();
 
   const getStoryDetail = async () => {
     const data = await request({
@@ -31,7 +31,7 @@ const Story: FC = () => {
       method: 'GET',
     });
     if (data) setStoryDetail(data);
-    else setIsInvalidID(true)
+    else setIsInvalidID(true);
   };
 
   const onClickDeleteButton = async () => {
@@ -39,9 +39,9 @@ const Story: FC = () => {
       url: `/stories/${params.id}`,
       method: 'DELETE',
     });
-    console.log(data)
+    console.log(data);
     history.push('/');
-  }
+  };
 
   useEffect(() => {
     getStoryDetail();
@@ -50,11 +50,11 @@ const Story: FC = () => {
 
   return (
     <Layout padding={'44px 24px'}>
-      {isInvalidId && <Redirect to='/'/>}
+      {isInvalidId && <Redirect to="/" />}
       <Header type={HEADER_TYPES.DETAIL} deleteFunction={onClickDeleteButton} />
-      <Date date={storyState.date} bigger={true}/>
+      <Date date={storyState.date} bigger={true} />
       <Title type={COMPONENT_TYPES.PLAIN} />
-      <Place type={COMPONENT_TYPES.PLAIN}  />
+      <Place type={COMPONENT_TYPES.PLAIN} />
       <Country type={COMPONENT_TYPES.PLAIN} />
       <ImageList type={COMPONENT_TYPES.PLAIN} />
       <Content />
