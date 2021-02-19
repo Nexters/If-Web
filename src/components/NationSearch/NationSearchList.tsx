@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { INationList } from '@/lib/constants';
 import NationSearchListItem from '@/components/NationSearch/NationSearchListItem';
+import { ISearchNationResult } from '@/types/Nation';
 
 interface IFinderNationListProps {
-  nationList: INationList[];
+  nationList: ISearchNationResult[];
 }
 
 const NationSearchList: FC<IFinderNationListProps> = ({ nationList }) => {

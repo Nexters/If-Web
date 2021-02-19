@@ -1,12 +1,11 @@
-import NationIcon from '@/components/NationIcon/NationIcon';
 import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
-import { INationList } from '@/lib/constants';
 import useAddContent from '@/hooks/useAddContent';
 import { useHistory } from 'react-router-dom';
+import { ISearchNationResult } from '@/types/Nation';
 
 interface IFinderNationListItemProps {
-  nation: INationList;
+  nation: ISearchNationResult;
 }
 
 const NationSearchListItem: FC<IFinderNationListItemProps> = ({ nation }) => {
@@ -17,7 +16,8 @@ const NationSearchListItem: FC<IFinderNationListItemProps> = ({ nation }) => {
     const nationInfo = {
       id: nation.id,
       name: nation.name,
-      title: nation.title,
+      type: nation.type,
+      imgUrl: nation.flag_image_url,
     };
     changeCountry(nationInfo);
     history.push('/add');
@@ -35,8 +35,12 @@ const NationSearchListItem: FC<IFinderNationListItemProps> = ({ nation }) => {
       onKeyDown={onKeyDown}
       tabIndex={0}
     >
-      <NationIcon name={nation.name} />
-      <span>{nation.title}</span>
+      <NationIconWrapper>
+        {nation.flag_image_url ? (
+          <img src={nation.flag_image_url} alt={nation.name} />
+        ) : null}
+      </NationIconWrapper>
+      <span>{nation.name}</span>
     </NationListItem>
   );
 };
@@ -61,5 +65,17 @@ const NationListItem = styled.li`
   span {
     font-size: ${({ theme }) => theme.fontSizes.caption01};
     margin-left: 12px;
+  }
+`;
+
+const NationIconWrapper = styled.div`
+  width: 36px;
+  height: 24px;
+  background: ${({ theme }) => theme.colors.background};
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `;

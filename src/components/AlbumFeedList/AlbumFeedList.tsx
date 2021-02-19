@@ -27,12 +27,12 @@ const AlbumFeedList = () => {
     history.push('/album');
   }, []);
 
-  if (!data) return <div>Loading...</div>;
+  if (!data) return null;
   if (error) return <div>Error...</div>;
   return (
     <Layout>
       <Header>
-        <h2>{name}</h2>
+        <h2>{data[0].countryName || ''}</h2>
         <button onClick={onChangeHistory}>
           <FeatureIcon
             name={'arrow'}
@@ -56,7 +56,7 @@ const AlbumFeedList = () => {
           );
         })}
       </div>
-      <AddButton nation={name} />
+      <AddButton nation={data[0].countryName || ''} />
     </Layout>
   );
 };

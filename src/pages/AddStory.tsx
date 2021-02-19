@@ -19,6 +19,8 @@ import {
 import useQueryString from '@/hooks/useQueryString';
 import { multiRequest } from '@/utils/request';
 import COMPONENT_TYPES from '@/types/ComponentTypes';
+import { useQuery } from 'react-query';
+import { searchCountries } from '@/lib/api/searchCountries';
 import Header from './Header';
 
 const AddStory: FC = () => {
@@ -27,8 +29,15 @@ const AddStory: FC = () => {
   const resetStoryState = useResetRecoilState(StoryStateAtom);
   const { path } = useRouteMatch();
   const history = useHistory();
-  const { country, changeCountry } = useAddContent();
+  const { changeCountry } = useAddContent();
   const qs = useQueryString();
+  const { data } = useQuery(
+    ['searchCountries', qs.get('nation')],
+    searchCountries(qs.get('nation')),
+    {
+      enabled: !!qs.get('nation'),
+    }
+  );
 
   const onClickCreateButton = async () => {
     if (!isAvailabe) return;
@@ -41,12 +50,23 @@ const AddStory: FC = () => {
   };
 
   useEffect(() => {
-    const nation = qs.get('nation');
-    if (qs.get('nation')) {
-      // TODO: changeNation에 필요한 정보 넣어주기
-      // changeNation({});
+    if (data && data.length > 0) {
+      changeCountry({
+        id: data[0].id,
+        name: data[0].name,
+        type: data[0].type,
+        imgUrl: data[0].flag_image_url,
+      });
+    } else if (!data || data.length === 0) {
+      changeCountry({
+        id: null,
+        name: '기타',
+        type: 'OTHER',
+        imgUrl:
+          'https://tripinmyroom.s3.ap-northeast-2.amazonaws.com/flags/etc.svg',
+      });
     }
-  }, [qs, changeCountry]);
+  }, [data]);
 
   useEffect(() => {
     return () => resetStoryState();

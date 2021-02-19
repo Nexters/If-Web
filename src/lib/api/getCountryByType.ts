@@ -15,6 +15,15 @@ interface ICountryByTypeFromApi {
   title: string;
   updated_at: string;
   user_id: string;
+  country: {
+    album_sticker_image_url: string;
+    flag_image_url: string;
+    id: string;
+    main_food: string;
+    name: string;
+    stamp_image_url: string;
+    type: string;
+  };
 }
 
 export interface ICountryByTypeForView {
@@ -29,12 +38,13 @@ export interface ICountryByTypeForView {
     storyId?: number;
     url: string;
   }[];
+  countryName: string;
 }
 
 const convertCountryByTypeDataFromApi = (
   data: ICountryByTypeFromApi[]
 ): ICountryByTypeForView[] => {
-  return data.map(({ id, date, title, memo, picture_list }) => ({
+  return data.map(({ id, date, title, memo, picture_list, country }) => ({
     id,
     date,
     title,
@@ -42,16 +52,23 @@ const convertCountryByTypeDataFromApi = (
     picture_list: picture_list.map(({ url }) => ({
       url,
     })),
+    countryName: country.name,
   }));
 };
 
 export const getCountryByType = (countryType: string) => async () => {
   try {
-    const { data } = await axios.get(`/api/stories/countries/${countryType}`, {
+    const token = localStorage.getItem('token');
+    const url =
+      process.env.NODE_ENV === 'production'
+        ? `/stories/countries/${countryType}`
+        : `/api/stories/countries/${countryType}`;
+    const { data } = await axios.get(url, {
       headers: {
-        Authorization: `Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJ1c2VyIiwic3ViIjoiTmV4dGVyc0lmIiwiaXNzIjoiTmV4dGVyczZ0ZWFtIiwiZXhwIjoxNjI0NDYxMzE5OTIwLCJpYXQiOjE2MTM2NjEzMTk5MjAsImlkIjoiYThmMzc4YzUtZmNkYi00MWQ1LWEzOGItOWIzZDVkMzU0OTA3Iiwic29jaWFsIjoia2FrYW8ifQ.K2Z04hb2OQSFggxK7lHCRZ6t5cADYdoNKf3hafCQwLg`,
+        Authorization: `Bearer ${token}`,
       },
     });
+
     return convertCountryByTypeDataFromApi(data);
   } catch (e) {
     throw new Error(e);

@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { atom, selector, useRecoilState, useSetRecoilState } from 'recoil';
-import { NationIconType } from '@/components/NationIcon/NationIcon';
 import { IImage } from '@/types';
 import { getFormattedFullDate } from '@/utils/formatter';
 
@@ -18,9 +17,11 @@ interface IStoryState {
     longitude?: number | null;
   };
   country: {
-    id: string | null;
-    name: NationIconType;
-    title: string;
+    id: string;
+    name: string;
+    type: string;
+    imgUrl?: string;
+    flag_image_url?: string;
   };
   memo: string;
   images: IImage[];
@@ -37,9 +38,12 @@ export const StoryStateAtom = atom<IStoryState>({
     },
     date: '',
     country: {
-      id: null,
-      name: 'korea',
-      title: '여행한 나라',
+      id: '',
+      name: '',
+      type: '',
+      imgUrl:
+        'https://tripinmyroom.s3.ap-northeast-2.amazonaws.com/flags/etc.svg',
+      flag_image_url: '',
     },
     memo: '',
     images: [],
@@ -58,8 +62,12 @@ export const StoryFormData = selector({
     form.append('placeLatitude', `${place.latitude}`);
     form.append('placeLongitude', `${place.longitude}`);
     form.append('date', date || getFormattedFullDate(new Date().toString()));
-    form.append('countryId', `8f5e436d-789e-4f42-8e0f-31f2e7bbbbfe`);
     form.append('memo', memo);
+    if (country.id && country.type !== 'OTHER') {
+      form.append('countryId', country.id);
+    } else {
+      form.append('newCountryName', country.name);
+    }
     pictures.map((picture) => form.append('pictures', picture));
 
     return form;
