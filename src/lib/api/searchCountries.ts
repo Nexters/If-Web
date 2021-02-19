@@ -3,7 +3,11 @@ import axios from 'axios';
 export const searchCountries = (input: string | null) => async () => {
   try {
     const token = localStorage.getItem('token');
-    const { data } = await axios.get('/api/countries/search', {
+    const url =
+      process.env.NODE_ENV === 'production'
+        ? '/countries/search'
+        : `/api/countries/search`;
+    const { data } = await axios.get(url, {
       params: {
         countryName: input,
       },

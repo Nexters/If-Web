@@ -51,7 +51,11 @@ const convertCountriesDataFromApi = (
 export const getCountries = async () => {
   try {
     const token = localStorage.getItem('token');
-    const { data } = await axios.get('/api/countries/stories', {
+    const url =
+      process.env.NODE_ENV === 'production'
+        ? '/countries/stories'
+        : `/api/countries/stories`;
+    const { data } = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
