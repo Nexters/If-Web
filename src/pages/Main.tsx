@@ -21,14 +21,25 @@ const Main: FC = () => {
     getStoryList();
   }, []);
 
+  const initialData = {
+    id: null,
+    date: new Date().toString(),
+    memo: '식사하셨어요?',
+    picture_list: [],
+  };
+
   return (
     <Layout>
       <Header type={HEADER_TYPES.FEED} />
-      {storyList.map((story, idx) => {
-        const { id } = story;
-        const pos = idx % 2 === 0 ? 'left' : 'right';
-        return <Story key={id} position={pos} {...story} />;
-      })}
+      {storyList.length > 0 ? (
+        storyList.map((story, idx) => {
+          const { id } = story;
+          const pos = idx % 2 === 0 ? 'left' : 'right';
+          return <Story key={id} position={pos} {...story} />;
+        })
+      ) : (
+        <Story key={0} position="left" {...initialData} isEmpty={true} />
+      )}
       <AddButton />
     </Layout>
   );

@@ -10,12 +10,12 @@ import { useHistory } from 'react-router-dom';
 
 const NationSearch: FC = () => {
   const { value, onChangeValue } = useInput();
-  const { changeNation } = useAddContent();
+  const { changeCountry } = useAddContent();
   const history = useHistory();
 
   const filteredNationList = useMemo(() => {
     if (value === '') return nationList;
-    return nationList.filter((nation) => nation.title === value);
+    return nationList.filter((nation) => nation.title.includes(value));
   }, [value]);
 
   const onChangeCustomNation = useCallback(() => {
@@ -24,9 +24,9 @@ const NationSearch: FC = () => {
       name: 'korea',
       title: value,
     };
-    changeNation(nationInfo);
+    changeCountry(nationInfo);
     history.push('/add');
-  }, [value, changeNation, history]);
+  }, [value, changeCountry, history]);
 
   return (
     <>

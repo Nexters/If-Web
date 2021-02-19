@@ -14,6 +14,7 @@ import { ReactComponent as arrow2 } from '@/components/FeatureIcon/svg/arrow2.sv
 import { ReactComponent as plus } from '@/components/FeatureIcon/svg/plus.svg';
 import { ReactComponent as line } from '@/components/FeatureIcon/svg/line.svg';
 import { ReactComponent as noResult } from '@/components/FeatureIcon/svg/no_result.svg';
+import { ReactComponent as masking } from '@/components/FeatureIcon/svg/masking.svg';
 
 export {
   album,
@@ -32,4 +33,5 @@ export {
   plus,
   line,
   noResult,
+  masking,
 };

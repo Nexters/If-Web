@@ -11,6 +11,7 @@ import { hot } from 'react-hot-loader';
 import AddContent from '@/pages/AddStory';
 import Main from '@/pages/Main';
 import Login from '@/pages/Login';
+import Story from '@/pages/Story';
 import MyPage from '@/pages/MyPage';
 import MyPageEdit from '@/pages/MyPageEdit';
 
@@ -18,6 +19,9 @@ import GlobalStyle from '@/styles/global';
 import theme from '@/styles/theme';
 import { ThemeProvider } from 'styled-components';
 import Album from '@/pages/Album';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 import PrivateRoute from '@/routes/PrivateRoute';
 import PublicRoute from '@/routes/PublicRoute';
@@ -27,28 +31,32 @@ const App: FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <RecoilRoot>
-        <Router>
-          <Switch>
-            <PrivateRoute path={'/add'}>
-              <AddContent />
-            </PrivateRoute>
-            <PrivateRoute path={'/album'}>
-              <Album />
-            </PrivateRoute>
-            <PrivateRoute exact path={'/'}>
-              <Main />
-            </PrivateRoute>
-            <PublicRoute path={'/login'}>
-              <Login />
-            </PublicRoute>
-            <PrivateRoute exact path={'/myPage'}>
+<QueryClientProvider client={queryClient}>
+        <RecoilRoot>
+          <Router>
+            <Switch>
+              <PublicRoute path={'/login'}>
+                <Login />
+              </PublicRoute>
+              <PrivateRoute path={'/add'}>
+                <AddContent />
+              </PrivateRoute>
+              <PrivateRoute path={'/album'}>
+                <Album />
+              </PrivateRoute>
+              <PrivateRoute exact path={'/'}>
+                <Main />
+              </PrivateRoute>
+              <PrivateRoute path={'/story/:id'}>
+                <Story />
+              </PrivateRoute>
+               <PrivateRoute exact path={'/myPage'}>
               <MyPage />
             </PrivateRoute>
             <PrivateRoute exact path={'/myPage/edit'}>
               <MyPageEdit />
             </PrivateRoute>
-            <Route
+              <Route
               path={'*'}
               render={() => {
                 return checkAuth() ? (
@@ -58,9 +66,10 @@ const App: FC = () => {
                 );
               }}
             />
-          </Switch>
-        </Router>
-      </RecoilRoot>
+            </Switch>
+          </Router>
+        </RecoilRoot>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 };

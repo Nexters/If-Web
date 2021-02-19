@@ -10,27 +10,31 @@ interface IFinderNationListItemProps {
 }
 
 const NationSearchListItem: FC<IFinderNationListItemProps> = ({ nation }) => {
-  const { changeNation } = useAddContent();
+  const { changeCountry } = useAddContent();
   const history = useHistory();
 
-  const onChangeNation = useCallback(() => {
+  const onChangeCountry = useCallback(() => {
     const nationInfo = {
       id: nation.id,
       name: nation.name,
       title: nation.title,
     };
-    changeNation(nationInfo);
+    changeCountry(nationInfo);
     history.push('/add');
-  }, [nation, changeNation, history]);
+  }, [nation, changeCountry, history]);
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLLIElement>) => {
     if (e.key === 'Enter') {
-      onChangeNation();
+      onChangeCountry();
     }
   };
 
   return (
-    <NationListItem onClick={onChangeNation} onKeyDown={onKeyDown} tabIndex={0}>
+    <NationListItem
+      onClick={onChangeCountry}
+      onKeyDown={onKeyDown}
+      tabIndex={0}
+    >
       <NationIcon name={nation.name} />
       <span>{nation.title}</span>
     </NationListItem>
