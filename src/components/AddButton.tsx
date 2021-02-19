@@ -20,8 +20,8 @@ const AddButton: FC<IAddButtonProps> = ({ nation }) => {
 export default AddButton;
 
 const ButtonWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   height: 72px;
   bottom: 0;
-  right: 0;
+  right: calc(50% - (min(100vw, 480px) / 2));
 `;
