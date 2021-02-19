@@ -3,13 +3,15 @@ import Layout from '@/components/Layout';
 import HEADER_TYPES from '@/types/HeaderTypes';
 import styled from 'styled-components';
 import CancelIcon from '@/components/CancelIcon';
+import request from '@/utils/request';
+import { useHistory } from 'react-router-dom';
 import Header from './Header';
 
 const MyPageEdit: FC = () => {
   const [usernameInput, setUsernameInput] = useState('');
   const [complete, setComplete] = useState(false);
-
   const usernameInputRef = useRef<HTMLInputElement>(null);
+  const history = useHistory();
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length <= 10) {
@@ -25,9 +27,15 @@ const MyPageEdit: FC = () => {
     }
   };
 
-  const handleComplete = () => {
-    alert(usernameInput);
-    // axios
+  const handleComplete = async () => {
+    const res = await request({
+      url: '/users',
+      method: 'PUT',
+      data: { name: usernameInput },
+    });
+    if (res.name === usernameInput) {
+      history.push('/myPage');
+    }
   };
 
   const handleCancelClick = () => {
