@@ -33,7 +33,7 @@ const AlbumFeedList = () => {
   }, []);
 
   return (
-    <Layout padding={'44px 24px'}>
+    <Layout>
       <Header>
         <h2>{name}</h2>
         <button onClick={onChangeHistory}>

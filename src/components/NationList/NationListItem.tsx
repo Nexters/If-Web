@@ -1,17 +1,31 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 interface INationListItemProps {
   name: string;
-  foods?: string;
+  type: string;
+  foods: string;
+  imgUrl: string;
 }
 
-const NationListItem: FC<INationListItemProps> = ({ name, foods }) => {
+const NationListItem: FC<INationListItemProps> = ({
+  name,
+  type,
+  foods,
+  imgUrl,
+}) => {
+  const history = useHistory();
+
+  const onChangeHistory = useCallback(() => {
+    history.push(`/add?nation=${type}`);
+  }, []);
+
   return (
-    <ListItem>
+    <ListItem onClick={onChangeHistory}>
       <figure>
         <NationImageWrapper>
-          {/* <img src="/#" alt="나라 기본이미지" />   */}
+          <img src={imgUrl} alt={name} />
         </NationImageWrapper>
       </figure>
       <NationDefinitionList>
