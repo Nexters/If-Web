@@ -1,4 +1,6 @@
 import React, { FC } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 import ActionModal from './ActionModal';
 
 interface LeaveModalProps {
@@ -12,9 +14,21 @@ const LeaveModal: FC<LeaveModalProps> = ({
   handleModalClose,
   username,
 }) => {
-  const handleLeave = () => {
-    // TODO: /Leave 경로 & /login으로 이동?
-    handleModalClose();
+  const history = useHistory();
+
+  const handleLeave = async () => {
+    const accessToken = localStorage.getItem('token');
+    const result = await axios({
+      url: `/api/users`,
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    if (result.status === 200 || result.status === 202) {
+      handleModalClose();
+      localStorage.removeItem('token');
+      localStorage.removeItem('refresh_token');
+      history.push('/myPage');
+    }
   };
 
   return (

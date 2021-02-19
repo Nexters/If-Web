@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
-import ActionModal from './ActionModal';
 import axios from 'axios';
+import ActionModal from './ActionModal';
 
 interface LogoutModalProps {
   isOpen: boolean;
