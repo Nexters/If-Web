@@ -1,4 +1,6 @@
 import React, { FC } from 'react';
+import request from '@/utils/request';
+import { useHistory } from 'react-router-dom';
 import ActionModal from './ActionModal';
 
 interface LogoutModalProps {
@@ -7,9 +9,18 @@ interface LogoutModalProps {
 }
 
 const LogoutModal: FC<LogoutModalProps> = ({ isOpen, handleModalClose }) => {
-  const handleLogout = () => {
-    // TODO: /logout 경로 & /login으로 이동?
+  const history = useHistory();
+
+  const handleLogout = async () => {
+    // TODO: CORS로 추정되는 문제 해결하기 (403 에러)
+    // const res = await request({
+    //   url: '/users/logout',
+    //   method: 'POST',
+    // });
+    // console.log(res);
     handleModalClose();
+    localStorage.removeItem('token');
+    history.push('/login');
   };
 
   return (

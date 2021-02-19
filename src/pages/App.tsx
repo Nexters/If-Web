@@ -1,6 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { RecoilRoot } from 'recoil';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  RouteProps,
+} from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 
 import AddContent from '@/pages/AddStory';
@@ -14,6 +20,9 @@ import theme from '@/styles/theme';
 import { ThemeProvider } from 'styled-components';
 import Album from '@/pages/Album';
 
+import PrivateRoute from '@/routes/PrivateRoute';
+import PublicRoute from '@/routes/PublicRoute';
+
 const App: FC = () => {
   return (
     <ThemeProvider theme={theme}>
@@ -21,24 +30,24 @@ const App: FC = () => {
       <RecoilRoot>
         <Router>
           <Switch>
-            <Route path={'/add'}>
+            <PrivateRoute path={'/add'}>
               <AddContent />
-            </Route>
-            <Route path={'/album'}>
+            </PrivateRoute>
+            <PrivateRoute path={'/album'}>
               <Album />
-            </Route>
-            <Route exact path={'/'}>
+            </PrivateRoute>
+            <PrivateRoute exact path={'/'}>
               <Main />
-            </Route>
-            <Route path={'/login'}>
+            </PrivateRoute>
+            <PublicRoute path={'/login'}>
               <Login />
-            </Route>
-            <Route exact path={'/myPage'}>
+            </PublicRoute>
+            <PrivateRoute exact path={'/myPage'}>
               <MyPage />
-            </Route>
-            <Route exact path={'/myPage/edit'}>
+            </PrivateRoute>
+            <PrivateRoute exact path={'/myPage/edit'}>
               <MyPageEdit />
-            </Route>
+            </PrivateRoute>
           </Switch>
         </Router>
       </RecoilRoot>

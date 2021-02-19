@@ -1,31 +1,61 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import KakaoLogin from 'react-kakao-login';
 import LoginIcon from '@/components/LoginIcon';
+import request from '@/utils/request';
+import axios from 'axios';
+
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
 
 const KakaoButton: FC = () => {
+  const { Kakao } = window;
+
   const history = useHistory();
 
   const KAKAO_KEY = String(process.env.KAKAO_KEY);
+  // const KAKAO_REST_API_KEY = String(process.env.KAKAO_REST_API_KEY);
+  // const REDIRECT_URI = 'http://52.79.196.61:6150/users/login/kakao';
 
-  const kakaoSuccess = (res: any) => {
-    const { response } = res;
-    localStorage.setItem('token', response.access_token);
-    history.push('/');
+  useEffect(() => {
+    Kakao.init(KAKAO_KEY);
+    // 연결되었는지 확인
+    // console.log(Kakao.isInitialized());
+  }, []);
+
+  const handleKakaoLogin = () => {
+    Kakao.Auth.login({
+      success: kakaoSuccess,
+      fail: kakaoFail,
+    });
+  };
+
+  const kakaoSuccess = async (res: any) => {
+    const tokenInformation = await request({
+      url: `/users/login/kakao/tokens?token=${res.access_token}&tokenType=bearer`,
+      method: 'GET',
+    });
+
+    if (tokenInformation.access_token) {
+      localStorage.setItem('token', tokenInformation.access_token);
+      history.push('/');
+    }
   };
 
   const kakaoFail = (res: any) => {
     console.log(res);
-    alert('문제가 생겼습니다. ');
   };
 
   return (
     <KakaoContainer
-      token={KAKAO_KEY}
-      needProfile={true}
-      onSuccess={kakaoSuccess}
-      onFail={kakaoFail}
+      onClick={handleKakaoLogin}
+      onKeyPress={handleKakaoLogin}
+      role="button"
+      tabIndex={0}
     >
       <KakaoContent />
     </KakaoContainer>
@@ -41,7 +71,7 @@ const KakaoContent = () => {
   );
 };
 
-const KakaoContainer = styled(KakaoLogin)`
+const KakaoContainer = styled.div`
   margin: 0 auto 16px auto !important;
   width: 87.2% !important;
   height: 48px !important;
@@ -53,7 +83,7 @@ const KakaoContainer = styled(KakaoLogin)`
   text-align: left !important;
   font-weight: 400;
   font-size: ${({ theme }) => theme.fontSizes.body};
-  line-height: 28px;
+  line-height: 48px;
   outline: none;
 `;
 
