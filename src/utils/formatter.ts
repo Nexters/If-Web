@@ -6,6 +6,13 @@ export const getFormattedDate = (dateString: string) => {
   return `${year}.${month}.${day}`;
 };
 
+export const getFormattedFullDate = (dateString: string) => {
+  return new Date(dateString)
+    .toISOString()
+    .replace(/T/, ' ')
+    .replace(/\..+/, '');
+};
+
 export const getFormattedDistance = (distance: string) => {
   if (!distance) return '';
   const numberDist = +distance;

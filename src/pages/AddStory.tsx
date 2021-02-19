@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useResetRecoilState, useRecoilValue } from 'recoil';
 import Layout from '@/components/Layout';
 import HEADER_TYPES from '@/types/HeaderTypes';
@@ -11,7 +11,11 @@ import useAddContent from '@/hooks/useAddContent';
 import PlaceSearch from '@/components/PlaceSearch';
 import { Route, Switch, useRouteMatch, useHistory } from 'react-router-dom';
 import NationSearch from '@/components/NationSearch';
-import { StoryStateAtom, StoryFormData } from '@/atoms/storyState';
+import {
+  StoryStateAtom,
+  StoryFormData,
+  StoryFormCondition,
+} from '@/atoms/storyState';
 import useQueryString from '@/hooks/useQueryString';
 import { multiRequest } from '@/utils/request';
 import COMPONENT_TYPES from '@/types/ComponentTypes';
@@ -19,6 +23,7 @@ import Header from './Header';
 
 const AddContent: FC = () => {
   const sendedData = useRecoilValue(StoryFormData);
+  const isAvailabe = useRecoilValue(StoryFormCondition);
   const resetStoryState = useResetRecoilState(StoryStateAtom);
   const { path } = useRouteMatch();
   const history = useHistory();
@@ -26,6 +31,7 @@ const AddContent: FC = () => {
   const qs = useQueryString();
 
   const onClickCreateButton = async () => {
+    if (!isAvailabe) return;
     const result = await multiRequest({
       method: 'POST',
       url: '/stories',
@@ -52,6 +58,7 @@ const AddContent: FC = () => {
         <Route exact path={path}>
           <div>
             <Header
+              completed={isAvailabe}
               type={HEADER_TYPES.ADD_EDIT}
               primaryFunction={onClickCreateButton}
             />

@@ -29,7 +29,7 @@ export const multiRequest = async (props: IRequestProps) => {
   const url =
     process.env.NODE_ENV === 'production' ? props.url : `/api${props.url}`;
   try {
-    const { data } = await axios({
+    const { status } = await axios({
       url,
       method: props.method,
       data: props.data,
@@ -37,7 +37,7 @@ export const multiRequest = async (props: IRequestProps) => {
         'content-type': 'multipart/form-data',
       },
     });
-    return data;
+    return status;
   } catch (e) {
     return false;
   }

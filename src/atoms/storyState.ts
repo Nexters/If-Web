@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { atom, selector, useRecoilState, useSetRecoilState } from 'recoil';
 import { NationIconType } from '@/components/NationIcon/NationIcon';
 import { IImage } from '@/types';
-import Country from '@/components/Country';
+import { getFormattedFullDate } from '@/utils/formatter';
 
 export enum StoryStateField {
   TITLE = 'title',
@@ -35,7 +35,7 @@ export const StoryStateAtom = atom<IStoryState>({
     place: {
       name: '',
     },
-    date: new Date().toString(),
+    date: '',
     country: {
       id: null,
       name: 'korea',
@@ -57,12 +57,23 @@ export const StoryFormData = selector({
     form.append('placeName', place.name);
     form.append('placeLatitude', `${place.latitude}`);
     form.append('placeLongitude', `${place.longitude}`);
-    form.append('date', '2021-02-20 00:00:01');
+    form.append('date', date || getFormattedFullDate(new Date().toString()));
     form.append('countryId', `8f5e436d-789e-4f42-8e0f-31f2e7bbbbfe`);
     form.append('memo', memo);
     pictures.map((picture) => form.append('pictures', picture));
 
     return form;
+  },
+});
+
+export const StoryFormCondition = selector({
+  key: 'isAvailabePostStory',
+  get: ({ get }) => {
+    const storyState = get(StoryStateAtom);
+    const { title, place, pictures, country, memo } = storyState;
+    if (!title || !place.name || pictures.length === 0) return false;
+    if (!country.id || !memo) return false;
+    return true;
   },
 });
 
@@ -95,12 +106,13 @@ export const useStoryState = () => {
   );
 
   const setStoryPlace = useCallback(
-    ({ placeName, placeLatitude, placeLongitude }) => {
+    ({ place }) => {
       setStoryStateAtom((prevState) => ({
         ...prevState,
-        placeName,
-        placeLatitude,
-        placeLongitude,
+        place: {
+          ...prevState.place,
+          ...place,
+        },
       }));
     },
     [setStoryStateAtom]
