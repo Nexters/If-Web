@@ -9,9 +9,11 @@ interface IRequestProps {
 export default async (props: IRequestProps) => {
   const accessToken = localStorage.getItem('token');
   axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+  const url =
+  process.env.NODE_ENV === 'production' ? props.url : `/api${props.url}`;
   try {
     const { data } = await axios({
-      url: `/api${props.url}`,
+      url,
       method: props.method,
       data: props.data,
     });
