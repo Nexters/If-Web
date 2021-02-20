@@ -25,6 +25,8 @@ const GlobalStyle = createGlobalStyle`
         height: auto;
         margin: 0 auto;
         background-color: #F8F8F8;
+        background-image: url('https://user-images.githubusercontent.com/43198553/108579490-64cfce00-736a-11eb-9d09-78577101c0f7.png');
+        background-repeat: repeat;
         color: #1A1515;
         ::-webkit-scrollbar {
             display: none;
