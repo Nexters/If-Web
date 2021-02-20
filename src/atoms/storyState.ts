@@ -79,7 +79,8 @@ export const StoryFormCondition = selector({
   get: ({ get }) => {
     const storyState = get(StoryStateAtom);
     const { title, place, images, pictures, country, memo } = storyState;
-    if (!title || !place.name || !country.id || !memo) return false;
+    if (!title || !place.name || !memo) return false;
+    if (!country.id && !country.name) return false;
     if (pictures.length === 0 && images.length === 0) return false;
     return true;
   },
