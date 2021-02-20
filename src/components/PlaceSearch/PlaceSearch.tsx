@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
+import { useHistory } from 'react-router-dom';
 import { GeolocationAtom } from '@/atoms/geolocation';
+import { useStoryState } from '@/atoms/storyState';
 import Layout from '@/components/Layout';
 import SearchHeader from '@/components/SearchHeader';
 import SearchInput from '@/components/SearchInput';
@@ -18,16 +20,24 @@ declare global {
 const PlaceSearch = () => {
   const [placeList, setPlaceList] = useState<IPlace[]>([]);
   const [geolocation, setGeolocation] = useRecoilState(GeolocationAtom);
+  const history = useHistory();
+  const { setStoryPlace } = useStoryState();
   const { value, onChangeValue } = useInput();
 
   const searchPlaceCb = (data: IPlace[], status: string) => {
     if (status === 'OK') setPlaceList(data);
+    else if (status === 'ZERO_RESULT') setPlaceList([]);
   };
 
   const getSearchOption = () => ({
     x: geolocation.longitude,
     y: geolocation.latitude,
   });
+
+  const onClickCustomPlace = () => {
+    setStoryPlace({ place: { name: value, latitude: 0, longitude: 0 } });
+    history.push('/add');
+  };
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -56,7 +66,7 @@ const PlaceSearch = () => {
       ) : (
         <SearchEmptyFallback
           searchKeyword={value}
-          selectCustomKeyword={() => {}}
+          selectCustomKeyword={() => onClickCustomPlace()}
           categoryText={'장소'}
         />
       )}

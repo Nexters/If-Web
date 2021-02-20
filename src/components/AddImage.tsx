@@ -17,7 +17,6 @@ const AddImage: FC<IPlusIconProps> = ({ setImageState }) => {
       const reader = new FileReader();
       reader.onload = (e) => {
         if (e.target?.result && typeof e.target.result === 'string') {
-          const imageFile = reader.result;
           setImageState({ file, img: e.target.result });
         }
       };

@@ -25,10 +25,12 @@ interface IStoryProps {
 const Story: FC<IStoryProps> = (props) => {
   const { id, date, title, position, picture_list, isEmpty } = props;
   const history = useHistory();
+
   const onClickPicture = () => {
     if (isEmpty) history.push('/add');
     else history.push(`/story/${id}`);
   };
+
   return (
     <StoryWrapper position={position}>
       {!isEmpty && <MaskingTape />}
@@ -37,7 +39,7 @@ const Story: FC<IStoryProps> = (props) => {
         {isEmpty && <Icon name="plus" />}
       </PictureWrapper>
       <Date date={date} />
-      <Title>{title}</Title>
+      <Title isEmpty={isEmpty}>{title}</Title>
     </StoryWrapper>
   );
 };
@@ -80,11 +82,12 @@ const PictureWrapper = styled.div`
   }
 `;
 
-const Title = styled.div`
+const Title = styled.div<{ isEmpty?: boolean }>`
   font-size: 17px;
   line-height: 20px;
   letter-spacing: 0.05em;
-  color: ${(props) => props.theme.colors.darkgray};
+  color: ${({ isEmpty, theme }) =>
+    isEmpty ? theme.colors.darkgray : theme.colors.darkbrown};
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
