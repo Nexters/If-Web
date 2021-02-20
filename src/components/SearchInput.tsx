@@ -41,7 +41,7 @@ const InputBase = styled.div`
 
 const Input = styled.input`
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.white2};
+  background: none;
   padding-left: 32px;
   border: 0;
   border-bottom: 1px solid ${({ theme }) => theme.colors.darkbrown};

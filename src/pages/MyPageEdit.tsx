@@ -70,7 +70,7 @@ const Input = styled.input`
   margin-top: 24px;
   padding-bottom: 8px;
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.background};
+  background: none;
   border: none;
   border-bottom: 1px solid ${({ theme }) => theme.colors.darkbrown};
   outline: none;
