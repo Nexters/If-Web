@@ -27,12 +27,12 @@ _NEXTERS 18기 프로젝트_
 
 BE 개발자 배지훈 | BE 개발자 탁다임
 | :---: | :---: |
-<img src='' width='200px'> | <img src='' width='200px'>
+<img src='https://user-images.githubusercontent.com/43198553/108576135-cdfe1400-735f-11eb-8bcc-b2f369f79765.png' width='200px'> | <img src='' width='200px'>
 서비스 만들다가 미라클모닝이 사라졌어요 | 여행기록 서비스를 만들다가 유럽시차에 사십니다
 
 FE 개발자 김다윤 | FE 개발자 신창선 | FE 개발자 안샛별 (PM)
 | :---: | :---: | :---: |
-<img src='https://user-images.githubusercontent.com/43198553/108575579-14527380-735e-11eb-8ac1-f5c96620060f.jpeg' width='200px'>  | <img src='' width='200px'>  | <img src='https://user-images.githubusercontent.com/43198553/108575619-321fd880-735e-11eb-8de5-7d91fb0b1a7e.png' width='200px'> 
+<img src='https://user-images.githubusercontent.com/43198553/108575579-14527380-735e-11eb-8ac1-f5c96620060f.jpeg' width='200px'>  | <img src='https://user-images.githubusercontent.com/43198553/108575904-0e10c700-735f-11eb-85f2-c3e481c424ee.png' width='200px'>  | <img src='https://user-images.githubusercontent.com/43198553/108575619-321fd880-735e-11eb-8de5-7d91fb0b1a7e.png' width='200px'> 
 밀리의 서재 왜 아무도 안가져가나요? | 심심할 땐 ㄷrㄴr오r... 재택러버 | 공평하게 PM 일을 ~~미뤄~~나눠요^^
 
 ## 개발 환경
