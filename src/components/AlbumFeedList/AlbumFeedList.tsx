@@ -52,6 +52,7 @@ const AlbumFeedList = () => {
               date={date}
               memo={memo}
               picture_list={picture_list}
+              title={title}
             />
           );
         })}
