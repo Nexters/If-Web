@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import FeatureIcon from '@/components/FeatureIcon';
 import { MyPageStateAtom, MyPageStateField } from '@/atoms/myPageState';
 import { useSetRecoilState } from 'recoil';
+import { useLocation } from 'react-router-dom';
 
 interface ArrowProps {
   route: string;
@@ -59,6 +60,7 @@ const Header: FC<Props> = ({
   deleteFunction = () => {},
   parentRoute = MyPageStateField.FEED,
 }) => {
+  const location = useLocation();
   const setMyPageState = useSetRecoilState(MyPageStateAtom);
 
   const updateMyPageParent = useCallback(
@@ -70,6 +72,16 @@ const Header: FC<Props> = ({
     },
     [setMyPageState]
   );
+
+  let addEditGoBackRoute = '/';
+  if (location.pathname === '/add' && location.search.includes('?nation')) {
+    addEditGoBackRoute = '/album';
+  } else if (
+    location.pathname.includes('/story/') &&
+    location.pathname.includes('/edit')
+  ) {
+    addEditGoBackRoute = location.pathname.slice(0, -5);
+  }
 
   return (
     <StyledHeader>
@@ -101,7 +113,7 @@ const Header: FC<Props> = ({
 
       {type === HEADER_TYPES.ADD_EDIT && (
         <>
-          <Arrow route={'/'} />
+          <Arrow route={addEditGoBackRoute} />
           {completed ? (
             <Text
               completed={completed}
