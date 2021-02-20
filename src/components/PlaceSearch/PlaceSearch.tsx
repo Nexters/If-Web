@@ -36,7 +36,7 @@ const PlaceSearch = () => {
 
   const onClickCustomPlace = () => {
     setStoryPlace({ place: { name: value, latitude: 0, longitude: 0 } });
-    history.push('/add');
+    history.goBack();
   };
 
   useEffect(() => {
