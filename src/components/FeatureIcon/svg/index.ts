@@ -15,6 +15,7 @@ import { ReactComponent as plus } from '@/components/FeatureIcon/svg/plus.svg';
 import { ReactComponent as line } from '@/components/FeatureIcon/svg/line.svg';
 import { ReactComponent as noResult } from '@/components/FeatureIcon/svg/no_result.svg';
 import { ReactComponent as masking } from '@/components/FeatureIcon/svg/masking.svg';
+import { ReactComponent as saveFalse } from '@/components/FeatureIcon/svg/save_false.svg';
 
 export {
   album,
@@ -34,4 +35,5 @@ export {
   line,
   noResult,
   masking,
+  saveFalse,
 };

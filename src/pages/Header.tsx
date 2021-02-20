@@ -88,7 +88,10 @@ const Header: FC<Props> = ({
                 role="button"
                 tabIndex={0}
               >
-                <FeatureIcon name={'save'} />
+                <FeatureIcon
+                  style={{ cursor: 'not-allowed' }}
+                  name={'saveFalse'}
+                />
               </div>
             </Icon>
             <MyPage

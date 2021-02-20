@@ -52,9 +52,7 @@ export const getCountries = async () => {
   try {
     const token = localStorage.getItem('token');
     const url =
-      process.env.NODE_ENV === 'production'
-        ? '/countries/stories'
-        : `/api/countries/stories`;
+      process.env.NODE_ENV === 'production' ? '/countries' : `/api/countries`;
     const { data } = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${token}`,
