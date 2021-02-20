@@ -27,7 +27,7 @@ _NEXTERS 18기 프로젝트_
 
 BE 개발자 배지훈 | BE 개발자 탁다임
 | :---: | :---: |
-<img src='https://user-images.githubusercontent.com/43198553/108576135-cdfe1400-735f-11eb-8bcc-b2f369f79765.png' width='200px'> | <img src='' width='200px'>
+<img src='https://user-images.githubusercontent.com/43198553/108576135-cdfe1400-735f-11eb-8bcc-b2f369f79765.png' width='200px'> | <img src='https://user-images.githubusercontent.com/43198553/108576347-9fcd0400-7360-11eb-87d4-b85a445c4df2.png' width='200px'>
 서비스 만들다가 미라클모닝이 사라졌어요 | 여행기록 서비스를 만들다가 유럽시차에 사십니다
 
 FE 개발자 김다윤 | FE 개발자 신창선 | FE 개발자 안샛별 (PM)
