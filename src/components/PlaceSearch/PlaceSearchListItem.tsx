@@ -20,7 +20,7 @@ const PlaceSearchListItem: FC<IPlaceSearchListItem> = (props) => {
 
   const onClickPlaceItem = () => {
     setStoryPlace({ place });
-    history.push('/add');
+    history.goBack();
   };
 
   return (
