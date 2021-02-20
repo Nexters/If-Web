@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useResetRecoilState, useRecoilValue } from 'recoil';
 import Layout from '@/components/Layout';
 import HEADER_TYPES from '@/types/HeaderTypes';
@@ -50,17 +50,28 @@ const AddStory: FC = () => {
   };
 
   useEffect(() => {
-    if (data && data.length > 0) {
-      changeCountry({
-        id: data[0].id,
-        name: data[0].name,
-        type: data[0].type,
-        imgUrl: data[0].flag_image_url,
-      });
-    } else if (!data || data.length === 0) {
+    const nationName = qs.get('nation');
+    if (nationName) {
+      if (data && data.length > 0) {
+        changeCountry({
+          id: data[0].id,
+          name: data[0].name,
+          type: data[0].type,
+          imgUrl: data[0].flag_image_url,
+        });
+      } else if (!data || data.length === 0) {
+        changeCountry({
+          id: null,
+          name: nationName,
+          type: 'OTHER',
+          imgUrl:
+            'https://tripinmyroom.s3.ap-northeast-2.amazonaws.com/flags/etc.svg',
+        });
+      }
+    } else {
       changeCountry({
         id: null,
-        name: '기타',
+        name: null,
         type: 'OTHER',
         imgUrl:
           'https://tripinmyroom.s3.ap-northeast-2.amazonaws.com/flags/etc.svg',

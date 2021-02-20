@@ -25,7 +25,7 @@ const NationListItem: FC<INationListItemProps> = ({
     <ListItem onClick={onChangeHistory}>
       <figure>
         <NationImageWrapper>
-          <img src={imgUrl} alt={name} />
+          {imgUrl ? <img src={imgUrl} alt={name} /> : null}
         </NationImageWrapper>
       </figure>
       <NationDefinitionList>
