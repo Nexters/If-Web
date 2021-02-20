@@ -40,6 +40,7 @@ export default NationListItem;
 
 const ListItem = styled.li`
   display: flex;
+  cursor: pointer;
 
   & + & {
     margin-top: 24px;
