@@ -1,10 +1,16 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { useStoryImage } from '@/atoms/storyState';
 import Icon from './FeatureIcon';
 
-const DeleteButton: FC = () => {
+interface IDeleteButtonProps {
+  index: number;
+}
+
+const DeleteButton: FC<IDeleteButtonProps> = ({ index }) => {
+  const { deleteImage } = useStoryImage();
   return (
-    <ButtonWrapper>
+    <ButtonWrapper onClick={() => deleteImage({ index })}>
       <Icon
         className="icon"
         name="cancel"

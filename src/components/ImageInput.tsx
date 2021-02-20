@@ -10,12 +10,12 @@ interface IImageInputProps {
   index: number;
 }
 
-const ImageInput: FC<IImageInputProps> = ({ image }) => {
+const ImageInput: FC<IImageInputProps> = ({ image, index }) => {
   const [imageState, setImageState] = useState({ file: null, img: image?.url });
   const { setStoryImageState } = useStoryImage();
 
   useEffect(() => {
-    if (image?.url !== imageState.img) {
+    if (image?.url !== imageState.img && imageState.file) {
       setStoryImageState({ file: imageState.file, image: imageState.img });
     }
   }, [imageState, image, setStoryImageState]);
@@ -24,7 +24,7 @@ const ImageInput: FC<IImageInputProps> = ({ image }) => {
     <ImageWrapper>
       {image ? (
         <>
-          <DeleteButton />
+          <DeleteButton index={index} />
           <Image src={imageState.img} />
         </>
       ) : (
