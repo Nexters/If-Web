@@ -41,6 +41,7 @@ export default AlbumListItem;
 const ListItem = styled.li`
   padding: 0 20px 24px 0;
   height: 200px;
+  cursor: pointer;
 `;
 
 const AlbumImageWrapper = styled.div`

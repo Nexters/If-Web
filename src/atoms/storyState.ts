@@ -136,6 +136,7 @@ export const useStoryState = () => {
 
 export const useStoryImage = () => {
   const setStoryStateAtom = useSetRecoilState(StoryStateAtom);
+
   const setStoryImageState = useCallback(
     ({ image, file }) => {
       setStoryStateAtom((prevState) => ({
@@ -147,7 +148,19 @@ export const useStoryImage = () => {
     [setStoryStateAtom]
   );
 
+  const deleteImage = useCallback(
+    ({ index }) => {
+      setStoryStateAtom((prevState) => ({
+        ...prevState,
+        images: prevState.images.filter((_, idx) => idx !== index),
+        pictures: prevState.pictures.filter((_, idx) => idx !== index),
+      }));
+    },
+    [setStoryStateAtom]
+  );
+
   return {
     setStoryImageState,
+    deleteImage,
   };
 };

@@ -1,11 +1,10 @@
 import React, { FC, useCallback } from 'react';
 import HEADER_TYPES from '@/types/HeaderTypes';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import FeatureIcon from '@/components/FeatureIcon';
 import { MyPageStateAtom, MyPageStateField } from '@/atoms/myPageState';
 import { useSetRecoilState } from 'recoil';
-import { useLocation } from 'react-router-dom';
 
 interface ArrowProps {
   route: string;
@@ -137,14 +136,14 @@ const Header: FC<Props> = ({
         <>
           <Arrow route={'/'} />
           <div>
-            <Text
+            {/* <Text
               onClick={primaryFunction}
               onKeyPress={primaryFunction}
               role="button"
               tabIndex={0}
             >
               수정
-            </Text>
+            </Text> */}
             <Text
               onClick={deleteFunction}
               onKeyPress={deleteFunction}

@@ -39,7 +39,7 @@ const Story: FC<IStoryProps> = (props) => {
         {isEmpty && <Icon name="plus" />}
       </PictureWrapper>
       <Date date={date} />
-      <Title isEmpty={isEmpty}>{title}</Title>
+      <Title isEmpty={isEmpty}>{title || '식사하셨어요?'}</Title>
     </StoryWrapper>
   );
 };
