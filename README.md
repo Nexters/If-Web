@@ -22,17 +22,17 @@ _NEXTERS 18기 프로젝트_
 
 디자이너 고은솔 | ~~개~~디자이너 안채영
 | :---: | :---: |
-이미지 | 이미지
+<img src='https://user-images.githubusercontent.com/43198553/108575530-e2d9a800-735d-11eb-98ce-1c16beb5bc7e.PNG' width='200px'> | <img src='https://user-images.githubusercontent.com/43198553/108575549-f7b63b80-735d-11eb-9b98-68d223fd3e00.png' width='200px'> 
 국기를 일일이 그리는 디자이너가 있다?! | 디자인 완벽주의 끝판왕 (ENTJ)
 
 BE 개발자 배지훈 | BE 개발자 탁다임
 | :---: | :---: |
-이미지 | 이미지
+<img src='https://user-images.githubusercontent.com/43198553/108576135-cdfe1400-735f-11eb-8bcc-b2f369f79765.png' width='200px'> | <img src='' width='200px'>
 서비스 만들다가 미라클모닝이 사라졌어요 | 여행기록 서비스를 만들다가 유럽시차에 사십니다
 
 FE 개발자 김다윤 | FE 개발자 신창선 | FE 개발자 안샛별 (PM)
 | :---: | :---: | :---: |
-이미지 | 이미지 | 이미지
+<img src='https://user-images.githubusercontent.com/43198553/108575579-14527380-735e-11eb-8ac1-f5c96620060f.jpeg' width='200px'>  | <img src='https://user-images.githubusercontent.com/43198553/108575904-0e10c700-735f-11eb-85f2-c3e481c424ee.png' width='200px'>  | <img src='https://user-images.githubusercontent.com/43198553/108575619-321fd880-735e-11eb-8de5-7d91fb0b1a7e.png' width='200px'> 
 밀리의 서재 왜 아무도 안가져가나요? | 심심할 땐 ㄷrㄴr오r... 재택러버 | 공평하게 PM 일을 ~~미뤄~~나눠요^^
 
 ## 개발 환경
