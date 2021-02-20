@@ -7,6 +7,21 @@ export const getFormattedDate = (dateString: string) => {
 };
 
 export const getFormattedFullDate = (dateString: string) => {
+  const rand = Math.floor(Math.random() * 10);
+  const arr = [
+    '2021-01-02 12:11:11',
+    '2021-02-02 12:11:11',
+    '2021-02-07 12:11:11',
+    '2021-02-13 12:11:11',
+    '2021-01-11 12:11:11',
+    '2021-01-22 12:11:11',
+    '2021-01-30 12:11:11',
+    '2021-02-14 12:11:11',
+    '2021-02-02 12:11:11',
+    '2021-01-23 12:11:11',
+    '2021-02-09 12:11:11',
+  ];
+  return arr[rand];
   return new Date(dateString)
     .toISOString()
     .replace(/T/, ' ')
