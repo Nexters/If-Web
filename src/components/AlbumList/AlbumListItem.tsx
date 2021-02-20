@@ -46,7 +46,6 @@ const ListItem = styled.li`
 const AlbumImageWrapper = styled.div`
   width: 140px;
   height: 140px;
-  background-color: ${({ theme }) => theme.colors.lightgray};
   margin-bottom: 16px;
 `;
 
