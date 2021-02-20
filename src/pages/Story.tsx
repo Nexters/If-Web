@@ -35,23 +35,27 @@ const Story: FC = () => {
   };
 
   const onClickDeleteButton = async () => {
-    const data = await request({
+    await request({
       url: `/stories/${params.id}`,
       method: 'DELETE',
     });
-    console.log(data);
     history.push('/');
   };
 
+  const onClickEditButton = () => history.push(`/story/${params.id}/edit`);
+
   useEffect(() => {
     getStoryDetail();
-    return () => resetStoryState();
   }, []);
 
   return (
     <Layout padding={'44px 24px'}>
       {isInvalidId && <Redirect to="/" />}
-      <Header type={HEADER_TYPES.DETAIL} deleteFunction={onClickDeleteButton} />
+      <Header
+        type={HEADER_TYPES.DETAIL}
+        primaryFunction={onClickEditButton}
+        deleteFunction={onClickDeleteButton}
+      />
       <Date date={storyState.date} bigger={true} />
       <Title type={COMPONENT_TYPES.PLAIN} />
       <Place type={COMPONENT_TYPES.PLAIN} />

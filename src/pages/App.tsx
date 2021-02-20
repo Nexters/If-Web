@@ -9,7 +9,8 @@ import {
 import { hot } from 'react-hot-loader';
 
 // Pages
-import AddContent from '@/pages/AddStory';
+import AddStory from '@/pages/AddStory';
+import EditStory from '@/pages/EditStory';
 import Main from '@/pages/Main';
 import Login from '@/pages/Login';
 import Story from '@/pages/Story';
@@ -43,7 +44,7 @@ const App: FC = () => {
                 <Login />
               </PublicRoute>
               <PrivateRoute path={'/add'}>
-                <AddContent />
+                <AddStory />
               </PrivateRoute>
               <PrivateRoute path={'/album'}>
                 <Album />
@@ -51,8 +52,11 @@ const App: FC = () => {
               <PrivateRoute exact path={'/'}>
                 <Main />
               </PrivateRoute>
-              <PrivateRoute path={'/story/:id'}>
+              <PrivateRoute exact path={'/story/:id'}>
                 <Story />
+              </PrivateRoute>
+              <PrivateRoute path={'/story/:id/edit'}>
+                <EditStory />
               </PrivateRoute>
               <PrivateRoute exact path={'/myPage'}>
                 <MyPage />

@@ -13,7 +13,7 @@ const ContentInput: FC = () => {
           setStoryState({ field: 'memo', value })
         }
         placeholder="무엇을 드셨나요?"
-      ></TextArea>
+      />
     </>
   );
 };
