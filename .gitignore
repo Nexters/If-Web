@@ -16,4 +16,4 @@ stats.json
 .DS_store
 
 # deploy folder
-dist
+# dist
