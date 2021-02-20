@@ -32,13 +32,14 @@ export default React.memo(SearchHeader);
 const Header = styled.div`
   width: 100%;
   height: 44px;
-  margin: 0 0 30px;
+  margin: 20px 0 30px 0;
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   h2 {
+    margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -52,5 +53,6 @@ const Header = styled.div`
     width: 24px;
     height: 24px;
     cursor: pointer;
+    outline: none;
   }
 `;

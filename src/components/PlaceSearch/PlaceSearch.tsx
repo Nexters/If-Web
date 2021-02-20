@@ -54,7 +54,7 @@ const PlaceSearch = () => {
   }, [value]);
 
   return (
-    <Layout padding={'30px 24px'}>
+    <>
       <SearchHeader title={'장소 검색하기'} />
       <SearchInput
         value={value}
@@ -70,7 +70,7 @@ const PlaceSearch = () => {
           categoryText={'장소'}
         />
       )}
-    </Layout>
+    </>
   );
 };
 
